@@ -3,9 +3,9 @@
  * @author jagatrp<Jagat Ram Prajapati>
  * @email prajapatijagat2009@gmail.com
  */
-package rims.controllers;
+package controllers;
 
-import rims.ejb.CustomerEJB;
+import ejb.CustomerEJB;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -13,8 +13,8 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import rims.entities.Address;
-import rims.entities.Customer;
+import entities.Address;
+import entities.Customer;
 
 @Named(value = "customerController")
 @RequestScoped

@@ -2,7 +2,7 @@
  * @author jagatrp<Jagat Ram Prajapati>
  * @email prajapatijagat2009@gmail.com
  */
-package rims.entities;
+package entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

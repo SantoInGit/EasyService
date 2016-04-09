@@ -2,7 +2,7 @@
  * @author jagatrp<Jagat Ram Prajapati>
  * @email prajapatijagat2009@gmail.com
  */
-package rims.ejb;
+package ejb;
 
 import java.util.List;
 import java.util.Map;
@@ -11,8 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import rims.entities.Address;
-import rims.entities.Customer;
+import entities.Address;
+import entities.Customer;
 
 @Stateless
 public class CustomerEJB {
