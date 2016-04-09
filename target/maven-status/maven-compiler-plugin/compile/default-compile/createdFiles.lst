@@ -1,0 +1,6 @@
+rims\controllers\CustomerController.class
+rims\entities\Address_.class
+rims\entities\Address.class
+rims\entities\Customer.class
+rims\ejb\CustomerEJB.class
+rims\entities\Customer_.class
