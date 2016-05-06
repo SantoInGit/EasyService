@@ -27,14 +27,20 @@
                                         <h:outputLabel for="firstName" value="First name: "/>
                                         <h:inputText id="firstName" value="#{customerController.customer.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field."/>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <h:outputLabel value="Last name: "/>
-                                        <h:inputText value="#{customerController.customer.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
+                                        <h:outputLabel for="middleName" value="Middle name: "/>
+                                        <h:inputText id="middleName" value="#{customerController.customer.middleName}" class="form-control" required="false"/>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <h:outputLabel for="lastName" value="Last name: "/>
+                                        <h:inputText id="lastName" value="#{customerController.customer.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
                                     </div>
                                     
                                      <div class="form-group">
-                                        <h:outputLabel value="Contact No. "/>
-                                        <h:inputText value="#{customerController.customer.phoneNo}" class="form-control"/>
+                                        <h:outputLabel for="contactNo" value="Contact No. "/>
+                                        <h:inputText id="contactNo" value="#{customerController.customer.phoneNo}" class="form-control"/>
                                     </div>
                                     
                                     <div class="form-group">

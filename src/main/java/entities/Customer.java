@@ -34,6 +34,8 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
+    private String middleName;
+
     private String lastName;
     private Address address;
     private String phoneNo;
@@ -178,6 +180,15 @@ public class Customer implements Serializable {
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+    
+    
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     /**
