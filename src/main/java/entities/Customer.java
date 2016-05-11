@@ -1,16 +1,15 @@
-/**
- * @author jagatrp<Jagat Ram Prajapati>
- * @email prajapatijagat2009@gmail.com
- */
+
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * Named queries for getting all customers with specified parameter
@@ -26,189 +25,26 @@ import javax.persistence.NamedQuery;
 /**
  * customer entity class
  */
-public class Customer implements Serializable {
-
+public class Customer extends User implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String firstName;
-    private String middleName;
-
-    private String lastName;
-    private Address address;
-    private String phoneNo;
-    private String email;
-    private String password;
-
-    /**
-     * added one to many unidirectional relation from customer to rent;
-     */
-
-    /**
-     * default constructor
-     */
-    public Customer() {
+    private String status;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "jnd_Customer_ServiceOrder",
+            joinColumns = @JoinColumn(name = "customer_serviceOrder_fk")
+    )
+    private List<ServiceOrder> serviceOrder;
+    
+    public Customer(){
+    
     }
-
-    /**
-     * constructor to set firstName and lastName
-     *
-     * @param firstName
-     * @param lastName
-     */
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    /**
-     * constructor to set firstName,lastName,address,rents
-     *
-     * @param firstName
-     * @param lastName
-     * @param address
-     */
-    public Customer(String firstName, String lastName, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-    }
-
-    /**
-     *
-     * @return
-     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
-
-    /**
-     * to get PhoneNo of customer
-     *
-     * @return
-     */
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getStatus() {
+        return status;
     }
-
-    /**
-     * to set PhoneNo of customer
-     *
-     * @param phoneNo
-     */
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-    /**
-     * to get email address of customer
-     *
-     * @return
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * to set email address of customer
-     *
-     * @param email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * to get customer Id
-     *
-     * @return
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * to get customer address
-     *
-     * @return
-     */
-    public Address getAddress() {
-        return address;
-    }
-
-    /**
-     * to get customer firstName
-     *
-     * @return
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * to get customer lastName
-     *
-     * @return
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     *
-     * @param id
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * to set address for customer
-     *
-     * @param address
-     */
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    /**
-     * to set firstName for customer
-     *
-     * @param firstName
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    
-    
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    /**
-     * to set lastName for customer
-     *
-     * @param lastName
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-   
-
-
 }

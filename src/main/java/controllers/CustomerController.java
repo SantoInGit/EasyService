@@ -1,8 +1,4 @@
-/**
- *
- * @author jagatrp<Jagat Ram Prajapati>
- * @email prajapatijagat2009@gmail.com
- */
+
 package controllers;
 
 import ejb.CustomerEJB;
@@ -58,6 +54,8 @@ public class CustomerController {
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "listCustomers.xhtml";
     }
+    
+   
 
     /**
      *

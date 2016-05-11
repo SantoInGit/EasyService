@@ -14,7 +14,7 @@
             <title>Easy Services</title>
         </f:facet>
         <!-- Bootstrap Core CSS -->
-        <f:facet name="second">
+        <f:facet name="styleSheets">
 
             <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
 
@@ -32,6 +32,7 @@
 
 
         </f:facet>
+       
     </h:head>
     <h:body>
         <div id="wrapper">
@@ -60,13 +61,28 @@
                                 <a href="#"><i class="glyphicon glyphicon-expand"></i> Customers</a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="addCustomer.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Customer</a>
+                                        <a href="addCustomers.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Customer</a>
                                     </li>
                                     <li>
                                         <a href="listCustomers.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Customers</a>
                                     </li>
                                     <li>
                                         <a href="searchCustomers.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Customers</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-expand"></i> Staffs</a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="addStaffs.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Staff</a>
+                                    </li>
+                                    <li>
+                                        <a href="listStaffs.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Staff</a>
+                                    </li>
+                                    <li>
+                                        <a href="searchStaffs.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Staff</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -80,7 +96,8 @@
             </nav>
 
             <div id="page-wrapper">
-                <h:messages style="padding-top: 20px;"></h:messages>
+                
+                <h:messages  class="alert alert-danger"></h:messages>
                 <ui:insert name="content" />
             </div>
 
