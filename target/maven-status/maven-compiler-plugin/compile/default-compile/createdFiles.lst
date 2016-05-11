@@ -1,6 +1,0 @@
-entities\Customer_.class
-controllers\CustomerController.class
-entities\Customer.class
-entities\Address.class
-entities\Address_.class
-ejb\CustomerEJB.class
