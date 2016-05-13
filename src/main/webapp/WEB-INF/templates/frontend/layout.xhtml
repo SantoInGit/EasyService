@@ -42,7 +42,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./faces/index.xhtml"><img class="img-responsive" src="resources/img/logo6.png" width="100" alt="EasyServices" /></a>
+                    <a class="navbar-brand" href="http://localhost:8080/EasyServices/faces/index.xhtml"><img class="img-responsive" src="resources/img/logo6.png" width="100" alt="EasyServices" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -55,8 +55,28 @@
                             <button type="submit" class="btn btn-default">Submit</button>
                           </form>-->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
-                        <li class="dropdown">
+                        <li>
+                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#top"  onclick = '$("#menu-close").click();' >Home</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#about" onclick = '$("#menu-close").click();' >About</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#services" onclick = '$("#menu-close").click();' >Services</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#portfolio" onclick = '$("#menu-close").click();' >Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#contact" onclick = '$("#menu-close").click();' >Contact</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#contact" onclick = '$("#menu-close").click();' >Login</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8080/EasyServices/faces/register.xhtml">Register</a>
+                        </li>
+<!--                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Action</a></li>
@@ -65,7 +85,7 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -104,29 +124,7 @@
                 </nav>-->
 
         <!-- Header -->
-        <header id="top" class="header">
-            <div class="text-vertical-center">
-                <h1>EasyServices</h1>
-                <h3>Welcome to the EasyServices.</h3>
-                <br></br>
-                <div class="container" style="max-width: 500px;">
-                    <div class="row">
-
-                        <div id="custom-search-input">
-                            <div class="input-group col-md-12">
-                                <input type="text" class="form-control input-lg" placeholder="Search services..." />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info btn-lg" type="button">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </header>
+       
 
         <h:messages style="padding-top: 20px;"></h:messages>
         <ui:insert name="content" />
