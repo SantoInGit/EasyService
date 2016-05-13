@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -31,12 +32,11 @@ public class Service implements Serializable {
     private Float ratePerHour;
     private String description;
     private String status;
-    @OneToMany(fetch=FetchType.EAGER)
-    @JoinTable(
-            name = "jnd_Service_ServiceOrderItem",
-            joinColumns = @JoinColumn(name = "Service_ServiceOrderItem_fk")
-     )
-    private List<ServiceOrderItem> serviceOrderItemList;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="serviceCategory_fk")
+    private ServiceCategory serviceCategory;
+    
+
 
     public Service() {
     }

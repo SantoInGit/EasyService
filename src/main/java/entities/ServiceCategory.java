@@ -6,21 +6,23 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Santo
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "findAllServiceCategory", query = "select s from ServiceCategory s"),
+    @NamedQuery(name = "findServiceCategoryByCategoryName", query = "select s from ServiceCategory s where UPPER(s.serviceCategoryName) LIKE :CategoryName"),
+    @NamedQuery(name = "findServiceCategoryByStatus", query = "select s from ServiceCategory s where UPPER(s.status) LIKE :Status"),
+})
 public class ServiceCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,14 +30,12 @@ public class ServiceCategory implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long serviceCategoryId;
     private String serviceCategoryName;
-    private String description;
+    private String shortDescription;
+    private String longDescription;
+
+
     private String status;
-    @OneToMany(fetch=FetchType.EAGER)
-    @JoinTable(
-            name="jnd_ServiceCategory_Service",
-            joinColumns = @JoinColumn(name = "serviceCategory_Service_fk")
-    )
-    private List<Service> service;
+    
 
     public ServiceCategory() {
     }
@@ -82,12 +82,20 @@ public class ServiceCategory implements Serializable {
         this.serviceCategoryName = serviceCategoryName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
     }
 
     public String getStatus() {
