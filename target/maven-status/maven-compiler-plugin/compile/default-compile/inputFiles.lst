@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 D:\COIT20273\src\main\java\entities\ServiceOrderItem.java
 D:\COIT20273\src\main\java\ejb\StaffEJB.java
 D:\COIT20273\src\main\java\entities\ServiceCategory.java
@@ -13,9 +12,3 @@ D:\COIT20273\src\main\java\entities\Admin.java
 D:\COIT20273\src\main\java\entities\Staff.java
 D:\COIT20273\src\main\java\entities\ServiceOrder.java
 D:\COIT20273\src\main\java\ejb\CustomerEJB.java
-=======
-C:\Users\jagatrp\Documents\NetBeansProjects\EasyServices\src\main\java\controllers\CustomerController.java
-C:\Users\jagatrp\Documents\NetBeansProjects\EasyServices\src\main\java\entities\Customer.java
-C:\Users\jagatrp\Documents\NetBeansProjects\EasyServices\src\main\java\ejb\CustomerEJB.java
-C:\Users\jagatrp\Documents\NetBeansProjects\EasyServices\src\main\java\entities\Address.java
->>>>>>> jagat
