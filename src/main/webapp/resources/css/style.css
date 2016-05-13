@@ -226,6 +226,28 @@ hr.small {
     height: 500px;
 }
 
+.navbar-default{
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    /*background: rgba(255,255,255,1);*/
+    background: rgba(22,73,152,1);
+    border: none;
+    height: 100px;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a{
+    color: #fff;
+    font-size: 17px;
+}
+.navbar{
+    margin-bottom: 0;
+}
+
+.navbar-right{
+    padding-top: 40px;
+}
+
 @media(max-width:768px) {
     .map {
         height: 75%;
