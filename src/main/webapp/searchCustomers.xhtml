@@ -6,40 +6,40 @@
     <ui:define name="title">List Games</ui:define>
 
     <ui:define name="content">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Easy Services</h1>
-            </div>
-            <!-- /.col-lg-12 -->
+        <div class="row">   
+            <div class="col-lg-12 panel-heading"></div>    
         </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Search Customers
+                        <h3>Search Customers</h3>
                     </div>
                     <div class="panel-body add-product">
                         <h:form>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <h:outputLabel value="Search By"/>
+                                        <h:outputLabel value="Search By"/>                                        
                                         <h:selectOneMenu value="#{customerController.searchBy}" styleClass="form-control">
                                             <f:selectItem itemValue="FirstName" itemLabel="First Name" />
                                             <f:selectItem itemValue="LastName" itemLabel="Last Name" />
                                             <f:selectItem itemValue="Address" itemLabel="Address" />
                                         </h:selectOneMenu>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <h:outputLabel value="Input field"/>
+                                        <h:outputLabel value="Input field" />
                                         <h:inputText value="#{customerController.search}" class="form-control" required="true" requiredMessage="Search field is required field."/>    
                                     </div>
-                                    <h:commandButton value="Search" action="#{customerController.doSearch}"/>
+                                    <div>
+                                        <h:commandButton class="btn-primary form-control" value="Search" action="#{customerController.doSearch}"/>
+                                    </div>
                                 </div>
                             </div>
                         </h:form>
