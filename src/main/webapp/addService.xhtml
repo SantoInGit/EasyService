@@ -21,19 +21,17 @@
                             <div class="col-lg-6">
                                 <h:form>
 
-
-
-                                    <div class="form-group">
-                                        <h:outputLabel for="serviceDescription" value="Description: "/>
-                                        <h:inputText id="serviceDescription" value="#{serviceController.service.description}" class="form-control" required="true" requiredMessage="Description is required field."/>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel for="serviceRatePerHour" value="Rate Per Hour: "/>
-                                        <h:inputText id="serviceRatePerHour" value="#{serviceController.service.ratePerHour}" class="form-control" required="true" requiredMessage="Rate per hour is required field."/>
-                                    </div>
                                     <div class="form-group">
                                         <h:outputLabel for="serviceName" value="Name: "/>
                                         <h:inputText id="serviceName" value="#{serviceController.service.serviceName}" class="form-control" required="true" requiredMessage="Service name is required field."/>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel value="Select Category: " styleClass="control-label col-sm-2"/>
+                                        
+                                            <h:selectOneMenu value="#{serviceController.serviceCategory}" class="form-control">
+                                                <f:selectItems value="#{serviceCategoryController.serviceCategoryList}" var="servicecat" itemLabel="#{servicecat.serviceCategoryName}" itemValue="#{servicecat.serviceCategoryId}" />
+                                            </h:selectOneMenu>
+                                   
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel for="serviceStatus" value="Choose Status: "/>
@@ -42,14 +40,18 @@
                                             <f:selectItem itemValue="active" itemLabel="Active" />                                       
                                         </h:selectOneMenu>
                                     </div>
+
                                     <div class="form-group">
-                                        <h:outputLabel value="Select Category" styleClass="control-label col-sm-2"/>
-                                        <div class="col-sm-10">
-                                            <h:selectOneMenu value="#{serviceCategoryController.serviceCategoryList}" class="form-control">
-                                                <f:selectItems value="#{serviceCategoryController.serviceCategoryList}" var="servicecat" itemLabel="#{servicecat.serviceCategoryName}" itemValue="#{servicecat.serviceCategoryId}" />
-                                            </h:selectOneMenu>
-                                        </div>
+                                        <h:outputLabel for="serviceDescription" value="Description: "/>
+                                        <h:inputTextarea style="resize: none" rows="5" id="serviceDescription" value="#{serviceController.service.description}" class="form-control" required="true" requiredMessage="Description is required field."/>
+
                                     </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="serviceRatePerHour" value="Rate Per Hour: "/>
+                                        <h:inputText id="serviceRatePerHour" value="#{serviceController.service.ratePerHour}" class="form-control" required="true" requiredMessage="Rate per hour is required field."/>
+                                    </div>
+
+
                                     <div class="form-group">
                                         <h:commandButton class="btn-primary form-control " value="Add Service" action="#{serviceController.doCreateService}"/>
                                     </div>

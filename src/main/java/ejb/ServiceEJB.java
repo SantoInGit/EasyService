@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import entities.Service;
+import entities.ServiceCategory;
 
 @Stateless
 public class ServiceEJB {
@@ -38,9 +39,12 @@ public class ServiceEJB {
      * @param address
      * @return customer
      */
-    public Service addService(Service serCat) {
-        em.persist(serCat);
-        return serCat;
+    public Service addService(Service service, String serviceCatId) {
+        Long sid = Long.parseLong(serviceCatId);
+        ServiceCategory sCategory = em.find(ServiceCategory.class, sid);
+        service.setServiceCategory(sCategory);
+        em.persist(service);
+        return service;
     }
 
     /**

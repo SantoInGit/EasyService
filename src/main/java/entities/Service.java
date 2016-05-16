@@ -14,12 +14,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Santo
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "findAllService", query = "select s from Service s"),
+    @NamedQuery(name = "findServiceByServiceName", query = "select s from Service s where UPPER(s.serviceName) LIKE :ServiceName"),
+    @NamedQuery(name = "findServiceByStatus", query = "select s from Service s where UPPER(s.status) LIKE :Status")
+       
+})
 public class Service implements Serializable {
 
     private static final long serialVersionUID = 1L;
