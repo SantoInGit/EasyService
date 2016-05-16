@@ -1,7 +1,7 @@
 
 package controllers;
 
-import ejb.CustomerEJB;
+import ejb.AdminEJB;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -10,21 +10,21 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Address;
-import entities.Customer;
+import entities.Admin;
 
 @Named(value = "customerController")
 @RequestScoped
-public class CustomerController {
+public class adminController {
 
     /**
      * Creates a new instance of CustomerController
      */
-    public CustomerController() {
+    public adminController() {
     }
     @EJB
-    private CustomerEJB customerEJB;
-    private Customer customer = new Customer();
-    private List<Customer> customerList = new ArrayList<>();
+    private AdminEJB adminEJB;
+    private Admin admin = new Admin();
+    private List<Admin> adminList = new ArrayList<>();
     private String city;
     private String zipcode;
     private String country;
@@ -33,25 +33,25 @@ public class CustomerController {
     private String searchBy = "";
 
  
-    public String doCreateCustomer() {
+    public String doCreateAdmin() {
         Address address = new Address(city, zipcode, country, street);
-        customer = customerEJB.addCustomer(customer, address);
+        admin = adminEJB.addCustomer(admin, address);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listCustomers.xhtml";
+        return "listAdmins.xhtml";
     }
 
   
     public String doSearch() {
-        customerList = customerEJB.search(search, searchBy);
+        adminList = adminEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listCustomers.xhtml";
+        return "listAdmins.xhtml";
     }
     
-    public String doLogInCustomer(){
+    public String doLogInAdmin(){
         
-        return "customerProfile.xhtml";
+        return "adminProfile.xhtml";
     }
     
    
@@ -156,16 +156,16 @@ public class CustomerController {
      *
      * @return
      */
-    public Customer getCustomer() {
-        return customer;
+    public Admin getAdmin() {
+        return admin;
     }
 
     /**
      *
      * @param customer
      */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(Admin admin) {
+        this.admin = admin;
     }
 
     /**
@@ -173,37 +173,37 @@ public class CustomerController {
      * @param customer_id
      * @return
      */
-    public Customer getCustomerById(Long customer_id) {
-        customer = customerEJB.getCustomer(customer_id);
-        return customer;
+    public Admin getAdminById(Long adminId) {
+        admin = adminEJB.getCustomer(adminId);
+        return admin;
     }
 
     /**
      *
      * @return
      */
-    public Customer getCustomerByParamId() {
-        customer = customerEJB.getCustomerByParamId();
-        return customer;
+    public Admin getCustomerByParamId() {
+        admin = adminEJB.getCustomerByParamId();
+        return admin;
     }
 
     /**
      *
      * @return
      */
-    public List<Customer> getCustomerList() {
+    public List<Admin> getCustomerList() {
         if (this.search.isEmpty()) {
-            customerList = customerEJB.listCustomers();
+            adminList = adminEJB.listCustomers();
         }
-        return customerList;
+        return adminList;
     }
 
     /**
      *
      * @param customerList
      */
-    public void setCustomerList(List<Customer> customerList) {
-        this.customerList = customerList;
+    public void setCustomerList(List<Admin> customerList) {
+        this.adminList = adminList;
     }
 
   

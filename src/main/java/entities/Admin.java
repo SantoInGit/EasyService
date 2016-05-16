@@ -32,49 +32,29 @@ public class Admin extends User implements Serializable{
     private static final long serialVersionUID = 1L;
     private String qualification;
     private String status;
-    @OneToMany(fetch=FetchType.EAGER)
-    @JoinTable(
-           name = "jnd_Admin_Invoice",
-            joinColumns = @JoinColumn(name="admin_invoice_fk")
-    )
-    private List<Invoice> invoiceList;
-   
     
     public Admin(){
         
     }
  
-    /**
-     * @return the serialVersionUID
-     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    /**
-     * @return the qualification
-     */
+
     public String getQualification() {
         return qualification;
     }
 
-    /**
-     * @param qualification the qualification to set
-     */
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
 
-    /**
-     * @return the status
-     */
+
     public String getStatus() {
         return status;
     }
 
-    /**
-     * @param status the status to set
-     */
     public void setStatus(String status) {
         this.status = status;
     }
