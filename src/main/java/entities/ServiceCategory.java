@@ -22,6 +22,7 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "findAllServiceCategory", query = "select s from ServiceCategory s"),
     @NamedQuery(name = "findServiceCategoryByCategoryName", query = "select s from ServiceCategory s where UPPER(s.serviceCategoryName) LIKE :CategoryName"),
     @NamedQuery(name = "findServiceCategoryByStatus", query = "select s from ServiceCategory s where UPPER(s.status) LIKE :Status"),
+   
 })
 public class ServiceCategory implements Serializable {
 
