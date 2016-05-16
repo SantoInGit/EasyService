@@ -7,7 +7,7 @@
     <ui:define name="title">EasyServices</ui:define>
 
     <ui:define name="content">
-         <header id="top" class="header">
+        <header id="top" class="header">
             <div class="text-vertical-center">
                 <h1>EasyServices</h1>
                 <h3>Welcome to the EasyServices.</h3>
@@ -51,62 +51,26 @@
                 <div class="row text-center">
                     <div class="col-lg-10 col-lg-offset-1">
                         <h2>Our Services</h2>
-<!--                        <hr class="small">-->
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
+                        <!--                        <hr class="small">-->
+                        <div class="row">
+                            <ui:repeat value="#{serviceCategoryController.serviceCategoryList}" var="serviceCategory">
+                               <div class="col-md-3 col-sm-6">
                                     <div class="service-item">
                                         <span class="fa-stack fa-4x">
                                             <i class="fa fa-circle fa-stack-2x"></i>
                                             <i class="fa fa-cloud fa-stack-1x text-primary"></i>
                                         </span>
                                         <h4>
-                                            <strong>Service Name</strong>
+                                            <strong>#{serviceCategory.serviceCategoryName}</strong>
                                         </h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                        <p>#{serviceCategory.shortDescription}</p>
                                         <a href="#" class="btn btn-light">Learn More</a>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="service-item">
-                                        <span class="fa-stack fa-4x">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-compass fa-stack-1x text-primary"></i>
-                                        </span>
-                                        <h4>
-                                            <strong>Service Name</strong>
-                                        </h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                        <a href="#" class="btn btn-light">Learn More</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="service-item">
-                                        <span class="fa-stack fa-4x">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-flask fa-stack-1x text-primary"></i>
-                                        </span>
-                                        <h4>
-                                            <strong>Service Name</strong>
-                                        </h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                        <a href="#" class="btn btn-light">Learn More</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="service-item">
-                                        <span class="fa-stack fa-4x">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                                        </span>
-                                        <h4>
-                                            <strong>Service Name</strong>
-                                        </h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                        <a href="#" class="btn btn-light">Learn More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.row (nested) -->
+                            </ui:repeat>
+                        </div>
+
+                        <!-- /.row (nested) -->
                     </div>
                     <!-- /.col-lg-10 -->
                 </div>
@@ -130,38 +94,38 @@
                         <h2>Our Work</h2>
 
                         <hr class="small"></hr>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="resources/img/portfolio-1.jpg" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="resources/img/portfolio-2.jpg" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="resources/img/portfolio-3.jpg" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="resources/img/portfolio-4.jpg" />
-                                        </a>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="portfolio-item">
+                                    <a href="#">
+                                        <img class="img-portfolio img-responsive" src="resources/img/portfolio-1.jpg" />
+                                    </a>
                                 </div>
                             </div>
-                            <!-- /.row (nested) -->
-                            <a href="#" class="btn btn-dark">View More Items</a>
+                            <div class="col-md-6">
+                                <div class="portfolio-item">
+                                    <a href="#">
+                                        <img class="img-portfolio img-responsive" src="resources/img/portfolio-2.jpg" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="portfolio-item">
+                                    <a href="#">
+                                        <img class="img-portfolio img-responsive" src="resources/img/portfolio-3.jpg" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="portfolio-item">
+                                    <a href="#">
+                                        <img class="img-portfolio img-responsive" src="resources/img/portfolio-4.jpg" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row (nested) -->
+                        <a href="#" class="btn btn-dark">View More Items</a>
 
                     </div>
                     <!-- /.col-lg-10 -->
@@ -178,7 +142,7 @@
             <small>
                 <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
             </small>
-            
+
         </section>
     </ui:define>
 </ui:composition>
