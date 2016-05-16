@@ -21,6 +21,9 @@ public class ServiceCategoryController {
     @EJB
     private ServiceCategoryEJB serviceCategoryEJB;
     private ServiceCategory serviceCategory = new ServiceCategory();
+    private List<ServiceCategory> serviceCategoryList = new ArrayList<>();
+    private String search = "";
+    private String searchBy = "";
 
     public ServiceCategory getServiceCategory() {
         return serviceCategory;
@@ -29,14 +32,44 @@ public class ServiceCategoryController {
     public void setServiceCategory(ServiceCategory serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
-    private List<ServiceCategory> serviceCategoryList = new ArrayList<>();
-    private String search = "";
-    private String searchBy = "";
+    
+    public String getSearchBy() {
+        return searchBy;
+    }
 
-    /**
-     *
-     * @return String
-     */
+    public void setSearchBy(String searchBy) {
+        this.searchBy = searchBy;
+    }
+
+ 
+    public String getSearch() {
+        return search;
+    }
+
+ 
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public ServiceCategory getServiceCategoryByParamId() {
+        serviceCategory = serviceCategoryEJB.getServiceCategoryByParamId();
+        return serviceCategory;
+    }
+
+    public List<ServiceCategory> getServiceCategoryList() {
+        if (this.search.isEmpty()) {
+            serviceCategoryList = serviceCategoryEJB.listServiceCategory();
+        }
+        return serviceCategoryList;
+    }
+
+
+    public void setServiceCategoryList(List<ServiceCategory> serviceCategoryList) {
+        this.serviceCategoryList = serviceCategoryList;
+    }
+
+
+ 
     public String doCreateServiceCategory() {
        
         serviceCategory = serviceCategoryEJB.addServiceCategory(serviceCategory);
@@ -45,10 +78,6 @@ public class ServiceCategoryController {
         return "listServiceCategory.xhtml";
     }
 
-    /**
-     *
-     * @return
-     */
     public String doSearch() {
         serviceCategoryList = serviceCategoryEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
@@ -56,73 +85,7 @@ public class ServiceCategoryController {
         return "listServiceCategory.xhtml";
     }
     
-   
 
-    /**
-     *
-     * @return String
-     */
-    public String getSearchBy() {
-        return searchBy;
-    }
-
-    /**
-     *
-     * @param searchBy
-     */
-    public void setSearchBy(String searchBy) {
-        this.searchBy = searchBy;
-    }
-
-    /**
-     *
-     * @return String
-     */
-    public String getSearch() {
-        return search;
-    }
-
-    /**
-     *
-     * @param search
-     */
-    public void setSearch(String search) {
-        this.search = search;
-    }
-
-    
-    public ServiceCategory getStaffById(Long serCat_id) {
-        serviceCategory = serviceCategoryEJB.getServiceCategory(serCat_id);
-        return serviceCategory;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ServiceCategory getServiceCategoryByParamId() {
-        serviceCategory = serviceCategoryEJB.getServiceCategoryByParamId();
-        return serviceCategory;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<ServiceCategory> getServiceCategoryList() {
-        if (this.search.isEmpty()) {
-            serviceCategoryList = serviceCategoryEJB.listServiceCategory();
-        }
-        return serviceCategoryList;
-    }
-
-    /**
-     *
-     * @param serviceCategoryList
-     */
-    public void setServiceCategoryList(List<ServiceCategory> serviceCategoryList) {
-        this.serviceCategoryList = serviceCategoryList;
-    }
 
   
 
