@@ -36,8 +36,9 @@
     </h:head>
     <h:body>
         <div id="wrapper">
-
-            <!-- Navigation -->
+             
+             
+                        <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -113,10 +114,28 @@
                                     </li>
                                     <li>
                                         <a href="searchService.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Service</a>
+
+                            
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-expand"></i> Admins</a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="addAdmins.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Admin</a>
+                                    </li>
+                                    <li>
+                                        <a href="listAdmins.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Admin</a>
+                                    </li>
+                                    <li>
+                                        <a href="searchAdmins.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Admin</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Log out</a>
+                            </li>
+                            
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
@@ -127,6 +146,9 @@
             <div id="page-wrapper">
                 
                 <h:messages  class="alert alert-danger"></h:messages>
+                <h:form>
+                <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign In" type="submit" action="#{adminLogInOutController.isLogedIn()}"/>
+                </h:form>
                 <ui:insert name="content" />
             </div>
 

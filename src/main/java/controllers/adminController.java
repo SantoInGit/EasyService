@@ -6,21 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Address;
 import entities.Admin;
+import java.io.Serializable;
+import javax.enterprise.context.RequestScoped;
 
-@Named(value = "customerController")
+@Named(value = "adminController")
 @RequestScoped
-public class adminController {
+public class adminController implements Serializable{
 
-    /**
-     * Creates a new instance of CustomerController
-     */
     public adminController() {
     }
+    
     @EJB
     private AdminEJB adminEJB;
     private Admin admin = new Admin();
@@ -35,8 +34,8 @@ public class adminController {
  
     public String doCreateAdmin() {
         Address address = new Address(city, zipcode, country, street);
-        admin = adminEJB.addCustomer(admin, address);
-        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer Created Succefully.", "");
+        admin = adminEJB.addAdmin(admin, address);
+        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "listAdmins.xhtml";
     }
@@ -50,88 +49,62 @@ public class adminController {
     }
     
     public String doLogInAdmin(){
-        
-        return "adminProfile.xhtml";
+        List<Admin> user = adminEJB.listAdmins();
+        for(Admin adminFromDB:user){
+            if(adminFromDB.getEmail().equals(this.admin.getEmail()) && (adminFromDB.getPassword()).equals(this.admin.getPassword())){
+                
+                return "listAdmins.xhtml";
+            }
+        }
+        return "loginAdmin.xhtml";
     }
     
-   
-
-    /**
-     *
-     * @return String
-     */
+ 
     public String getSearchBy() {
         return searchBy;
     }
 
-    /**
-     *
-     * @param searchBy
-     */
+
     public void setSearchBy(String searchBy) {
         this.searchBy = searchBy;
     }
 
-    /**
-     *
-     * @return String
-     */
+
     public String getSearch() {
         return search;
     }
 
-    /**
-     *
-     * @param search
-     */
+
     public void setSearch(String search) {
         this.search = search;
     }
 
-    /**
-     *
-     * @return
-     */
+ 
     public String getCity() {
         return city;
     }
 
-    /**
-     *
-     * @return
-     */
+ 
     public String getZipcode() {
         return zipcode;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String getCountry() {
         return country;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String getStreet() {
         return street;
     }
 
-    /**
-     *
-     * @param city
-     */
+ 
     public void setCity(String city) {
         this.city = city;
     }
 
-    /**
-     *
-     * @param zipcode
-     */
+ 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
@@ -144,65 +117,42 @@ public class adminController {
         this.country = country;
     }
 
-    /**
-     *
-     * @param street
-     */
+ 
     public void setStreet(String street) {
         this.street = street;
     }
 
-    /**
-     *
-     * @return
-     */
+   
     public Admin getAdmin() {
         return admin;
     }
 
-    /**
-     *
-     * @param customer
-     */
-    public void setCustomer(Admin admin) {
+
+    public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
-    /**
-     *
-     * @param customer_id
-     * @return
-     */
     public Admin getAdminById(Long adminId) {
-        admin = adminEJB.getCustomer(adminId);
+        admin = adminEJB.getAdmin(adminId);
         return admin;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Admin getCustomerByParamId() {
-        admin = adminEJB.getCustomerByParamId();
+
+    public Admin getAdminByParamId() {
+        admin = adminEJB.getAdminByParamId();
         return admin;
     }
 
-    /**
-     *
-     * @return
-     */
-    public List<Admin> getCustomerList() {
+
+    public List<Admin> getAdminList() {
         if (this.search.isEmpty()) {
-            adminList = adminEJB.listCustomers();
+            adminList = adminEJB.listAdmins();
         }
         return adminList;
     }
 
-    /**
-     *
-     * @param customerList
-     */
-    public void setCustomerList(List<Admin> customerList) {
+
+    public void setAdminList(List<Admin> adminList) {
         this.adminList = adminList;
     }
 

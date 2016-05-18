@@ -152,45 +152,29 @@ public class CustomerController {
         this.street = street;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public Customer getCustomer() {
         return customer;
     }
 
-    /**
-     *
-     * @param customer
-     */
+ 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    /**
-     *
-     * @param customer_id
-     * @return
-     */
+ 
     public Customer getCustomerById(Long customer_id) {
         customer = customerEJB.getCustomer(customer_id);
         return customer;
     }
 
-    /**
-     *
-     * @return
-     */
+ 
     public Customer getCustomerByParamId() {
         customer = customerEJB.getCustomerByParamId();
         return customer;
     }
 
-    /**
-     *
-     * @return
-     */
+ 
     public List<Customer> getCustomerList() {
         if (this.search.isEmpty()) {
             customerList = customerEJB.listCustomers();
