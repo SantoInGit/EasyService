@@ -35,10 +35,14 @@
 
     </h:head>
     <h:body>
+ <f:view>
+     <f:event type="preRenderView"
+              listener="#{adminLogInOutController.forwardToLoginIfNotLoggedIn}" />
+   </f:view>    
         <div id="wrapper">
 
-
             <!-- Navigation -->
+
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -146,9 +150,6 @@
             <div id="page-wrapper">
 
                 <h:messages  class="alert alert-danger"></h:messages>
-                <h:form>
-                    <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign In" type="submit" action="#{adminLogInOutController.isLogedIn()}"/>
-                </h:form>
                 <ui:insert name="content" />
             </div>
 

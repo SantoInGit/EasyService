@@ -15,9 +15,9 @@ import javax.enterprise.context.RequestScoped;
 
 @Named(value = "adminController")
 @RequestScoped
-public class adminController implements Serializable{
+public class AdminController implements Serializable{
 
-    public adminController() {
+    public AdminController() {
     }
     
     @EJB
