@@ -9,9 +9,7 @@ import javax.faces.context.FacesContext;
 import entities.Service;
 import ejb.ServiceEJB;
 
-import entities.ServiceCategory;
 import java.util.ArrayList;
-import ejb.ServiceCategoryEJB;
 
 @Named(value = "serviceController")
 @RequestScoped
