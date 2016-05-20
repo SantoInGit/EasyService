@@ -33,7 +33,6 @@
 
 
     <h:body>
-
         <nav class="navbar navbar-default">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -44,7 +43,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="http://localhost:8080/EasyServices/faces/index.xhtml"><img class="img-responsive" src="resources/img/logo6.png" width="100" alt="EasyServices" /></a>
+                    <a class="navbar-brand" href="#{helperController.getBaseURL()}/faces/index.xhtml"><img class="img-responsive" src="resources/img/logo6.png" width="100" alt="EasyServices" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,25 +57,25 @@
                           </form>-->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#top"  onclick = '$("#menu-close").click();' >Home</a>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#top"  onclick = '$("#menu-close").click();' >Home</a>
                         </li>
                         <li>
-                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#about" onclick = '$("#menu-close").click();' >About</a>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#about" onclick = '$("#menu-close").click();' >About</a>
                         </li>
                         <li>
-                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#services" onclick = '$("#menu-close").click();' >Services</a>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#services" onclick = '$("#menu-close").click();' >Services</a>
                         </li>
                         <li>
-                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#portfolio" onclick = '$("#menu-close").click();' >Portfolio</a>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#portfolio" onclick = '$("#menu-close").click();' >Portfolio</a>
                         </li>
                         <li>
-                            <a href="http://localhost:8080/EasyServices/faces/index.xhtml#contact" onclick = '$("#menu-close").click();' >Contact</a>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#contact" onclick = '$("#menu-close").click();' >Contact</a>
                         </li>
                         <li>
-                            <a href="http://localhost:8080/EasyServices/faces/login.xhtml" onclick = '$("#menu-close").click();' >Login</a>
+                            <a href="#{helperController.getBaseURL()}/faces/login.xhtml" onclick = '$("#menu-close").click();' >Login</a>
                         </li>
                         <li>
-                            <a href="http://localhost:8080/EasyServices/faces/register.xhtml">Register</a>
+                            <a href="#{helperController.getBaseURL()}/faces/register.xhtml">Register</a>
                         </li>
 <!--                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
