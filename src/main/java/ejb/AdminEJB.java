@@ -8,7 +8,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import entities.Address;
 import entities.Admin;
 
 @Stateless
@@ -23,10 +22,43 @@ public class AdminEJB {
         return query.getResultList();
     }
 
-    public Admin addAdmin(Admin admin, Address address) {
-        admin.setAddress(address);
+    public Admin addAdmin(Admin admin){
         em.persist(admin);
         return admin;
+    }
+//    public Admin editAdmin(Long id){
+//         return getAdmin(id);
+//    }
+   public int editAdminCommit(Admin admin){
+       TypedQuery<Admin> query = em.createNamedQuery("updateAdmin",Admin.class);
+//       query.setParameter(1,admin.getEmail());
+//       query.setParameter(2,admin.getFirstName());
+//       query.setParameter(3,admin.getId());
+//       //query.setParameter(1, getAdmin(id).getId() );
+              query.setParameter("adEmail", admin.getEmail() );
+       query.setParameter("adFirstName", admin.getFirstName() );
+       query.setParameter("adLastName", admin.getLastName() );
+       query.setParameter("adMiddleName", admin.getMiddleName() );
+       query.setParameter("adPassword", admin.getPassword() );
+       query.setParameter("adPhoneNo", admin.getPhoneNo() );
+       query.setParameter("adQualification", admin.getQualification() );
+       query.setParameter("adStatus", admin.getStatus() );
+       query.setParameter("adUserType", admin.getUserType() );
+       query.setParameter("adCity",admin.getAddress().getCity() );
+       query.setParameter("adCountry",admin.getAddress().getCountry());
+       query.setParameter("adState",admin.getAddress().getState() );
+       query.setParameter("adStreet",admin.getAddress().getStreet() );
+       query.setParameter("adZipCode",admin.getAddress().getZipCode() );
+       query.setParameter("adId",admin.getId() );;
+       
+       
+        return query.executeUpdate();
+       
+       
+   }
+    
+    public void deleteAdmin(Long id){
+       em.remove(getAdmin(id));
     }
 
     public Admin getAdmin(Long adminId) {

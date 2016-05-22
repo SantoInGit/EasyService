@@ -1,110 +1,90 @@
-/**
- * @author jagatrp<Jagat Ram Prajapati>
- * @email prajapatijagat2009@gmail.com
- */
+
 package entities;
 
+/*
+An embeddable class to be embedded in Customer class for address
+ */
 import java.io.Serializable;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- *
- * Embedded address field for customer.
- */
 @Embeddable
-public class Address implements Serializable {
-
-    private String city;
-    private String zipcode;
-    private String country;
-    private String street;
-
-    public Address() {
+@Access(AccessType.PROPERTY)
+public class Address implements Serializable
+{
+     
+     private String street;
+    
+     private String city;
+    
+     private String state;
+     
+     private String zipCode;
+     
+     private String country;
+    
+     //Constructor
+    public Address(){
+        
     }
-
-    /**
-     *
-     * @param city
-     * @param zipcode
-     * @param country
-     * @param street
-     */
-    public Address(String city, String zipcode, String country, String street) {
-        this.city = city;
-        this.zipcode = zipcode;
-        this.country = country;
-        this.street = street;
+    //Contructor
+    public Address(String street, String city, String state,String zipCode, String country){
+        this.setStreet(street);
+        this.setCity(city);
+        this.setState(state);
+        this.setZipCode(zipCode);
+        this.setCountry(country);
     }
-
-    /**
-     *
-     * @return
-     */
+    
+    //getter functions
+    @Column(name = "STREET")
+    public String getStreet() {
+        return street;
+    }
+    @Column(name = "CITY")
     public String getCity() {
         return city;
     }
-
-    /**
-     * to get Zipcode
-     *
-     * @return
-     */
-    public String getZipcode() {
-        return zipcode;
+     @Column(name = "STATE")
+    public String getState() {
+        return state;
     }
-
-    /**
-     * set Country for customer
-     *
-     * @return
-     */
+    @Column(name = "ZIPCODE")
+    public String getZipCode() {
+        return zipCode;
+    }
+    @Column(name = "COUNTRY")
     public String getCountry() {
         return country;
     }
 
-    /**
-     * to get Street
-     *
-     * @return
-     */
-    public String getStreet() {
-        return street;
-    }
-
-    /**
-     * to set city
-     *
-     * @param city
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
-     * to set zipcode
-     *
-     * @param zipcode
-     */
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    /**
-     * to set country for customer
-     *
-     * @param country
-     */
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    /**
-     * to set street
-     *
-     * @param street
-     */
+    //setter functions
     public void setStreet(String street) {
         this.street = street;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return  "street=" + street + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", country=" + country ;
+    }
+    
+    
 }

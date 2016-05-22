@@ -75,14 +75,14 @@ public class ServiceCategoryController {
         serviceCategory = serviceCategoryEJB.addServiceCategory(serviceCategory);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Category Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listServiceCategory.xhtml";
+        return "listServiceCategory.xhtml?faces-redirect=true";
     }
 
     public String doSearch() {
         serviceCategoryList = serviceCategoryEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listServiceCategory.xhtml";
+        return "listServiceCategory.xhtml?faces-redirect=true";
     }
     
 

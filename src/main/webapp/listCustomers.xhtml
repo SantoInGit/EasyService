@@ -34,9 +34,31 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
+                                        <h:outputText value="Contact"/>
+                                    </f:facet>
+                                    <h:outputText value="#{customer.phoneNo}" />
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
                                         <h:outputText value="Address"/>
                                     </f:facet>
                                     <h:outputText value="#{customer.address.street} #{customer.address.city}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Status"/>
+                                    </f:facet>
+                                    <h:outputText value="#{customer.status}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                    <h:form>
+                                        <h:commandButton value="Edit" action="#{customerEditController.doEditCustomer(customer.id)}"/>
+                                        <h:commandButton value="Delete" action="#{customerController.doDeleteCustomer(customer.id)}"/>
+                                    </h:form>
                                 </h:column>
 
                                 

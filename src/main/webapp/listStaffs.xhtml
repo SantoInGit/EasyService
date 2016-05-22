@@ -34,11 +34,31 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
+                                        <h:outputText value="Contact"/>
+                                    </f:facet>
+                                    <h:outputText value="#{staff.phoneNo}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
                                         <h:outputText value="Address"/>
                                     </f:facet>
                                     <h:outputText value="#{staff.address.street} #{staff.address.city}"/>
                                 </h:column>
-
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Status"/>
+                                    </f:facet>
+                                    <h:outputText value="#{staff.status}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                    <h:form>
+                                        <h:commandButton value="Edit" action="#{staffEditController.doEditStaff(staff.id)}"/>
+                                        <h:commandButton value="Delete" action="#{staffController.doDeleteStaff(staff.id)}"/>
+                                    </h:form>
+                                </h:column>
                                 
                               
                             </h:dataTable>

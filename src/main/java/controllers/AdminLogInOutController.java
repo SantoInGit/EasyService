@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.event.ComponentSystemEvent;
-import javax.faces.component.UIViewRoot;
 
 @Named(value = "adminLogInOutController")
 @SessionScoped
@@ -57,7 +56,7 @@ public class AdminLogInOutController implements Serializable {
     }
 
     public String doLogInAdmin() {
-        FacesMessage logInSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Succesful: ", "");
+        FacesMessage logInSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Succesful! ", "");
         FacesMessage logInFailure = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Failure! ", "");
 
         ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
