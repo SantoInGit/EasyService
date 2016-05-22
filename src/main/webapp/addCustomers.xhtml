@@ -51,20 +51,26 @@
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel value="Street "/>
-                                        <h:inputText value="#{customerController.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
+                                        <h:inputText value="#{customerController.customer.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel value="City: "/>
-                                        <h:inputText value="#{customerController.city}" class="form-control" required="true" requiredMessage="City is required field."/>
+                                        <h:inputText value="#{customerController.customer.address.city}" class="form-control" required="true" requiredMessage="City is required field."/>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <h:outputLabel value="State "/>
+                                        <h:inputText value="#{customerController.customer.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <h:outputLabel value="Zipcode: "/>
-                                        <h:inputText value="#{customerController.zipcode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
+                                        <h:inputText value="#{customerController.customer.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
                                     </div>
 
                                     <div class="form-group">
                                         <h:outputLabel value="Country "/>
-                                        <h:inputText value="#{customerController.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
+                                        <h:inputText value="#{customerController.customer.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
                                     </div>
                                     <div class="form-group">
 

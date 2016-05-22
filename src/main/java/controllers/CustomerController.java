@@ -9,7 +9,6 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import entities.Address;
 import entities.Customer;
 
 @Named(value = "customerController")
@@ -25,20 +24,20 @@ public class CustomerController {
     private CustomerEJB customerEJB;
     private Customer customer = new Customer();
     private List<Customer> customerList = new ArrayList<>();
-    private String city;
-    private String zipcode;
-    private String country;
-    private String street;
+
     private String search = "";
     private String searchBy = "";
 
  
     public String doCreateCustomer() {
-        Address address = new Address(city, zipcode, country, street);
-        customer = customerEJB.addCustomer(customer, address);
+        customer = customerEJB.addCustomer(customer);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listCustomers.xhtml";
+        return "listCustomers.xhtml?faces-redirect=true";
+    }
+    public String doDeleteCustomer(Long id){
+        customerEJB.deleteCustomer(id);
+        return "listCustomers.xhtml?faces-redirect=true";
     }
 
   
@@ -46,12 +45,12 @@ public class CustomerController {
         customerList = customerEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listCustomers.xhtml";
+        return "listCustomers.xhtml?faces-redirect=true";
     }
     
     public String doLogInCustomer(){
         
-        return "customerProfile.xhtml";
+        return "customerProfile.xhtml?faces-redirect=true";
     }
     
    
@@ -87,71 +86,6 @@ public class CustomerController {
     public void setSearch(String search) {
         this.search = search;
     }
-
-    /**
-     *
-     * @return
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getStreet() {
-        return street;
-    }
-
-    /**
-     *
-     * @param city
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
-     *
-     * @param zipcode
-     */
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    /**
-     *
-     * @param country
-     */
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    /**
-     *
-     * @param street
-     */
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
 
     public Customer getCustomer() {
         return customer;

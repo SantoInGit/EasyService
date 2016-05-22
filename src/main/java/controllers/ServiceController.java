@@ -114,7 +114,7 @@ public class ServiceController {
 
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listService.xhtml";
+        return "listService.xhtml?faces-redirect=true";
     }
 
     /**
@@ -125,7 +125,7 @@ public class ServiceController {
         serviceList = serviceEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listService.xhtml";
+        return "listService.xhtml?faces-redirect=true";
     }
 
     

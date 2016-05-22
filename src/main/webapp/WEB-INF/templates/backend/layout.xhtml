@@ -61,7 +61,7 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
 
-                            <li><a href="index.faces"><i class="glyphicon glyphicon-dashboard"></i>&nbsp;Dashboard</a></li>
+                            <li><a href="dashboard.faces"><i class="glyphicon glyphicon-dashboard"></i>&nbsp;Dashboard</a></li>
                             <li>
                                 <a href="#"><i class="glyphicon glyphicon-expand"></i> Customers</a>
                                 <ul class="nav nav-second-level">
@@ -137,7 +137,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="#"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Log out</a>
+                                    <i class="glyphicon glyphicon-log-out"></i><h:form> <h:commandButton value="Log out" action="#{adminLogInOutController.doLogOutAdmin()}"/></h:form>
                                 </li>
                             </li>
                         </ul>
@@ -148,8 +148,10 @@
             </nav>
 
             <div id="page-wrapper">
-
-                <h:messages  class="alert alert-danger"></h:messages>
+               
+                
+                <h:messages for="errorMessage" class="alert alert-danger"/>
+                
                 <ui:insert name="content" />
             </div>
 

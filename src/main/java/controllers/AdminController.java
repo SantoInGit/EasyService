@@ -8,7 +8,6 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import entities.Address;
 import entities.Admin;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
@@ -24,39 +23,37 @@ public class AdminController implements Serializable{
     private AdminEJB adminEJB;
     private Admin admin = new Admin();
     private List<Admin> adminList = new ArrayList<>();
-    private String city;
-    private String zipcode;
-    private String country;
-    private String street;
+   
     private String search = "";
     private String searchBy = "";
 
  
     public String doCreateAdmin() {
-        Address address = new Address(city, zipcode, country, street);
-        admin = adminEJB.addAdmin(admin, address);
+        admin = adminEJB.addAdmin(admin);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listAdmins.xhtml";
+        return "listAdmins.xhtml?faces-redirect=true";
     }
-
-  
+ 
     public String doSearch() {
         adminList = adminEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listAdmins.xhtml";
+        return "listAdmins.xhtml?faces-redirect=true";
+    }
+    public String doDeleteAdmin(Long id){
+        adminEJB.deleteAdmin(id);
+        return "listAdmins.xhtml?faces-redirect=true";
     }
     
     public String doLogInAdmin(){
         List<Admin> user = adminEJB.listAdmins();
         for(Admin adminFromDB:user){
             if(adminFromDB.getEmail().equals(this.admin.getEmail()) && (adminFromDB.getPassword()).equals(this.admin.getPassword())){
-                
-                return "listAdmins.xhtml";
+                return "listAdmins.xhtml?faces-redirect=true";
             }
         }
-        return "loginAdmin.xhtml";
+        return "loginAdmin.xhtml?faces-redirect=true";
     }
     
  
@@ -78,50 +75,6 @@ public class AdminController implements Serializable{
     public void setSearch(String search) {
         this.search = search;
     }
-
- 
-    public String getCity() {
-        return city;
-    }
-
- 
-    public String getZipcode() {
-        return zipcode;
-    }
-
-
-    public String getCountry() {
-        return country;
-    }
-
-
-    public String getStreet() {
-        return street;
-    }
-
- 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
- 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    /**
-     *
-     * @param country
-     */
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
- 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
    
     public Admin getAdmin() {
         return admin;

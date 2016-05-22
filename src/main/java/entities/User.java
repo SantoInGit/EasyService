@@ -21,44 +21,33 @@ public class User implements Serializable{
     private String firstName;
     private String middleName;
     private String lastName;
+    @Embedded
     private Address address;
     private String phoneNo;
     private String email;
     private String password;
     private String userType;
      
+    public User(){
+        this.address = new Address();
+    }
 
-    /**
-     * @return the id
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     * @param userId the id to set
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * @return the firstName
-     */
     public String getFirstName() {
         return firstName;
     }
 
-    /**
-     * @param firstName the firstName to set
-     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    /**
-     * @return the middleName
-     */
     public String getMiddleName() {
         return middleName;
     }
