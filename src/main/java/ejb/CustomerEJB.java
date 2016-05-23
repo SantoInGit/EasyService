@@ -38,7 +38,7 @@ public class CustomerEJB {
     }
     
     public int editCustomerCommit(Customer customer){
-       TypedQuery<Customer> query = em.createNamedQuery("updateStaff",Customer.class);
+       TypedQuery<Customer> query = em.createNamedQuery("updateCustomer",Customer.class);
 
        query.setParameter("custEmail", customer.getEmail() );
        query.setParameter("custFirstName", customer.getFirstName() );

@@ -16,7 +16,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 style="color:blue">Customer Edit/Update: #{customerEditController.customer.firstName} [ email: #{customerEditController.customer.email} ]</h3>
+                        <h3 style="color:blue">Customer Edit/Update: #{entityEditController.customer.firstName} [ email: #{entityEditController.customer.email} ]</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -24,29 +24,29 @@
                                 <h:form>
                                     <div class="form-group">
                                         <h:outputLabel for="firstName" value="First name: "/>
-                                        <h:inputText id="firstName" value="#{customerEditController.customer.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field." />
+                                        <h:inputText id="firstName" value="#{entityEditController.customer.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field." />
                                     </div>
                                     
                                     <div class="form-group">
                                         <h:outputLabel for="middleName" value="Middle name: "/>
-                                        <h:inputText id="middleName" value="#{customerEditController.customer.middleName}" class="form-control" required="false"/>
+                                        <h:inputText id="middleName" value="#{entityEditController.customer.middleName}" class="form-control" required="false"/>
                                     </div>
                                     
                                     <div class="form-group">
                                         <h:outputLabel for="lastName" value="Last name: "/>
-                                        <h:inputText id="lastName" value="#{customerEditController.customer.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
+                                        <h:inputText id="lastName" value="#{entityEditController.customer.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
                                     </div>
                                     
                                      <div class="form-group">
                                         <h:outputLabel for="contactNo" value="Contact No.: "/>
-                                        <h:inputText id="contactNo" value="#{customerEditController.customer.phoneNo}" class="form-control"/>
+                                        <h:inputText id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control"/>
                                     </div>
 
                                     
                                      <div class="form-group">
                                        
                                         <h:outputLabel for="staffStatus" value="Choose Status: "/>
-                                        <h:selectOneMenu value="#{customerEditController.customer.status}" styleClass="form-control">
+                                        <h:selectOneMenu value="#{entityEditController.customer.status}" styleClass="form-control">
                                             <f:selectItem itemValue="inactive" itemLabel="Inactive" />
                                             <f:selectItem itemValue="active" itemLabel="Active" />                                       
                                         </h:selectOneMenu>
@@ -54,36 +54,36 @@
 
                                      <div class="form-group">
                                         <h:outputLabel value="Street "/>
-                                        <h:inputText value="#{customerEditController.customer.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
+                                        <h:inputText value="#{entityEditController.customer.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel value="City: "/>
-                                        <h:inputText value="#{customerEditController.customer.address.city}" class="form-control" required="true" requiredMessage="City is required field."/>
+                                        <h:inputText value="#{entityEditController.customer.address.city}" class="form-control" required="true" requiredMessage="City is required field."/>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel value="Zipcode: "/>
-                                        <h:inputText value="#{customerEditController.customer.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
+                                        <h:inputText value="#{entityEditController.customer.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
                                     </div>
                                     
                                     <div class="form-group">
                                         <h:outputLabel value="State "/>
-                                        <h:inputText value="#{customerEditController.customer.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
+                                        <h:inputText value="#{entityEditController.customer.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
                                     </div>
 
                                     <div class="form-group">
                                         <h:outputLabel value="Country "/>
-                                        <h:inputText value="#{customerEditController.customer.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
+                                        <h:inputText value="#{entityEditController.customer.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
                                     </div>
                                     
                                     <div class="form-group">
                                         <h:outputLabel value="Email "/>
-                                        <h:inputText disabled="true" value="#{customerEditController.customer.email}" class="form-control" required="true" requiredMessage="Email is required field."/>
+                                        <h:inputText disabled="true" value="#{entityEditController.customer.email}" class="form-control" required="true" requiredMessage="Email is required field."/>
                                     </div>
                                     
                                     <div class="col-lg-6 btn-group inline pull-left ">
-                                            <h:commandButton class="btn btn-primary form-control " value="Commit" action="#{customerEditController.doEditCustomerCommit()}"/>
+                                            <h:commandButton class="btn btn-primary form-control " value="Commit" action="#{entityEditController.doEditEntityCommit('customer')}"/>
                                         
-                                           <h:commandButton class ="btn btn-primary form-control "  value="Cancel" action="#{customerEditController.doCancelEditCustomer()}"/>
+                                           <h:commandButton class ="btn btn-primary form-control "  value="Cancel" action="#{entityEditController.doCancelEdit('customer')}"/>
                                             </div>
                                 </h:form>
                             </div>

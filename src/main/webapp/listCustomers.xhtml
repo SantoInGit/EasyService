@@ -56,7 +56,7 @@
                                         <h:outputText value="Action"/>
                                     </f:facet>
                                     <h:form>
-                                        <h:commandButton value="Edit" action="#{customerEditController.doEditCustomer(customer.id)}"/>
+                                        <h:commandButton value="Edit" action="#{entityEditController.doEditEntity(customer.id,'customer')}"/>
                                         <h:commandButton value="Delete" action="#{customerController.doDeleteCustomer(customer.id)}"/>
                                     </h:form>
                                 </h:column>

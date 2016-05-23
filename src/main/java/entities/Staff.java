@@ -23,9 +23,9 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery(name = "findAllStaff", query = "select s from Staff s"),
     @NamedQuery(name = "findStaffByFirstName", query = "select s from Staff s where UPPER(s.firstName) LIKE :FirstName"),
-    @NamedQuery(name = "findStaffByLastName", query = "select s from Customer s where UPPER(s.lastName) LIKE :LastName"),
-    @NamedQuery(name = "findStaffByAddress", query = "select s from Customer s where UPPER(s.address.street) LIKE :Address"),
-    @NamedQuery(name = "findStaffById", query = "select s from Customer s where s.id=:id"),
+    @NamedQuery(name = "findStaffByLastName", query = "select s from Staff s where UPPER(s.lastName) LIKE :LastName"),
+    @NamedQuery(name = "findStaffByAddress", query = "select s from Staff s where UPPER(s.address.street) LIKE :Address"),
+    @NamedQuery(name = "findStaffById", query = "select s from Staff s where s.id=:id"),
 //update query
     @NamedQuery(name = "updateStaff", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
             query="update Staff a Set  a.email = :stEmail, a.firstName = :stFirstName, a.jobTitle = :stJobTitle,"
