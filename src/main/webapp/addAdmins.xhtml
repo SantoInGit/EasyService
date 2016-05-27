@@ -24,28 +24,28 @@
                                         <h:outputLabel value="Fill up personal information below: "/>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel for="firstName" value="First name: "/>
+                                        <h:outputLabel for="firstName" value="First Name: "/>
                                         <h:inputText id="firstName" value="#{adminController.admin.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field."/>
                                     </div>
                                     
                                     <div class="form-group">
-                                        <h:outputLabel for="middleName" value="Middle name: "/>
+                                        <h:outputLabel for="middleName" value="Middle Name: "/>
                                         <h:inputText id="middleName" value="#{adminController.admin.middleName}" class="form-control" required="false"/>
                                     </div>
                                     
                                     <div class="form-group">
-                                        <h:outputLabel for="lastName" value="Last name: "/>
+                                        <h:outputLabel for="lastName" value="Last Name: "/>
                                         <h:inputText id="lastName" value="#{adminController.admin.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
                                     </div>
                                     
                                      <div class="form-group">
-                                        <h:outputLabel for="contactNo" value="Contact No. "/>
-                                        <h:inputText id="contactNo" onblur="checkPhoneNumber" value="#{adminController.admin.phoneNo}" class="form-control"/>
+                                        <h:outputLabel for="contactNo" value="Contact No.: "/>
+                                        <h:inputText id="contactNo"  value="#{adminController.admin.phoneNo}" class="form-control"/>
                                     </div>
                                     
                               
                                      <div class="form-group">
-                                        <h:outputLabel for="qualification" value="Qualification "/>
+                                        <h:outputLabel for="qualification" value="Qualification: "/>
                                         <h:inputText id="qualification" value="#{adminController.admin.qualification}" class="form-control"/>
                                     </div>
                                     
@@ -53,8 +53,8 @@
                                          
                                         <h:outputLabel for="serviceStatus" value="Choose Status: "/>
                                         <h:selectOneMenu value="#{adminController.admin.status}" styleClass="form-control">
-                                            <f:selectItem itemValue="inactive" itemLabel="Inactive" />
-                                            <f:selectItem itemValue="active" itemLabel="Active" />                                       
+                                            <f:selectItem itemValue="Inactive" itemLabel="Inactive" />
+                                            <f:selectItem itemValue="Active" itemLabel="Active" />                                       
                                         </h:selectOneMenu>
                                         
                                     </div>
@@ -63,7 +63,7 @@
                                         <h:outputLabel value="Fill up address information below: "/>
                                     </div>
                                      <div class="form-group">
-                                        <h:outputLabel value="Street "/>
+                                        <h:outputLabel value="Street: "/>
                                         <h:inputText value="#{adminController.admin.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
                                     </div>
                                     <div class="form-group">
@@ -72,16 +72,16 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                        <h:outputLabel value="State "/>
+                                        <h:outputLabel value="State: "/>
                                         <h:inputText value="#{adminController.admin.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel value="Zipcode: "/>
+                                        <h:outputLabel value="Zip Code: "/>
                                         <h:inputText value="#{adminController.admin.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
                                     </div>
 
                                     <div class="form-group">
-                                        <h:outputLabel value="Country "/>
+                                        <h:outputLabel value="Country: "/>
                                         <h:inputText value="#{adminController.admin.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
                                     </div>
                                     
@@ -89,12 +89,12 @@
                                         <h:outputLabel value="Fill up log in credential below: "/>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel value="Email "/>
+                                        <h:outputLabel value="Email: "/>
                                         <h:inputText value="#{adminController.admin.email}" class="form-control" required="true" requiredMessage="Email is required field."/>
                                     </div>
                                     
                                     <div class="form-group">
-                                        <h:outputLabel value="Password "/>
+                                        <h:outputLabel value="Password: "/>
                                         <h:inputSecret value="#{adminController.admin.password}" class="form-control" required="true" requiredMessage="Password is required field."/>
                                     </div>
                                     
