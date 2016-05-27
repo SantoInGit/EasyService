@@ -1,7 +1,4 @@
-/**
- * @author jagatrp<Jagat Ram Prajapati>
- * @email prajapatijagat2009@gmail.com
- */
+
 package ejb;
 
 import java.util.List;
@@ -16,32 +13,39 @@ import entities.ServiceCategory;
 @Stateless
 public class ServiceCategoryEJB {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     @PersistenceContext(unitName = "EASYSERVICES_PU")
     private EntityManager em;
 
-    // ======================================
-    // =           Public Methods           =
-    // ======================================
     public List<ServiceCategory> listServiceCategory() {
         // TODO not implemented with eclipselink 2.0 TypedQuery query = em.createNamedQuery("findAllBooks", Book.class);
         TypedQuery<ServiceCategory> query = em.createNamedQuery("findAllServiceCategory", ServiceCategory.class);
         return query.getResultList();
     }
 
-    /**
-     *
-     * @param customer
-     * @param address
-     * @return customer
-     */
+ 
     public ServiceCategory addServiceCategory(ServiceCategory serCat) {
         em.persist(serCat);
         return serCat;
     }
+    
+    public void deleteServiceCategory(Long id){
+       em.remove(getServiceCategory(id));
+    }
+    
+    public int editServiceCategoryCommit(ServiceCategory serviceCategory){
+       TypedQuery<ServiceCategory> query = em.createNamedQuery("updateServiceCategory",ServiceCategory.class);
+
+       query.setParameter("serCatLongDescription", serviceCategory.getLongDescription() );
+       query.setParameter("serCatServiceCategoryName", serviceCategory.getServiceCategoryName() );
+       query.setParameter("serCatShortDescription", serviceCategory.getShortDescription() );
+       query.setParameter("serCatStatus", serviceCategory.getStatus() );
+       query.setParameter("serCatId", serviceCategory.getServiceCategoryId());
+       
+       
+       return query.executeUpdate();
+       
+       
+   }
 
     /**
      *

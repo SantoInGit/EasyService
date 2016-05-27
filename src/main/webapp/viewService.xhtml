@@ -1,0 +1,85 @@
+<ui:composition template="/WEB-INF/templates/backend/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Add Service</ui:define>
+
+    <ui:define name="content">
+        <div class="row">   
+            <div class="col-lg-12 panel-heading"></div>    
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Details Service: [ #{entityEditController.service.serviceName} ]</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h:form>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="serviceName" value="Name: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel id="serviceName" value="#{entityEditController.service.serviceName}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Category: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{entityEditController.service.serviceCategory.serviceCategoryName}" class="form-control"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="serviceStatus" value="Status: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{entityEditController.service.status}" styleClass="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="serviceDescription" value="Description: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel id="serviceDescription" value="#{entityEditController.service.description}" class="form-control"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="serviceRatePerHour" value="Rate Per Hour: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel id="serviceRatePerHour" value="#{entityEditController.service.ratePerHour}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+
+                            <div class="row">                               
+                                <div class="col-md-6">
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <div class="col-md-6" style="padding-left: 0">
+                                                <h:commandButton class="btn btn-primary form-control " value="Edit" action="#{entityEditController.doEditEntity(entityEditController.service.serviceId,'service')}"/>
+                                            </div>
+                                            <div class="col-md-6" style="padding-right: 0">
+                                                <h:commandButton class ="btn btn-primary form-control "  value="Cancel" action="#{entityEditController.doCancelEdit('service')}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </h:form>
+                    </div>
+                </div>  
+            </div>
+
+        </div>
+
+    </ui:define>
+</ui:composition>
+

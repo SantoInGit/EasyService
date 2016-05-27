@@ -6,13 +6,13 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,7 +25,15 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "findAllService", query = "select s from Service s"),
     @NamedQuery(name = "findServiceByServiceName", query = "select s from Service s where UPPER(s.serviceName) LIKE :ServiceName"),
-    @NamedQuery(name = "findServiceByStatus", query = "select s from Service s where UPPER(s.status) LIKE :Status")
+    @NamedQuery(name = "findServiceByStatus", query = "select s from Service s where UPPER(s.status) LIKE :Status"),
+//update query
+    @NamedQuery(name = "updateService", 
+            query="UPDATE Service a SET  "
+                    + "a.description = :serDescription, "
+                    + "a.ratePerHour = :serRatePerHour, "
+                    + "a.serviceName = :serServiceName, "
+                    + "a.status = :serStatus " 
+                    + "WHERE a.serviceId = :serId")        
        
 })
 public class Service implements Serializable {
@@ -39,7 +47,10 @@ public class Service implements Serializable {
     private String description;
     private String status;
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="serviceCategory_fk")
+    @JoinTable(
+            name="jnd_Service_ServiceCategory",
+            joinColumns=@JoinColumn(name="service_serviceCategory_fk")
+    )
     private ServiceCategory serviceCategory;
     
 

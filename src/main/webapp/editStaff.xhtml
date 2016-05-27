@@ -11,45 +11,46 @@
         <div class="row">   
             <div class="col-lg-12 panel-heading"></div>    
         </div>
-        <!-- /.row -->
+        
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 style="color:blue">Staff Edit/Update: #{entityEditController.staff.firstName} [ email: #{entityEditController.staff.email} ]</h3>
+                        <h3>Staff Edit/Update: #{entityEditController.staff.firstName} [ email: #{entityEditController.staff.email} ]</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h:form>
+                        <h:form>
+                            <div class="row">
+                                <div class="col-lg-6">
+
                                     <div class="form-group">
                                         <h:outputLabel for="firstName" value="First name: "/>
                                         <h:inputText id="firstName" value="#{entityEditController.staff.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field." />
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel for="middleName" value="Middle name: "/>
                                         <h:inputText id="middleName" value="#{entityEditController.staff.middleName}" class="form-control" required="false"/>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel for="lastName" value="Last name: "/>
                                         <h:inputText id="lastName" value="#{entityEditController.staff.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
                                     </div>
-                                    
-                                     <div class="form-group">
+
+                                    <div class="form-group">
                                         <h:outputLabel for="contactNo" value="Contact No.: "/>
                                         <h:inputText id="contactNo" value="#{entityEditController.staff.phoneNo}" class="form-control"/>
                                     </div>
-                                    
-                              
-                                     <div class="form-group">
+
+
+                                    <div class="form-group">
                                         <h:outputLabel for="qualification" value="Qualification: "/>
                                         <h:inputText id="qualification" value="#{entityEditController.staff.qualification}" class="form-control"/>
                                     </div>
-                                    
-                                     <div class="form-group">
-                                       
+
+                                    <div class="form-group">
+
                                         <h:outputLabel for="staffStatus" value="Choose Status: "/>
                                         <h:selectOneMenu value="#{entityEditController.staff.status}" styleClass="form-control">
                                             <f:selectItem itemValue="inactive" itemLabel="Inactive" />
@@ -57,7 +58,7 @@
                                         </h:selectOneMenu>
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <h:outputLabel value="Street "/>
                                         <h:inputText value="#{entityEditController.staff.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
                                     </div>
@@ -69,7 +70,7 @@
                                         <h:outputLabel value="Zipcode: "/>
                                         <h:inputText value="#{entityEditController.staff.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel value="State "/>
                                         <h:inputText value="#{entityEditController.staff.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
@@ -79,32 +80,31 @@
                                         <h:outputLabel value="Country "/>
                                         <h:inputText value="#{entityEditController.staff.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel value="Email "/>
                                         <h:inputText disabled="true" value="#{entityEditController.staff.email}" class="form-control" required="true" requiredMessage="Email is required field."/>
                                     </div>
-                                    
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">                               
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-6 btn-group inline pull-left">
+                                        <div class="col-md-6" style="padding-left: 0">
                                             <h:commandButton class="btn btn-primary form-control " value="Commit" action="#{entityEditController.doEditEntityCommit('staff')}"/>
-                                        
-                                           <h:commandButton class ="btn btn-primary form-control "  value="Cancel" action="#{entityEditController.doCancelEdit('staff')}"/>
-                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="padding-right: 0">
+                                            <h:commandButton class ="btn btn-primary form-control "  value="Cancel" action="#{entityEditController.doCancelEdit('staff')}"/>
                                         </div>
                                     </div>
-                                </h:form>
-                            </div>
 
-                        </div>
-                        <!-- /.row (nested) -->
+                                </div>
+                            </div>    
+                        </h:form>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
         </div>
     </ui:define>
 </ui:composition>

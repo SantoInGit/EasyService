@@ -16,35 +16,36 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 style="color:blue">Customer Edit/Update: #{entityEditController.customer.firstName} [ email: #{entityEditController.customer.email} ]</h3>
+                        <h3>Customer Edit/Update: #{entityEditController.customer.firstName} [ email: #{entityEditController.customer.email} ]</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h:form>
+                        <h:form>
+                            <div class="row">
+                                <div class="col-lg-6">
+
                                     <div class="form-group">
                                         <h:outputLabel for="firstName" value="First name: "/>
                                         <h:inputText id="firstName" value="#{entityEditController.customer.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field." />
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel for="middleName" value="Middle name: "/>
                                         <h:inputText id="middleName" value="#{entityEditController.customer.middleName}" class="form-control" required="false"/>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel for="lastName" value="Last name: "/>
                                         <h:inputText id="lastName" value="#{entityEditController.customer.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
                                     </div>
-                                    
-                                     <div class="form-group">
+
+                                    <div class="form-group">
                                         <h:outputLabel for="contactNo" value="Contact No.: "/>
                                         <h:inputText id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control"/>
                                     </div>
 
-                                    
-                                     <div class="form-group">
-                                       
+
+                                    <div class="form-group">
+
                                         <h:outputLabel for="staffStatus" value="Choose Status: "/>
                                         <h:selectOneMenu value="#{entityEditController.customer.status}" styleClass="form-control">
                                             <f:selectItem itemValue="inactive" itemLabel="Inactive" />
@@ -52,7 +53,7 @@
                                         </h:selectOneMenu>
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <h:outputLabel value="Street "/>
                                         <h:inputText value="#{entityEditController.customer.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
                                     </div>
@@ -64,7 +65,7 @@
                                         <h:outputLabel value="Zipcode: "/>
                                         <h:inputText value="#{entityEditController.customer.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel value="State "/>
                                         <h:inputText value="#{entityEditController.customer.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
@@ -74,28 +75,34 @@
                                         <h:outputLabel value="Country "/>
                                         <h:inputText value="#{entityEditController.customer.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <h:outputLabel value="Email "/>
                                         <h:inputText disabled="true" value="#{entityEditController.customer.email}" class="form-control" required="true" requiredMessage="Email is required field."/>
                                     </div>
-                                    
-                                    <div class="col-lg-6 btn-group inline pull-left ">
-                                            <h:commandButton class="btn btn-primary form-control " value="Commit" action="#{entityEditController.doEditEntityCommit('customer')}"/>
-                                        
-                                           <h:commandButton class ="btn btn-primary form-control "  value="Cancel" action="#{entityEditController.doCancelEdit('customer')}"/>
-                                            </div>
-                                </h:form>
+                                </div>
                             </div>
 
-                        </div>
-                        <!-- /.row (nested) -->
+                            <br/>
+
+                            <div class="row">                               
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-6" style="padding-left: 0">
+                                            <h:commandButton class="btn btn-primary form-control " value="Commit" action="#{entityEditController.doEditEntityCommit('customer')}"/>
+                                        </div>
+                                        <div class="col-md-6" style="padding-right: 0">
+                                            <h:commandButton class ="btn btn-primary form-control "  value="Cancel" action="#{entityEditController.doCancelEdit('customer')}"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </h:form>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
         </div>
     </ui:define>
 </ui:composition>

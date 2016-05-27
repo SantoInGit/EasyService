@@ -26,51 +26,48 @@ public class ServiceController {
 
     private String search = "";
     private String searchBy = "";
-/**
-     *
-     * @return String
-     */
+    
+    public String doCreateService() {
+        service = serviceEJB.addService(service, serviceCategory);
+        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Created Succefully.", "");
+        FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+        return "listService.xhtml?faces-redirect=true";
+    }
+
+    public String doDeleteService(Long id){
+        serviceEJB.deleteService(id);
+        return "listService.xhtml?faces-redirect=true";
+    }
+    
+    public String doSearch() {
+        serviceList = serviceEJB.search(search, searchBy);
+        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
+        FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+        return "listService.xhtml?faces-redirect=true";
+    }
+
+    
     public String getSearchBy() {
         return searchBy;
     }
 
-    /**
-     *
-     * @param searchBy
-     */
     public void setSearchBy(String searchBy) {
         this.searchBy = searchBy;
     }
 
-    /**
-     *
-     * @return String
-     */
     public String getSearch() {
         return search;
     }
 
-    /**
-     *
-     * @param search
-     */
     public void setSearch(String search) {
         this.search = search;
     }
 
-    /**
-     *
-     * @return
-     */
     public Service getServiceByParamId() {
         service = serviceEJB.getServiceByParamId();
         return service;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Service> getServiceList() {
         if (this.search.isEmpty()) {
             serviceList = serviceEJB.listService();
@@ -78,10 +75,6 @@ public class ServiceController {
         return serviceList;
     }
 
-    /**
-     *
-     * @param serviceList
-     */
     public void setServiceList(List<Service> serviceList) {
         this.serviceList = serviceList;
     }
@@ -102,31 +95,7 @@ public class ServiceController {
         this.serviceCategory = serviceCategory;
     }
 
-    /**
-     *
-     * @return String
-     */
-    public String doCreateService() {
 
-        //rent = serviceEJB.
-        // ServiceCategory sCategory = em.find(Movies.class, id);
-        service = serviceEJB.addService(service, serviceCategory);
-
-        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Created Succefully.", "");
-        FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listService.xhtml?faces-redirect=true";
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String doSearch() {
-        serviceList = serviceEJB.search(search, searchBy);
-        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
-        FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listService.xhtml?faces-redirect=true";
-    }
 
     
 }

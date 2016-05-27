@@ -22,7 +22,14 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "findAllServiceCategory", query = "select s from ServiceCategory s"),
     @NamedQuery(name = "findServiceCategoryByCategoryName", query = "select s from ServiceCategory s where UPPER(s.serviceCategoryName) LIKE :CategoryName"),
     @NamedQuery(name = "findServiceCategoryByStatus", query = "select s from ServiceCategory s where UPPER(s.status) LIKE :Status"),
-   
+    //update query
+    @NamedQuery(name = "updateServiceCategory", 
+            query = "update ServiceCategory a Set "
+                    + "a.longDescription = :serCatLongDescription, "
+                    + "a.serviceCategoryName = :serCatServiceCategoryName, "
+                    + "a.shortDescription = :serCatShortDescription, "
+                    + "a.status = :serCatStatus  "
+                    + "where a.serviceCategoryId = :serCatId")
 })
 public class ServiceCategory implements Serializable {
 
@@ -33,8 +40,6 @@ public class ServiceCategory implements Serializable {
     private String serviceCategoryName;
     private String shortDescription;
     private String longDescription;
-
-
     private String status;
     
 
@@ -47,7 +52,7 @@ public class ServiceCategory implements Serializable {
     }
 
     public void setServiceCategoryId(Long id) {
-        this.serviceCategoryId = serviceCategoryId;
+        this.serviceCategoryId = id;
     }
 
     @Override

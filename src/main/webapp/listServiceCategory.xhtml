@@ -44,6 +44,16 @@
                                     </f:facet>
                                     <h:outputText value="#{serviceCategory.status} "/>
                                 </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                    <h:form>
+                                        <h:commandButton value="Edit" action="#{entityEditController.doEditEntity(serviceCategory.serviceCategoryId,'serviceCategory')}"/>
+                                        <h:commandButton value="Delete" action="#{serviceCategoryController.doDeleteServiceCategory(serviceCategory.serviceCategoryId)}"/>
+                                        <h:commandButton value="Details" action="#{entityEditController.doVeiwDetails(serviceCategory.serviceCategoryId, 'serviceCategory')}"/>
+                                    </h:form>
+                                </h:column>
                                 
                               
                             </h:dataTable>

@@ -1,0 +1,130 @@
+<ui:composition template="/WEB-INF/templates/backend/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="title">Details Customer</ui:define>
+    <ui:define name="content">
+        
+        <div class="row">   
+            <div class="col-lg-12 panel-heading"></div>    
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 style="color:blue">Details Customer : #{entityEditController.customer.firstName} [ email: #{entityEditController.customer.email} ]</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h:form>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="firstName" value="First Name: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel id="firstName" value="#{entityEditController.customer.firstName}" class="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="middleName" value="Middle Name: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel id="middleName" value="#{entityEditController.customer.middleName}" class="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="lastName" value="Last Name: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel id="lastName" value="#{entityEditController.customer.lastName}" class="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="contactNo" value="Contact No.: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control"/>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <h:outputLabel class="control-label col-sm-4" for="staffStatus" value="Status: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel value="#{entityEditController.customer.status}" styleClass="form-control"/>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Street: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel value="#{entityEditController.customer.address.street}" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="City: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel value="#{entityEditController.customer.address.city}" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Zipcode: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel value="#{entityEditController.customer.address.zipCode}" class="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="State: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel value="#{entityEditController.customer.address.state}" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Country: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel value="#{entityEditController.customer.address.country}" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Email: "/>
+                                        <div class="col-md-8">
+                                        <h:outputLabel value="#{entityEditController.customer.email}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <div class="col-md-6" style="padding-left: 0">
+                                                <h:commandButton class="btn-primary form-control " value="Edit" action="#{entityEditController.doEditEntity(entityEditController.customer.id, 'customer')}"/>
+                                            </div>
+                                            <div class="col-md-6" style="padding-right: 0">
+                                                <h:commandButton class="btn-primary form-control " value="Back" action="#{entityEditController.doCancelEdit('customer')}"/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
+

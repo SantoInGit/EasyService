@@ -24,6 +24,11 @@ public class ServiceCategoryController {
     private List<ServiceCategory> serviceCategoryList = new ArrayList<>();
     private String search = "";
     private String searchBy = "";
+    
+    public String doDeleteServiceCategory(Long id){
+        serviceCategoryEJB.deleteServiceCategory(id);
+        return "listServiceCategory.xhtml?faces-redirect=true";
+    }
 
     public ServiceCategory getServiceCategory() {
         return serviceCategory;
