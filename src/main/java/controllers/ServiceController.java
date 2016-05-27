@@ -8,7 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Service;
 import ejb.ServiceEJB;
-import entities.Customer;
 
 import java.util.ArrayList;
 
