@@ -15,9 +15,9 @@
                     <div class="account-wall">
                         <h:form class="form-signin">
                             
-                            <h:inputText class="form-control" value="#{customerController.customer.email}" p:placeholder="Email" />
-                            <h:inputSecret class="form-control" value="#{customerController.customer.password}" p:placeholder="Password" />
-                            <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign In" type="submit" action="#{customerController.doLogInCustomer()}"/>
+                            <h:inputText class="form-control" value="#{customerLogInOutController.email}" p:placeholder="Email" />
+                            <h:inputSecret class="form-control" value="#{customerLogInOutController.password}" p:placeholder="Password" />
+                            <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign In" type="submit" action="#{customerLogInOutController.doLogInCustomer()}"/>
                            
                         </h:form>
                     </div>

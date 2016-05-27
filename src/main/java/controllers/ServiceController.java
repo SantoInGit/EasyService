@@ -95,7 +95,14 @@ public class ServiceController {
         this.serviceCategory = serviceCategory;
     }
 
-
-
+      
+    public String doCreateServiceOrder(int service_id){
+        CustomerLogInOutController customer = new CustomerLogInOutController();
+        boolean isLoggedIn = customer.isLoggedIn();
+        if(isLoggedIn){
+            return "index.xhtml";
+        }
+        return "login.xhtml";
+    }
     
 }
