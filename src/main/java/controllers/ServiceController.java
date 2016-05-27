@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Service;
 import ejb.ServiceEJB;
+import entities.Customer;
 
 import java.util.ArrayList;
 
@@ -115,6 +116,15 @@ public class ServiceController {
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "listService.xhtml";
+    }
+    
+    public String doCreateServiceOrder(int service_id){
+        CustomerLogInOutController customer = new CustomerLogInOutController();
+        boolean isLoggedIn = customer.isLoggedIn();
+        if(isLoggedIn){
+            return "index.xhtml";
+        }
+        return "login.xhtml";
     }
 
     /**

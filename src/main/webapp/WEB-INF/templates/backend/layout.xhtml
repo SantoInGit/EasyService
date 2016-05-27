@@ -5,40 +5,34 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <f:facet name="first">
-            <meta charset="utf-8" />
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <meta name="description" content="" /> 
-            <meta name="author" content=""></meta>
-            <title>Easy Services</title>
-        </f:facet>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" /> 
+        <meta name="author" content=""></meta>
+        <title>Easy Services</title>
         <!-- Bootstrap Core CSS -->
-        <f:facet name="styleSheets">
+        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
 
-            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+        <!-- MetisMenu CSS -->
+        <h:outputStylesheet name="bootstrap/css/metisMenu.min.css" />
 
-            <!-- MetisMenu CSS -->
-            <h:outputStylesheet name="bootstrap/css/metisMenu.min.css" />
+        <!-- DataTables CSS -->
+        <h:outputStylesheet name="bootstrap/css/dataTables.bootstrap.css" />
 
-            <!-- DataTables CSS -->
-            <h:outputStylesheet name="bootstrap/css/dataTables.bootstrap.css" />
+        <!-- DataTables Responsive CSS -->
+        <h:outputStylesheet name="bootstrap/css/dataTables.responsive.css" />
 
-            <!-- DataTables Responsive CSS -->
-            <h:outputStylesheet name="bootstrap/css/dataTables.responsive.css" />
+        <!-- Custom CSS -->
+        <h:outputStylesheet name="bootstrap/css/sb-admin-2.css" />
 
-            <!-- Custom CSS -->
-            <h:outputStylesheet name="bootstrap/css/sb-admin-2.css" />
-
-
-        </f:facet>
 
     </h:head>
     <h:body>
- <f:view>
-     <f:event type="preRenderView"
-              listener="#{adminLogInOutController.forwardToLoginIfNotLoggedIn}" />
-   </f:view>    
+        <f:view>
+            <f:event type="preRenderView"
+                     listener="#{adminLogInOutController.forwardToLoginIfNotLoggedIn}" />
+        </f:view>    
         <div id="wrapper">
 
             <!-- Navigation -->
