@@ -1,0 +1,44 @@
+<ui:composition template="/WEB-INF/templates/frontend/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">List Service</ui:define>
+
+    <ui:define name="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 bottom-rule">
+                    <h2 class="product-price">Price per hour $#{serviceController.serviceByParamId.ratePerHour}</h2>
+                </div>
+            </div><!-- end row -->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                </div>
+                <div  class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2> #{serviceController.serviceByParamId.serviceName}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            #{serviceController.serviceByParamId.description}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h:form>
+                                <h:commandButton class="btn btn-primary" value="Book Now" action="#{serviceController.doCreateServiceOrder(serviceController.service.serviceId)}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end row -->
+
+        </div>
+
+    </ui:define>
+</ui:composition>

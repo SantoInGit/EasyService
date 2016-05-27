@@ -31,10 +31,14 @@
                                             #{service.ratePerHour}</p>
                                     </div>
                                     <div class="col-xs-12 col-md-4">
-                                        <a class="btn btn-success" href="http://www.jquery2dotnet.com">View Detail</a>
+                                        <h:link value="View Detail" outcome="frontendViewService.xhtml">
+                                            <f:param name="service_id" value="#{service.serviceId}" />
+                                        </h:link>
                                     </div>
                                     <div class="col-xs-12 col-md-4">
-                                        <a class="btn btn-success" href="http://www.jquery2dotnet.com">Book Now</a>
+                                        <h:form>
+                                            <h:commandButton class="btn btn-primary" value="Book Now" action="#{serviceController.doCreateServiceOrder(service.serviceId)}"/>
+                                        </h:form>
                                     </div>
                                 </div>
                             </div>

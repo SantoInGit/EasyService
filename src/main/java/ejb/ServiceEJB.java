@@ -50,17 +50,22 @@ public class ServiceEJB {
    }
 
 
-    public Service getService(Long serCat_id) {
-        Service serCat = em.find(Service.class, serCat_id);
-        return serCat;
+    /**
+     *
+     * @param service_id
+     * @return service
+     */
+    public Service getService(Long service_id) {
+        Service service = em.find(Service.class, service_id);
+        return service;
     }
 
 
     public Service getServiceByParamId() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String id = params.get("serCat_id");
-        Long serCat_id = Long.parseLong(id);
-        return this.getService(serCat_id);
+        String id = params.get("service_id");
+        Long service_id = Long.parseLong(id);
+        return this.getService(service_id);
     }
 
 

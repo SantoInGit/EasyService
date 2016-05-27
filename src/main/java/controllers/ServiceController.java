@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Service;
 import ejb.ServiceEJB;
+import entities.Customer;
 
 import java.util.ArrayList;
 
@@ -95,7 +96,14 @@ public class ServiceController {
         this.serviceCategory = serviceCategory;
     }
 
-
-
+      
+    public String doCreateServiceOrder(int service_id){
+        CustomerLogInOutController customer = new CustomerLogInOutController();
+        boolean isLoggedIn = customer.isLoggedIn();
+        if(isLoggedIn){
+            return "index.xhtml";
+        }
+        return "login.xhtml";
+    }
     
 }
