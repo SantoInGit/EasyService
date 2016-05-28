@@ -31,8 +31,7 @@ public class ServiceOrderItem implements Serializable {
     private Date scheduleDate;
 
     public ServiceOrderItem() {
-    }
-    
+    }   
     
     public Long getOrderItemId() {
         return orderItemId;

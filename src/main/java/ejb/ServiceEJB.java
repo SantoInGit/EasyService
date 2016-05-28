@@ -32,23 +32,22 @@ public class ServiceEJB {
         em.persist(service);
         return service;
     }
-    
-    public void deleteService(Long id){
-       em.remove(getService(id));
+
+    public void deleteService(Long id) {
+        em.remove(getService(id));
     }
-    
-    public int editServiceCommit(Service service){
-       TypedQuery<Service> query = em.createNamedQuery("updateService",Service.class);
 
-       query.setParameter("serDescription", service.getDescription() );
-       query.setParameter("serRatePerHour", service.getRatePerHour() );
-       query.setParameter("serServiceName", service.getServiceName() );
-       query.setParameter("serStatus", service.getStatus() );
-       query.setParameter("serId", service.getServiceId());
-              
-       return query.executeUpdate();   
-   }
+    public int editServiceCommit(Service service) {
+        TypedQuery<Service> query = em.createNamedQuery("updateService", Service.class);
 
+        query.setParameter("serDescription", service.getDescription());
+        query.setParameter("serRatePerHour", service.getRatePerHour());
+        query.setParameter("serServiceName", service.getServiceName());
+        query.setParameter("serStatus", service.getStatus());
+        query.setParameter("serId", service.getServiceId());
+
+        return query.executeUpdate();
+    }
 
     /**
      *
@@ -60,14 +59,17 @@ public class ServiceEJB {
         return service;
     }
 
-
     public Service getServiceByParamId() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = params.get("service_id");
-        Long service_id = Long.parseLong(id);
+        Long service_id;
+        if (id != null) {
+            service_id = Long.parseLong(id);
+        } else {
+            service_id = Long.parseLong("0");
+        }
         return this.getService(service_id);
     }
-
 
     public List<Service> search(String search, String searchBy) {
         TypedQuery<Service> query = em.createNamedQuery("findServiceBy" + searchBy, Service.class);
@@ -76,7 +78,5 @@ public class ServiceEJB {
         query.setParameter(searchBy, "%" + search + "%");
         return query.getResultList();
     }
-    
-  
 
 }

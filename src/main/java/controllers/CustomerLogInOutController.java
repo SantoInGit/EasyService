@@ -25,10 +25,20 @@ public class CustomerLogInOutController implements Serializable {
     private Customer customer = new Customer();
     private boolean loggedIn = false;
     
+    private String s_id = "";
+
     private String email, password;
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public String getS_id() {
+        return s_id;
+    }
+
+    public void setS_id(String s_id) {
+        this.s_id = s_id;
     }
 
     public Customer getCustomer() {
@@ -55,29 +65,41 @@ public class CustomerLogInOutController implements Serializable {
         this.password = password;
     }
 
-    public String doLogInCustomer() {
+    public void doLogInCustomer() {
         FacesMessage logInSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Succesful: ", "");
         FacesMessage logInFailure = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Failure! ", "");
 
         ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = extContext.getSessionMap();
         sessionMap.put("customer", customer);
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Customer user = customerEJB.getCustomerByEmailAndPassword(email, password);
 
-        List<Customer> user = customerEJB.listCustomers();
-        for (Customer customerFromDB : user) {
-            // if (customerFromDB.getEmail().equals(this.customer.getEmail()) && (customerFromDB.getPassword()).equals(this.customer.getPassword())) {
-            if (customerFromDB.getEmail().equals(email) && customerFromDB.getPassword().equals(password)) {
-                FacesContext.getCurrentInstance().addMessage(null, logInSuccess);
-                setCustomer(customerFromDB);
-                sessionMap.put("customer", customer);
-                loggedIn = true;
-                return "frontendListServices.xhtml?faces-redirect=true";
+        if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+            FacesContext.getCurrentInstance().addMessage(null, logInSuccess);
+            setCustomer(user);
+            sessionMap.put("customer", customer);
+            loggedIn = true;
+            
+            if (!"".equals(s_id)) {
+                fc.getApplication().getNavigationHandler().handleNavigation(
+                        fc,
+                        null,
+                        "/frontendBookService.xhtml?faces-redirect=true&service_id="+s_id);
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, logInFailure);
-                return "index.xhtml?faces-redirect=true";
+                fc.getApplication().getNavigationHandler().handleNavigation(
+                        fc,
+                        null,
+                        "/frontendCustomerProfile.xhtml?faces-redirect=true");
             }
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, logInFailure);
+            fc.getApplication().getNavigationHandler().handleNavigation(
+                    fc,
+                    null,
+                    "/login.xhtml");
         }
-        return null;
 
     }
 
@@ -94,13 +116,33 @@ public class CustomerLogInOutController implements Serializable {
 
     public void forwardToLoginIfNotLoggedIn(ComponentSystemEvent cse) {
         FacesContext fc = FacesContext.getCurrentInstance();
-        ExternalContext ex = fc.getExternalContext();
-        String viewId = fc.getViewRoot().getViewId();
-        if (!ex.getSessionMap().containsKey("customer") && !viewId.startsWith("/login")) {
+        if (!loggedIn) {
+            Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String service_id = params.get("service_id");
+            if (service_id != null) {
+                s_id = service_id;
+                fc.getApplication().getNavigationHandler().handleNavigation(
+                        fc,
+                        null,
+                        "/login.xhtml?faces-redirect=true");
+            } else {
+                fc.getApplication().getNavigationHandler().handleNavigation(
+                        fc,
+                        null,
+                        "/login.xhtml?faces-redirect=true");
+            }
+        }
+    }
+
+    public void forwardToProfileIfLogin(ComponentSystemEvent cse) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (loggedIn) {
+            //loggedIn = false;
+            //s_id = null;
             fc.getApplication().getNavigationHandler().handleNavigation(
                     fc,
                     null,
-                    "/login.xhtml?faces-redirect=true");
+                    "/frontendCustomerProfile.xhtml?faces-redirect=true");
         }
     }
 }
