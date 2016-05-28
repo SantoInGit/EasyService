@@ -37,6 +37,15 @@ public class CustomerEJB {
         return customer;
     }
     
+    public Customer getCustomerByEmailAndPassword(String email, String password) {
+        TypedQuery<Customer> query = em.createNamedQuery("findCustomerByEmailAndPassword", Customer.class);
+        //changed all upper case as in query field, set field name to upper case
+        
+        query.setParameter("email", email);
+        query.setParameter("password", password);
+        return query.getSingleResult();
+    }
+    
     public int editCustomerCommit(Customer customer){
        TypedQuery<Customer> query = em.createNamedQuery("updateCustomer",Customer.class);
 

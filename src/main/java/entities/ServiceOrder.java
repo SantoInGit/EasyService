@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,21 +31,39 @@ public class ServiceOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long serviceOrderId;
-    private String serviceOrderName;
+    private String customerNote;
+    private String hoursPerDay;
     @Temporal(TemporalType.DATE)
     private Date serviceOrderDate;
+    private String fromDate;
+    private String toDate;
     private String serviceOrderStatus;
-    @OneToMany(fetch=FetchType.EAGER)
+    private int customer_id;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
-            name="jnd_ServiceOrder_ServiceOrderItem",
+            name = "jnd_ServiceOrder_ServiceOrderItem",
             joinColumns = @JoinColumn(name = "ServiceOrder_ServiceOrderItem_fk")
     )
     private List<ServiceOrderItem> serviceOrderItem;
 
     public ServiceOrder() {
     }
-    
-    
+
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public String getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
+    }
 
     public Long getServiceOrderId() {
         return serviceOrderId;
@@ -53,13 +72,32 @@ public class ServiceOrder implements Serializable {
     public void setServiceOrderId(Long serviceOrderId) {
         this.serviceOrderId = serviceOrderId;
     }
-    public String getServiceOrderName() {
-        return serviceOrderName;
+
+    public String getCustomerNote() {
+        return customerNote;
     }
 
-    public void setServiceOrderName(String serviceOrderName) {
-        this.serviceOrderName = serviceOrderName;
+    public void setCustomerNote(String customerNote) {
+        this.customerNote = customerNote;
     }
+
+    public String getHoursPerDay() {
+        return hoursPerDay;
+    }
+
+    public void setHoursPerDay(String hoursPerDay) {
+        this.hoursPerDay = hoursPerDay;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+
 
     public Date getServiceOrderDate() {
         return serviceOrderDate;
@@ -76,7 +114,7 @@ public class ServiceOrder implements Serializable {
     public void setServiceOrderStatus(String serviceOrderStatus) {
         this.serviceOrderStatus = serviceOrderStatus;
     }
-    
+
     public List<ServiceOrderItem> getServiceOrderItem() {
         return serviceOrderItem;
     }
@@ -110,7 +148,4 @@ public class ServiceOrder implements Serializable {
         return "entities.ServiceOrder[ id=" + serviceOrderId + " ]";
     }
 
-    
-
-    
 }
