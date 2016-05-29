@@ -20,6 +20,15 @@ public class ServiceOrderController {
     
     private int service_id;
     private String service_name;
+    private String customer_id;
+
+    public String getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(String customer_id) {
+        this.customer_id = customer_id;
+    }
 
     public String getService_name() {
         return service_name;
@@ -48,7 +57,7 @@ public class ServiceOrderController {
 
     public String doCreateServiceOrder() {
 
-        serviceOrder = serviceOrderEJB.addServiceOrder(serviceOrder, service_id, service_name);
+        serviceOrder = serviceOrderEJB.addServiceOrder(serviceOrder, service_id, service_name, customer_id);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Order Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "frontendCustomerProfile.xhtml?faces-redirect=true";

@@ -93,12 +93,14 @@
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-center">
                         <h2>Our Work</h2>
+                        <hr class="small"></hr>
                         <div class="row">
-                            <hr class="small"></hr>
-
                             <ui:repeat value="#{serviceController.serviceList}" var="service">
                                 <div class="col-md-6">
                                     <div class="portfolio-item">
+                                        <a href="#">
+                                            <img class="img-portfolio img-responsive" src="resources/img/placeholder.png" />
+                                        </a>
                                         <a href="#">
                                             #{service.serviceName}
                                         </a>
@@ -108,6 +110,7 @@
                                         </h:link>
                                     </div>
                                 </div>
+
                             </ui:repeat>
 
                         </div>

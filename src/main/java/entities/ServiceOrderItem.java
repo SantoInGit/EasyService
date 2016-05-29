@@ -10,9 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,8 +24,6 @@ public class ServiceOrderItem implements Serializable {
     private Long orderItemId;
     private String orderItemName;
     private String serviceStatus;
-    @Temporal(TemporalType.DATE)
-    private Date scheduleDate;
 
     public ServiceOrderItem() {
     }   
@@ -55,14 +50,6 @@ public class ServiceOrderItem implements Serializable {
 
     public void setServiceStatus(String serviceStatus) {
         this.serviceStatus = serviceStatus;
-    }
-
-    public Date getScheduleDate() {
-        return scheduleDate;
-    }
-
-    public void setScheduleDate(Date scheduleDate) {
-        this.scheduleDate = scheduleDate;
     }
 
     @Override
