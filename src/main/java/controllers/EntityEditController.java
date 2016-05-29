@@ -4,6 +4,7 @@ import ejb.AdminEJB;
 import ejb.CustomerEJB;
 import ejb.ServiceCategoryEJB;
 import ejb.ServiceEJB;
+import ejb.ServiceOrderEJB;
 import ejb.StaffEJB;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -13,6 +14,7 @@ import entities.Admin;
 import entities.Customer;
 import entities.Service;
 import entities.ServiceCategory;
+import entities.ServiceOrder;
 import entities.Staff;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
@@ -34,6 +36,9 @@ public class EntityEditController implements Serializable {
     private ServiceEJB serviceEJB;
     @EJB
     private ServiceCategoryEJB serviceCategoryEJB;
+    @EJB
+    private ServiceOrderEJB serviceOrderEJB;
+
     
     
     private static Admin admin = new Admin();
@@ -41,12 +46,13 @@ public class EntityEditController implements Serializable {
     private static Staff staff = new Staff();
     private static Service service = new Service();
     private static ServiceCategory serviceCategory = new ServiceCategory();
+    private static ServiceOrder serviceOrder = new ServiceOrder();
 
 
             
 
     public String doEditEntity(Long id, String entityName) {
-        switch (entityName) {
+        switch (entityName.toLowerCase()) {
             case "admin":
                 admin = adminEJB.getAdmin(id);
                 return "editAdmin.xhtml?faces-redirect=true";
@@ -59,7 +65,7 @@ public class EntityEditController implements Serializable {
             case "service":
                 service = serviceEJB.getService(id);
                 return "editService.xhtml?faces-redirect=true";
-            case "serviceCategory":
+            case "servicecategory":
                 serviceCategory = serviceCategoryEJB.getServiceCategory(id);
                 return "editServiceCategory.xhtml?faces-redirect=true";
             default:
@@ -110,6 +116,8 @@ public class EntityEditController implements Serializable {
     }
     
     public String doCancelEdit(String entityName){
+        //return "listServiceOrders.xhtml?faces-redirect=true";
+        
         switch(entityName.toLowerCase()){
             case "admin":
                 return "listAdmins.xhtml?faces-redirect=true";
@@ -121,13 +129,17 @@ public class EntityEditController implements Serializable {
                 return "listService.xhtml?faces-redirect=true";
             case "servicecategory":
                 return "listServiceCategory.xhtml?faces-redirect=true";
+            case "serviceorder":
+                return "listServiceOrders.xhtml?faces-redirect=true";
             default:
                 return null;
         }
+
     }
     
     public String doVeiwDetails(Long id, String entityName) {
-        switch (entityName) {
+        
+        switch (entityName.toLowerCase()) {
             case "admin":
                 admin = adminEJB.getAdmin(id);
                 return "viewAdmin.xhtml?faces-redirect=true";
@@ -140,9 +152,12 @@ public class EntityEditController implements Serializable {
             case "service":
                 service = serviceEJB.getService(id);
                 return "viewService.xhtml?faces-redirect=true";
-            case "serviceCategory":
+            case "servicecategory":
                 serviceCategory = serviceCategoryEJB.getServiceCategory(id);
                 return "viewServiceCategory.xhtml?faces-redirect=true";
+            case "serviceorder":
+                serviceOrder = serviceOrderEJB.getServiceOrder(id);
+                return "viewServiceOrder.xhtml?faces-redirect=true";
             default:
                 return null;
         }
@@ -186,5 +201,14 @@ public class EntityEditController implements Serializable {
     public void setServiceCategory(ServiceCategory serviceCategory) {
         EntityEditController.serviceCategory = serviceCategory;
     }
+    
+    public  ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        EntityEditController.serviceOrder = serviceOrder;
+    }
+    
     
 }
