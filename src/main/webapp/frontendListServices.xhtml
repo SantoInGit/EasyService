@@ -28,15 +28,15 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-4">
                                         <p class="lead">
-                                            #{service.ratePerHour}</p>
+                                           $#{service.ratePerHour}</p>
                                     </div>
                                     <div class="col-xs-12 col-md-4">
-                                        <h:link value="View Detail" outcome="frontendViewService.xhtml">
+                                        <h:link value="View Detail" class="btn btn-primary" outcome="frontendViewService.xhtml">
                                             <f:param name="service_id" value="#{service.serviceId}" />
                                         </h:link>
                                     </div>
                                     <div class="col-xs-12 col-md-4">
-                                        <h:link value="Book Now" outcome="frontendBookService.xhtml">
+                                        <h:link value="Book Now" class="btn btn-primary" outcome="frontendBookService.xhtml">
                                             <f:param name="service_id" value="#{service.serviceId}" />
                                         </h:link>
                                     </div>

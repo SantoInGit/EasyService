@@ -7,15 +7,10 @@
 
     <ui:define name="content">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 bottom-rule">
-                    <h2 class="product-price">Price per hour $#{serviceController.serviceByParamId.ratePerHour}</h2>
-                </div>
-            </div><!-- end row -->
-
-            <div class="row">
+            
+            <div class="row" style="padding-top: 50px;">
                 <div class="col-md-6">
-                    <img class="group list-group-image" src="resources/img/placeholder.png" alt="" />
+                    <img class="group list-group-image img-responsive" src="resources/img/placeholder.png" alt="" />
                 </div>
                 <div  class="col-md-6">
                     <div class="row">
@@ -26,11 +21,13 @@
                     <div class="row">
                         <div class="col-md-12">
                             #{serviceController.serviceByParamId.description}
+                            <h3 class="product-price">Price per hour $#{serviceController.serviceByParamId.ratePerHour}</h3>
                         </div>
+                         
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h:link value="Book Now" outcome="frontendBookService.xhtml">
+                            <h:link value="Book Now" class="btn btn-primary" outcome="frontendBookService.xhtml">
                                 <f:param name="service_id" value="#{serviceController.serviceByParamId.serviceId}" />
                             </h:link>
                         </div>
