@@ -16,9 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -33,18 +32,31 @@ public class ServiceOrder implements Serializable {
     private Long serviceOrderId;
     private String customerNote;
     private String hoursPerDay;
-    @Temporal(TemporalType.DATE)
-    private Date serviceOrderDate;
+    private String serviceOrderDate;
     private String fromDate;
     private String toDate;
     private String serviceOrderStatus;
-    private int customer_id;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name = "jnd_ServiceOrder_ServiceOrderItem",
             joinColumns = @JoinColumn(name = "ServiceOrder_ServiceOrderItem_fk")
     )
     private List<ServiceOrderItem> serviceOrderItem;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinTable(
+            name="jnd_ServiceOrder_Customer",
+            joinColumns=@JoinColumn(name="serviceOrder_Customer_fk")
+    )
+    private Customer Customer;
+
+    public Customer getCustomer() {
+        return Customer;
+    }
+
+    public void setCustomer(Customer Customer) {
+        this.Customer = Customer;
+    }
 
     public ServiceOrder() {
     }
@@ -89,21 +101,11 @@ public class ServiceOrder implements Serializable {
         this.hoursPerDay = hoursPerDay;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
-    }
-
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
-    }
-
-
-
-    public Date getServiceOrderDate() {
+    public String getServiceOrderDate() {
         return serviceOrderDate;
     }
 
-    public void setServiceOrderDate(Date serviceOrderDate) {
+    public void setServiceOrderDate(String serviceOrderDate) {
         this.serviceOrderDate = serviceOrderDate;
     }
 
