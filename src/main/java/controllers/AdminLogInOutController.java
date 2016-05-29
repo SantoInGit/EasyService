@@ -101,11 +101,20 @@ public class AdminLogInOutController implements Serializable {
         return loggedIn;
     }
 
+    public void forwardToDashboardIfLogIn() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (loggedIn) {
+            fc.getApplication().getNavigationHandler().handleNavigation(
+                    fc,
+                    null,
+                    "/dashboard.xhtml?faces-redirect=true");
+        }
+    }
+
     public void forwardToLoginIfNotLoggedIn(ComponentSystemEvent cse) {
         FacesContext fc = FacesContext.getCurrentInstance();
-        ExternalContext ex = fc.getExternalContext();
-        String viewId = fc.getViewRoot().getViewId();
-        if (!ex.getSessionMap().containsKey("admin") && !viewId.startsWith("/login")) {
+
+        if (!loggedIn) {
             fc.getApplication().getNavigationHandler().handleNavigation(
                     fc,
                     null,
