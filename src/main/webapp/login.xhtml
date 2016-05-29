@@ -8,6 +8,10 @@
     <ui:define name="title">EasyServices</ui:define>
 
     <ui:define name="content">
+        <f:view>
+            <f:event type="preRenderView"
+                     listener="#{customerLogInOutController.forwardToProfileIfLogin}" />
+        </f:view>
         <div class="container login-container">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -17,6 +21,7 @@
                             
                             <h:inputText class="form-control" value="#{customerLogInOutController.email}" p:placeholder="Email" />
                             <h:inputSecret class="form-control" value="#{customerLogInOutController.password}" p:placeholder="Password" />
+                            <h:inputHidden class="form-control" value="#{customerLogInOutController.s_id}" />
                             <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign In" type="submit" action="#{customerLogInOutController.doLogInCustomer()}"/>
                            
                         </h:form>

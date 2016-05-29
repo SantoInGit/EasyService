@@ -1,0 +1,91 @@
+<ui:composition template="/WEB-INF/templates/frontend/customerLoginLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">List Service</ui:define>
+
+    <ui:define name="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 bottom-rule">
+                    <h2 class="product-price">Price per hour $#{serviceController.serviceByParamId.ratePerHour}</h2>
+                </div>
+            </div><!-- end row -->
+            <h:form id="booking">
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <label>from date</label>
+                            <div class='input-group date' id='fromdate'>
+                                <h:inputText class="form-control" value="#{serviceOrderController.serviceOrder.fromDate}"></h:inputText>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <label>to date</label>
+                            <div class='input-group date' id='todate'>
+                                <h:inputText class="form-control" value="#{serviceOrderController.serviceOrder.toDate}"></h:inputText>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <label>Hours per day</label>
+
+                            <h:inputText class="form-control" value="#{serviceOrderController.serviceOrder.hoursPerDay}"></h:inputText>
+
+                        </div>
+                    </div>
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <label>Customer Note</label>
+                            <h:inputTextarea class="form-control" value="#{serviceOrderController.serviceOrder.customerNote}"></h:inputTextarea>
+
+                        </div>
+                    </div>
+                    <!--                    <script type="text/javascript">
+                                            jQuery(function () {
+                                                jQuery('#datetimepicker1').datetimepicker();
+                                            });
+                                        </script>-->
+                    <div  class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2> #{serviceController.serviceByParamId.serviceName}</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                #{serviceController.serviceByParamId.description}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h:inputHidden class="form-control" id="service_name" value="#{serviceOrderController.service_name}" />
+                                <h:inputHidden class="form-control" id="service_id" value="#{serviceOrderController.service_id}" />
+                                <h:inputHidden class="form-control" id="customer_id" value="#{serviceOrderController.serviceOrder.customer_id}" />
+                                <h:commandButton class="btn btn-lg btn-primary btn-block" value="Book" type="submit" action="#{serviceOrderController.doCreateServiceOrder()}"/>
+
+                                <script>
+                                    document.getElementById('booking:customer_id').value = '#{customerLogInOutController.customer.id}';
+                                    document.getElementById('booking:service_id').value = '#{serviceController.serviceByParamId.serviceId}';
+                                    document.getElementById('booking:service_name').value = '#{serviceController.serviceByParamId.serviceName}';
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end row -->
+            </h:form>
+
+        </div>
+
+    </ui:define>
+</ui:composition>
