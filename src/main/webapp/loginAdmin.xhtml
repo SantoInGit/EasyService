@@ -18,6 +18,7 @@
                             <h:inputText class="form-control" value="#{adminLogInOutController.email}" p:placeholder="Email" />
                             <h:inputSecret class="form-control" value="#{adminLogInOutController.password}" p:placeholder="Password" />
                             <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign In" type="submit" action="#{adminLogInOutController.doLogInAdmin()}"/>
+                            <h:commandButton class="btn btn-lg btn-primary btn-block" value="Create Test PDF" type="submit" action="#{(invoiceController.doGenerateInvoice())}"/>
                            
                         </h:form>
                     </div>

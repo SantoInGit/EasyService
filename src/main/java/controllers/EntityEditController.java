@@ -19,9 +19,9 @@ import javax.enterprise.context.RequestScoped;
 
 @Named(value = "entityEditController")
 @RequestScoped
-public class entityEditController implements Serializable {
+public class EntityEditController implements Serializable {
 
-    public entityEditController() {
+    public EntityEditController() {
     }
 
     @EJB
@@ -153,7 +153,7 @@ public class entityEditController implements Serializable {
     }
 
     public void setAdmin(Admin admin) {
-        entityEditController.admin = admin;
+        EntityEditController.admin = admin;
     }
     
     public Customer getCustomer() {
@@ -161,7 +161,7 @@ public class entityEditController implements Serializable {
     }
 
     public void setCustomer(Customer customer) {
-        entityEditController.customer = customer;
+        EntityEditController.customer = customer;
     }
 
     public Staff getStaff() {
@@ -169,14 +169,14 @@ public class entityEditController implements Serializable {
     }
 
     public void setStaff(Staff staff) {
-        entityEditController.staff = staff;
+        EntityEditController.staff = staff;
     }
         public  Service getService() {
         return service;
     }
 
     public void setService(Service service) {
-        entityEditController.service = service;
+        EntityEditController.service = service;
     }
 
     public ServiceCategory getServiceCategory() {
@@ -184,7 +184,7 @@ public class entityEditController implements Serializable {
     }
 
     public void setServiceCategory(ServiceCategory serviceCategory) {
-        entityEditController.serviceCategory = serviceCategory;
+        EntityEditController.serviceCategory = serviceCategory;
     }
     
 }

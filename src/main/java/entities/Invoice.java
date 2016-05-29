@@ -47,7 +47,7 @@ public class Invoice implements Serializable {
         return invoiceId;
     }
 
-    public void setInvoiceId(Long id) {
+    public void setInvoiceId(Long invoiceId) {
         this.invoiceId = invoiceId;
     }
     public Date getInvoiceDate() {
