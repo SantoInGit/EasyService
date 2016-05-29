@@ -26,7 +26,7 @@ public class ServiceController {
 
     private String search = "";
     private String searchBy = "";
-    
+
     public String doCreateService() {
         service = serviceEJB.addService(service, serviceCategory);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Created Succefully.", "");
@@ -34,11 +34,11 @@ public class ServiceController {
         return "listService.xhtml?faces-redirect=true";
     }
 
-    public String doDeleteService(Long id){
+    public String doDeleteService(Long id) {
         serviceEJB.deleteService(id);
         return "listService.xhtml?faces-redirect=true";
     }
-    
+
     public String doSearch() {
         serviceList = serviceEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
@@ -46,7 +46,6 @@ public class ServiceController {
         return "listService.xhtml?faces-redirect=true";
     }
 
-    
     public String getSearchBy() {
         return searchBy;
     }
@@ -95,14 +94,4 @@ public class ServiceController {
         this.serviceCategory = serviceCategory;
     }
 
-      
-    public String doCreateServiceOrder(int service_id){
-        CustomerLogInOutController customer = new CustomerLogInOutController();
-        boolean isLoggedIn = customer.isLoggedIn();
-        if(isLoggedIn){
-            return "index.xhtml";
-        }
-        return "login.xhtml";
-    }
-    
 }
