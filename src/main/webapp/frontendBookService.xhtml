@@ -18,7 +18,9 @@
                         <div class="form-group">
                             <label>from date</label>
                             <div class='input-group date' id='fromdate'>
-                                <h:inputText class="form-control" value="#{serviceOrderController.serviceOrder.fromDate}"></h:inputText>
+                                <h:inputText value="#{serviceOrderController.serviceOrder.fromDate}" class="form-control" required="true" requiredMessage="Starting date is required field">
+                                    <f:convertDateTime type="date" pattern="yyy-MM-dd"  class="form-control"/>
+                                </h:inputText>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -29,7 +31,9 @@
                         <div class="form-group">
                             <label>to date</label>
                             <div class='input-group date' id='todate'>
-                                <h:inputText class="form-control" value="#{serviceOrderController.serviceOrder.toDate}"></h:inputText>
+                                <h:inputText value="#{serviceOrderController.serviceOrder.toDate}" class="form-control" required="true" requiredMessage="End date is required field">
+                                    <f:convertDateTime type="date" pattern="yyy-MM-dd"  class="form-control"/>
+                                </h:inputText>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -60,6 +64,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h2> #{serviceController.serviceByParamId.serviceName}</h2>
+                                <img class="group list-group-image" src="resources/img/placeholder.png" />
                             </div>
                         </div>
                         <div class="row">
@@ -71,13 +76,14 @@
                             <div class="col-md-12">
                                 <h:inputHidden class="form-control" id="service_name" value="#{serviceOrderController.service_name}" />
                                 <h:inputHidden class="form-control" id="service_id" value="#{serviceOrderController.service_id}" />
-                                <h:inputHidden class="form-control" id="customer_id" value="#{serviceOrderController.serviceOrder.customer_id}" />
+                                <h:inputHidden class="form-control" id="customer_id" value="#{serviceOrderController.customer_id}" />
                                 <h:commandButton class="btn btn-lg btn-primary btn-block" value="Book" type="submit" action="#{serviceOrderController.doCreateServiceOrder()}"/>
 
                                 <script>
                                     document.getElementById('booking:customer_id').value = '#{customerLogInOutController.customer.id}';
                                     document.getElementById('booking:service_id').value = '#{serviceController.serviceByParamId.serviceId}';
                                     document.getElementById('booking:service_name').value = '#{serviceController.serviceByParamId.serviceName}';
+                                    document.getElementById('booking').action = location.href;
                                 </script>
                             </div>
                         </div>
