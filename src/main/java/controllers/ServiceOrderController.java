@@ -108,6 +108,7 @@ public class ServiceOrderController {
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
     public String doCancelServiceOrder(Long id){
+        serviceOrderEJB.cancelServiceOrder(id);
          return "listServiceOrders.xhtml?faces-redirect=true";
     }
     public String doConfirmServiceOrder(Long id){
