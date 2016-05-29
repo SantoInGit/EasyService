@@ -16,15 +16,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author Santo
- */
+
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "findAllServiceOrders", query = "select c from ServiceOrder c"),   
+    @NamedQuery(name = "cancelOrder", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
+            query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId")
+})
 public class ServiceOrder implements Serializable {
 
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

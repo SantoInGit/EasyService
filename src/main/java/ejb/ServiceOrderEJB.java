@@ -39,6 +39,14 @@ public class ServiceOrderEJB {
        em.remove(getServiceOrder(id));
     }
     
+    public void cancelServiceOrder(Long id){
+        TypedQuery<ServiceOrder> query = em.createNamedQuery("cancelOrder", ServiceOrder.class);
+        
+        query.setParameter("status","Cancelled");
+        query.setParameter("serOrderId",id);
+        
+    }
+    
     public void  createInvoice(Long id){
     }
 
@@ -47,7 +55,6 @@ public class ServiceOrderEJB {
        
     }
 
-    
     public List<ServiceOrder> search(String search, String searchBy) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrderBy" + searchBy, ServiceOrder.class);
         search = search.toUpperCase();
@@ -55,8 +62,6 @@ public class ServiceOrderEJB {
         return query.getResultList();
 
     }
-
-
 
     public ServiceOrder addServiceOrder(ServiceOrder serOrder, int service_id, String service_name, String customer_id) {
 

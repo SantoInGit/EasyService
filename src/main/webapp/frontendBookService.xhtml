@@ -7,14 +7,10 @@
 
     <ui:define name="content">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 bottom-rule">
-                    <h2 class="product-price">Price per hour $#{serviceController.serviceByParamId.ratePerHour}</h2>
-                </div>
-            </div><!-- end row -->
-            <h:form id="booking">
+            
+            <h:form id="booking" style="padding-top: 50px;">
                 <div class="row">
-                    <div class='col-sm-3'>
+                    <div class='col-sm-6'>
                         <div class="form-group">
                             <label>from date</label>
                             <div class='input-group date' id='fromdate'>
@@ -26,8 +22,6 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    <div class='col-sm-3'>
                         <div class="form-group">
                             <label>to date</label>
                             <div class='input-group date' id='todate'>
@@ -39,23 +33,17 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    <div class='col-sm-3'>
                         <div class="form-group">
                             <label>Hours per day</label>
 
                             <h:inputText class="form-control" value="#{serviceOrderController.serviceOrder.hoursPerDay}"></h:inputText>
 
                         </div>
-                    </div>
-                    <div class='col-sm-3'>
                         <div class="form-group">
                             <label>Customer Note</label>
                             <h:inputTextarea class="form-control" value="#{serviceOrderController.serviceOrder.customerNote}"></h:inputTextarea>
 
                         </div>
-                    </div>
-                    <div class='col-sm-3'>
                         <div class="form-group">
                             <h:outputLabel value="Staff required"/>
                             <h:selectOneMenu value="#{serviceOrderController.serviceOrder.staffRequired}" class="form-control" required="true" requiredMessage="This is required field">
@@ -67,33 +55,40 @@
                             </h:selectOneMenu>
                         </div>
                     </div>
-                    <div  class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2> #{serviceController.serviceByParamId.serviceName}</h2>
-                                <img class="group list-group-image" src="resources/img/placeholder.png" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                #{serviceController.serviceByParamId.description}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h:inputHidden class="form-control" id="service_name" value="#{serviceOrderController.service_name}" />
-                                <h:inputHidden class="form-control" id="service_id" value="#{serviceOrderController.service_id}" />
-                                <h:inputHidden class="form-control" id="customer_id" value="#{serviceOrderController.customer_id}" />
-                                <h:commandButton class="btn btn-lg btn-primary btn-block" value="Book" type="submit" action="#{serviceOrderController.doCreateServiceOrder()}"/>
+                    <div class="col-md-1"></div>
+                    <div  class="col-md-5">
+                        <div class="form-group">
 
-                                <script>
-                                    document.getElementById('booking:customer_id').value = '#{customerLogInOutController.customer.id}';
-                                    document.getElementById('booking:service_id').value = '#{serviceController.serviceByParamId.serviceId}';
-                                    document.getElementById('booking:service_name').value = '#{serviceController.serviceByParamId.serviceName}';
-                                    document.getElementById('booking').action = location.href;
-                                </script>
+                            <h2> #{serviceController.serviceByParamId.serviceName}</h2>
+                            <img class="group list-group-image" src="resources/img/placeholder.png" />
+
+                        </div>
+                        <div class="form-group">
+                            <h3 class="product-price">Price per hour $#{serviceController.serviceByParamId.ratePerHour}</h3>
+                        </div>
+                        <div class="form-group">
+
+                            #{serviceController.serviceByParamId.description}
+
+                        </div>
+                        <div class="form-group">
+                            <div  class="col-md-3">
+                                <h:commandButton class="btn btn-lg btn-primary btn-block" value="Book" type="submit" action="#{serviceOrderController.doCreateServiceOrder()}"/>
                             </div>
                         </div>
+
+                        <h:inputHidden class="form-control" id="service_name" value="#{serviceOrderController.service_name}" />
+                        <h:inputHidden class="form-control" id="service_id" value="#{serviceOrderController.service_id}" />
+                        <h:inputHidden class="form-control" id="customer_id" value="#{serviceOrderController.customer_id}" />
+
+
+                        <script>
+                            document.getElementById('booking:customer_id').value = '#{customerLogInOutController.customer.id}';
+                            document.getElementById('booking:service_id').value = '#{serviceController.serviceByParamId.serviceId}';
+                            document.getElementById('booking:service_name').value = '#{serviceController.serviceByParamId.serviceName}';
+                            document.getElementById('booking').action = location.href;
+                        </script>
+
                     </div>
                 </div><!-- end row -->
             </h:form>

@@ -92,20 +92,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-center">
-                        <h2>Our Work</h2>
+                        <h2>Services</h2>
                         <hr class="small"></hr>
                         <div class="row">
                             <ui:repeat value="#{serviceController.serviceList}" var="service">
                                 <div class="col-md-6">
                                     <div class="portfolio-item">
-                                        <a href="#">
+                                        <a href="#{helperController.baseURL}/faces/frontendViewService.xhtml?service_id=#{service.serviceId}">
                                             <img class="img-portfolio img-responsive" src="resources/img/placeholder.png" />
                                         </a>
-                                        <a href="#">
-                                            #{service.serviceName}
-                                        </a>
-                                        <p>#{service.description}</p>
-                                        <h:link value="View Detail" outcome="frontendViewService.xhtml">
+
+                                        <h3 style="margin: 15px 27px;width: 100%;text-align: left;">  #{service.serviceName}</h3>
+                                        <h:link class="btn btn-primary" style="margin: 0px 27px;float: left;" value="View Detail" outcome="frontendViewService.xhtml">
                                             <f:param name="service_id" value="#{service.serviceId}" />
                                         </h:link>
                                     </div>
