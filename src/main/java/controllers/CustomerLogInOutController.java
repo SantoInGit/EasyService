@@ -1,7 +1,6 @@
 package controllers;
 
 import ejb.CustomerEJB;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;

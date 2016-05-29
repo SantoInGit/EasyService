@@ -6,7 +6,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,6 +34,7 @@ public class ServiceOrder implements Serializable {
     private String serviceOrderDate;
     private String fromDate;
     private String toDate;
+    private String staffRequired;
     private String serviceOrderStatus;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
@@ -49,6 +49,14 @@ public class ServiceOrder implements Serializable {
             joinColumns=@JoinColumn(name="serviceOrder_Customer_fk")
     )
     private Customer Customer;
+
+    public String getStaffRequired() {
+        return staffRequired;
+    }
+
+    public void setStaffRequired(String staffRequired) {
+        this.staffRequired = staffRequired;
+    }
 
     public Customer getCustomer() {
         return Customer;

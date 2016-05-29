@@ -55,11 +55,18 @@
 
                         </div>
                     </div>
-                    <!--                    <script type="text/javascript">
-                                            jQuery(function () {
-                                                jQuery('#datetimepicker1').datetimepicker();
-                                            });
-                                        </script>-->
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <h:outputLabel value="Staff required"/>
+                            <h:selectOneMenu value="#{serviceOrderController.serviceOrder.staffRequired}" class="form-control" required="true" requiredMessage="This is required field">
+                                <f:selectItem itemLabel="1" itemValue="1" />
+                                <f:selectItem itemLabel="2" itemValue="2" />
+                                <f:selectItem itemLabel="3" itemValue="3" />
+                                <f:selectItem itemLabel="4" itemValue="4" />
+                                <f:selectItem itemLabel="5" itemValue="5" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
                     <div  class="col-md-6">
                         <div class="row">
                             <div class="col-md-12">
