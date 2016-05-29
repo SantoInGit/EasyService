@@ -1,0 +1,118 @@
+<ui:composition template="/WEB-INF/templates/backend/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="title">Confirm Service Order</ui:define>
+
+    <ui:define name="content">
+        <div class="row">   
+            <div class="col-lg-12 panel-heading"></div>    
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    
+                    <div class="panel-heading">
+                        <h3>Service Order Confirmation: [Order ID: #{serviceOrderController.serviceOrder.serviceOrderId} ]</h3>
+                    </div>
+                    
+                     <div class="panel-body">
+                        <h:form>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="ID: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel id="serviceName" value="#{serviceOrderController.serviceOrder.serviceOrderId}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Order By: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.customer.firstName} #{serviceOrderController.serviceOrder.customer.middleName} #{serviceOrderController.serviceOrder.customer.lastName}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Order Date: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.serviceOrderDate}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Start Date: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.fromDate}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="End Date: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.toDate}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Staff Required:"/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.staffRequired}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Hours Per Day: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.hoursPerDay}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" value="Coustomer Note: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.customerNote}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4" for="serviceStatus" value="Status: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{serviceOrderController.serviceOrder.serviceOrderStatus}" styleClass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="control-label col-sm-4"  value="Choose #{serviceOrderController.serviceOrder.staffRequired} Staff(s) "/>
+                                        <div class="col-md-8">                                                                                           
+                                            <h:selectManyListbox value="">
+                                                <f:selectItems value="#{staffController.staffList}" var="staffList" itemValue="#{staffList.firstName}" itemLabel="#{staffList.firstName} #{staffList.middleName} #{staffList.lastName} [Qualification: #{staffList.qualification}]" noSelectionValue="select staff"  />
+                                            </h:selectManyListbox>
+                                        </div>
+                                    </div>
+
+                             
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">                               
+                                <div class="col-md-6">
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                          
+                                            <div class="col-md-6" style="padding-left: 0">
+                                                <h:commandButton class ="btn btn-primary form-control "  value="Confirm" action="#{serviceOrderController.doConfirmServiceOrder(entityEditController.serviceOrder.serviceOrderId)}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </h:form>
+                    </div>
+   
+                </div>
+             
+            </div>
+           
+        </div>
+    </ui:define>
+</ui:composition>
+

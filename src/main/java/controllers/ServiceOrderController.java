@@ -18,7 +18,7 @@ public class ServiceOrderController {
     }
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
-    private ServiceOrder serviceOrder = new ServiceOrder();
+    private static ServiceOrder serviceOrder = new ServiceOrder();
     private List<ServiceOrder> serviceOrderList = new ArrayList<ServiceOrder>();
     private String search ="";
     private String searchBy = "";
@@ -107,12 +107,14 @@ public class ServiceOrderController {
         serviceOrderEJB.createInvoice(id);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
-    public String doCancelServiceOrder(Long id){
-        serviceOrderEJB.cancelServiceOrder(id);
-         return "listServiceOrders.xhtml?faces-redirect=true";
-    }
-    public String doConfirmServiceOrder(Long id){
+    public String doChangeStatusServiceOrder(Long id,String status){
+        serviceOrderEJB.changeStatusServiceOrder(id,status);
         return "listServiceOrders.xhtml?faces-redirect=true";
+    }
+
+    public String doConfirmServiceOrder(Long id){
+        serviceOrder = serviceOrderEJB.getServiceOrder(id);
+        return "confirmServiceOrder.xhtml?faces-redirect=true";
     }
     public String doSearch() {
         serviceOrderList = serviceOrderEJB.search(search, searchBy);

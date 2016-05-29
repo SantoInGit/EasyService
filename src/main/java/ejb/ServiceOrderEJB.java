@@ -1,4 +1,3 @@
-
 package ejb;
 
 import entities.Customer;
@@ -14,45 +13,52 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
-
 @Stateless
 public class ServiceOrderEJB {
 
-
-
     @PersistenceContext(unitName = "EASYSERVICES_PU")
     private EntityManager em;
-
-
 
     public List<ServiceOrder> listServiceOrders() {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findAllServiceOrders", ServiceOrder.class);
         return query.getResultList();
     }
-   
+
     public ServiceOrder addServiceOrder(ServiceOrder serviceOrder) {
         em.persist(serviceOrder);
         return serviceOrder;
     }
+
+    public void deleteServiceOrder(Long id) {
+        em.remove(getServiceOrder(id));
+    }
+
+    public int changeStatusServiceOrder(Long id, String status) {
+    TypedQuery<ServiceOrder> query= em.createNamedQuery("changeServiceOrderStatus", ServiceOrder.class);
+        switch (status.toLowerCase()) {
+            case "cancelled":
+                query.setParameter("status", "Cancelled");
+                query.setParameter("serOrderId", id);
+                return query.executeUpdate();
+                
+            case "completed":
+                query.setParameter("status", "Completed");
+                query.setParameter("serOrderId", id);
+                return query.executeUpdate();
+            default:
+                return 0;
+
+        }
     
-    public void deleteServiceOrder(Long id){
-       em.remove(getServiceOrder(id));
+    
+    }
+    public void createInvoice(Long id) {
     }
     
-    public void cancelServiceOrder(Long id){
-        TypedQuery<ServiceOrder> query = em.createNamedQuery("cancelOrder", ServiceOrder.class);
-        
-        query.setParameter("status","Cancelled");
-        query.setParameter("serOrderId",id);
-        
-    }
-    
-    public void  createInvoice(Long id){
-    }
 
     public ServiceOrder getServiceOrder(Long id) {
         return em.find(ServiceOrder.class, id);
-       
+
     }
 
     public List<ServiceOrder> search(String search, String searchBy) {
@@ -71,7 +77,6 @@ public class ServiceOrderEJB {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         //System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
-
 
         List<ServiceOrderItem> SOI = new ArrayList<>();
         ServiceOrderItem s = new ServiceOrderItem();

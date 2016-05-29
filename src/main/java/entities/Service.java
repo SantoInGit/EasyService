@@ -65,10 +65,7 @@ public class Service implements Serializable {
     public void setServiceCategory(ServiceCategory serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
-
-   
     
-
     public Long getServiceId() {
         return serviceId;
     }
