@@ -30,9 +30,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h:form>
-                                <h:commandButton class="btn btn-primary" value="Book Now" action="#{serviceController.doCreateServiceOrder(serviceController.service.serviceId)}"/>
-                            </h:form>
+                            <h:link value="Book Now" outcome="frontendBookService.xhtml">
+                                <f:param name="service_id" value="#{serviceController.serviceByParamId.serviceId}" />
+                            </h:link>
                         </div>
                     </div>
                 </div>

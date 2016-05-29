@@ -103,14 +103,16 @@
                                             #{service.serviceName}
                                         </a>
                                         <p>#{service.description}</p>
-                                        <a href="#" class="btn btn-light">Learn More</a>
+                                        <h:link value="View Detail" outcome="frontendViewService.xhtml">
+                                            <f:param name="service_id" value="#{service.serviceId}" />
+                                        </h:link>
                                     </div>
                                 </div>
                             </ui:repeat>
 
                         </div>
                         <!-- /.row (nested) -->
-                        <a href="#" class="btn btn-dark">View More Items</a>
+                        <a href="#{helperController.baseURL}/faces/frontendListServices.xhtml" class="btn btn-dark">View More Items</a>
 
                     </div>
                     <!-- /.col-lg-10 -->

@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 
     <h:head>
@@ -60,12 +60,20 @@
                         <li>
                             <a href="#{helperController.getBaseURL()}/faces/index.xhtml#contact" onclick = '$("#menu-close").click();' >Contact</a>
                         </li>
-                        <li>
-                            <a href="#{helperController.getBaseURL()}/faces/login.xhtml" onclick = '$("#menu-close").click();' >Login</a>
-                        </li>
-                        <li>
-                            <a href="#{helperController.getBaseURL()}/faces/register.xhtml">Register</a>
-                        </li>
+                        <c:if test="#{customerLogInOutController.loggedIn}">
+                            <li>
+                                <a href="#{helperController.getBaseURL()}/faces/customerProfile.xhtml" onclick = '$("#menu-close").click();' >Profile</a>
+                            </li>
+                           
+                        </c:if>
+                        <c:if test="#{!customerLogInOutController.loggedIn}">
+                            <li>
+                                <a href="#{helperController.getBaseURL()}/faces/login.xhtml" onclick = '$("#menu-close").click();' >Login</a>
+                            </li>
+                            <li>
+                                <a href="#{helperController.getBaseURL()}/faces/register.xhtml">Register</a>
+                            </li>
+                        </c:if>
                         <!--                        <li class="dropdown">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                                                     <ul class="dropdown-menu">
