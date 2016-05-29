@@ -25,6 +25,7 @@
 
         <!-- Custom CSS -->
         <h:outputStylesheet name="bootstrap/css/sb-admin-2.css" />
+        
 
 
     </h:head>
@@ -52,21 +53,21 @@
                 <!-- /.navbar-top-links -->
 
                 <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
+                    <div class="backend-sidebar sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
 
-                            <li><a href="dashboard.faces"><i class="glyphicon glyphicon-dashboard"></i>&nbsp;Dashboard</a></li>
+                            <li><a href="#{helperController.getBaseURL()}/faces/dashboard.xhtml"><i class="glyphicon glyphicon-dashboard"></i>&nbsp;Dashboard</a></li>
                             <li>
                                 <a href="#"><i class="glyphicon glyphicon-expand"></i> Customers</a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="addCustomers.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Customer</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/addCustomers.xhtml"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Customer</a>
                                     </li>
                                     <li>
-                                        <a href="listCustomers.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Customers</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/listCustomers.xhtml"><i class="glyphicon glyphicon-list"></i>&nbsp;List Customers</a>
                                     </li>
                                     <li>
-                                        <a href="searchCustomers.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Customers</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/searchCustomers.xhtml"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Customers</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -75,13 +76,13 @@
                                 <a href="#"><i class="glyphicon glyphicon-expand"></i> Staffs</a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="addStaffs.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Staff</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/addStaffs.xhtml"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Staff</a>
                                     </li>
                                     <li>
-                                        <a href="listStaffs.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Staff</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/listStaffs.xhtml"><i class="glyphicon glyphicon-list"></i>&nbsp;List Staff</a>
                                     </li>
                                     <li>
-                                        <a href="searchStaffs.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Staff</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/searchStaffs.xhtml"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Staff</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -90,13 +91,13 @@
                                 <a href="#"><i class="glyphicon glyphicon-expand"></i> Service Category</a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="addServiceCategory.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Category</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/addServiceCategory.xhtml"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Category</a>
                                     </li>
                                     <li>
-                                        <a href="listServiceCategory.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Category</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/listServiceCategory.xhtml"><i class="glyphicon glyphicon-list"></i>&nbsp;List Category</a>
                                     </li>
                                     <li>
-                                        <a href="searchServiceCategory.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Category</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/searchServiceCategory.xhtml"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Category</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -105,33 +106,33 @@
                                 <a href="#"><i class="glyphicon glyphicon-expand"></i> Service </a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="addService.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Service</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/addService.xhtml"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Service</a>
                                     </li>
                                     <li>
-                                        <a href="listService.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Service</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/listService.xhtml"><i class="glyphicon glyphicon-list"></i>&nbsp;List Service</a>
                                     </li>
                                     <li>
-                                        <a href="searchService.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Service</a>
+                                        <a href="#{helperController.getBaseURL()}/faces/searchService.xhtml"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Service</a>
                                     </li>
                                 </ul>
                                 <li>
                                     <a href="#"><i class="glyphicon glyphicon-expand"></i> Admins</a>
                                     <ul class="nav nav-second-level">
                                         <li>
-                                            <a href="addAdmins.faces"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Admin</a>
+                                            <a href="#{helperController.getBaseURL()}/faces/addAdmins.xhtml"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Admin</a>
                                         </li>
                                         <li>
-                                            <a href="listAdmins.faces"><i class="glyphicon glyphicon-list"></i>&nbsp;List Admin</a>
+                                            <a href="#{helperController.getBaseURL()}/faces/listAdmins.xhtml"><i class="glyphicon glyphicon-list"></i>&nbsp;List Admin</a>
                                         </li>
                                         <li>
-                                            <a href="searchAdmins.faces"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Admin</a>
+                                            <a href="#{helperController.getBaseURL()}/faces/searchAdmins.xhtml"><i class="glyphicon glyphicon-search"></i>&nbsp;Search Admin</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-second-level -->
                                 </li>
 
                                 <li>
-                                    <i class="glyphicon glyphicon-log-out"></i><h:form> <h:commandButton value="Log out" action="#{adminLogInOutController.doLogOutAdmin()}"/></h:form>
+                                    <h:form> <h:commandButton class="btn-custom" value="Log out" action="#{adminLogInOutController.doLogOutAdmin()}"/></h:form>
                                 </li>
                             </li>
                         </ul>

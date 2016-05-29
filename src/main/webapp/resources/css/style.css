@@ -386,6 +386,21 @@ hr.small {
     margin: 0 0 11px;
 }
 
+.btn-custom{
+    border: none;
+    background: none;
+    
+}
+.frontend-sidebar form{
+    padding: 10px 15px;
+}
+.frontend-sidebar li{
+    line-height: 15px;
+}
+
+.frontend-sidebar li:hover a{
+    color: #000;
+}
 
 @media(max-width:768px) {
     .map {

@@ -103,6 +103,7 @@ public class CustomerLogInOutController implements Serializable {
 
     public String doLogOutCustomer() {
         loggedIn = false;
+        s_id = "";
         FacesMessage logOutSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Log out success! ", "");
         FacesContext.getCurrentInstance().addMessage(null, logOutSuccess);
         return "login.xhtml?faces-redirect=true";
@@ -135,8 +136,6 @@ public class CustomerLogInOutController implements Serializable {
     public void forwardToProfileIfLogin(ComponentSystemEvent cse) {
         FacesContext fc = FacesContext.getCurrentInstance();
         if (loggedIn) {
-            //loggedIn = false;
-            //s_id = null;
             fc.getApplication().getNavigationHandler().handleNavigation(
                     fc,
                     null,

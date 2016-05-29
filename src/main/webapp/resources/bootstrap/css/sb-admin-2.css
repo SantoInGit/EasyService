@@ -793,3 +793,15 @@ body .ui-tooltip {
 .add-product tr td{
     padding-right: 20px;
 }
+
+.backend-sidebar form{
+    padding: 10px 15px;
+}
+
+.backend-sidebar
+
+.btn-custom{
+    border: none;
+    background: none;
+    
+}
