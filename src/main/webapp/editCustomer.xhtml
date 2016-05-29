@@ -40,7 +40,7 @@
 
                                     <div class="form-group">
                                         <h:outputLabel for="contactNo" value="Contact No.: "/>
-                                        <h:inputText id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control"/>
+                                        <h:inputText id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control" validator="validators.PhoneNumberValidator" maxlength="10"/>
                                     </div>
 
 

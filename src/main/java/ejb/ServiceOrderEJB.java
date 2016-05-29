@@ -1,18 +1,4 @@
-<<<<<<< HEAD
 
-package ejb;
-
-
-import entities.ServiceOrder;
-import java.util.List;
-import java.util.Map;
-import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import entities.Staff;
-=======
 package ejb;
 
 import javax.ejb.Stateless;
@@ -22,16 +8,13 @@ import entities.ServiceOrder;
 import entities.ServiceOrderItem;
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> e53ba46f4074d2aa57747fe64909e0c96331847b
+import javax.persistence.TypedQuery;
+
 
 @Stateless
 public class ServiceOrderEJB {
 
-<<<<<<< HEAD
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+
     @PersistenceContext(unitName = "EASYSERVICES_PU")
     private EntityManager em;
 
@@ -64,10 +47,8 @@ public class ServiceOrderEJB {
         search = search.toUpperCase();
         query.setParameter(searchBy, "%" + search + "%");
         return query.getResultList();
-=======
-    @PersistenceContext(unitName = "EASYSERVICES_PU")
-    private EntityManager em;
 
+    }
     public ServiceOrder addServiceOrder(ServiceOrder serOrder, int service_id, String service_name) {
         List<ServiceOrderItem> SOI = new ArrayList<>();
         ServiceOrderItem s = new ServiceOrderItem();
@@ -78,7 +59,7 @@ public class ServiceOrderEJB {
         serOrder.setServiceOrderItem(SOI);
         em.persist(serOrder);
         return serOrder;
->>>>>>> e53ba46f4074d2aa57747fe64909e0c96331847b
+
     }
 
 }

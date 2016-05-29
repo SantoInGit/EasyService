@@ -40,7 +40,7 @@
                                     
                                      <div class="form-group">
                                         <h:outputLabel for="contactNo" value="Contact No.: "/>
-                                        <h:inputText id="contactNo"  value="#{adminController.admin.phoneNo}" class="form-control"/>
+                                        <h:inputText id="contactNo"  value="#{adminController.admin.phoneNo}" class="form-control" validator="validators.PhoneNumberValidator" maxlength="10" />
                                     </div>
                                     
                               
@@ -51,7 +51,7 @@
                                     
                                      <div class="form-group">
                                          
-                                        <h:outputLabel for="serviceStatus" value="Choose Status: "/>
+                                        <h:outputLabel value="Choose Status: "/>
                                         <h:selectOneMenu value="#{adminController.admin.status}" styleClass="form-control">
                                             <f:selectItem itemValue="Inactive" itemLabel="Inactive" />
                                             <f:selectItem itemValue="Active" itemLabel="Active" />                                       
@@ -73,11 +73,11 @@
                                     
                                     <div class="form-group">
                                         <h:outputLabel value="State: "/>
-                                        <h:inputText value="#{adminController.admin.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
+                                        <h:inputText value="#{adminController.admin.address.state}" class="form-control" required="true" requiredMessage="State is required field."/>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel value="Zip Code: "/>
-                                        <h:inputText value="#{adminController.admin.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
+                                        <h:inputText value="#{adminController.admin.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field." validator="validators.ZipCodeValidator" maxlength="4"/>
                                     </div>
 
                                     <div class="form-group">
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel value="Email: "/>
-                                        <h:inputText value="#{adminController.admin.email}" class="form-control" required="true" requiredMessage="Email is required field."/>
+                                        <h:inputText value="#{adminController.admin.email}" class="form-control" required="true" requiredMessage="Email is required field." validator="validators.EmailValidator"/>
                                     </div>
                                     
                                     <div class="form-group">
