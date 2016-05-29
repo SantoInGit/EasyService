@@ -56,22 +56,23 @@ public class AdminLogInOutController implements Serializable {
     }
 
     public String doLogInAdmin() {
+        
         FacesMessage logInSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Succesful! ", "");
         FacesMessage logInFailure = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Failure! ", "");
 
+        
         ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = extContext.getSessionMap();
         sessionMap.put("admin", admin);
 
         List<Admin> user = adminEJB.listAdmins();
-        for (Admin adminFromDB : user) {
-            if (email.equals("admin") && (password).equals("admin")) {
-                FacesContext.getCurrentInstance().addMessage(null, logInSuccess);
-                setAdmin(adminFromDB);
-                sessionMap.put("admin", admin);
+        if (email.equals("admin") && (password).equals("admin")) {
                 loggedIn = true;
                 return "dashboard.xhtml?faces-redirect=true";
-            }
+        }
+        else{
+            for (Admin adminFromDB : user) {
+            
             if (adminFromDB.getEmail().equals(email) && adminFromDB.getPassword().equals(password)) {
                 FacesContext.getCurrentInstance().addMessage(null, logInSuccess);
                 setAdmin(adminFromDB);
@@ -83,6 +84,8 @@ public class AdminLogInOutController implements Serializable {
                 return "loginAdmin.xhtml?faces-redirect=true";
             }
         }
+        }
+        
         return null;
 
     }

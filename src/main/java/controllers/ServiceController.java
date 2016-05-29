@@ -99,7 +99,6 @@ public class ServiceController {
         this.serviceCategory = serviceCategory;
     }
 
-  
 
     public void createPdf() throws Exception {
         String machine_name = InetAddress.getLocalHost().getHostName();

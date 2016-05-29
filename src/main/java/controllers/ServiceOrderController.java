@@ -7,6 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import ejb.ServiceOrderEJB;
 import entities.ServiceOrder;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named(value = "serviceOrderController")
 @RequestScoped
@@ -17,6 +19,9 @@ public class ServiceOrderController {
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
     private ServiceOrder serviceOrder = new ServiceOrder();
+    private List<ServiceOrder> serviceOrderList = new ArrayList<ServiceOrder>();
+    private String search ="";
+    private String searchBy = "";
     
     private int service_id;
     private String service_name;
@@ -54,6 +59,37 @@ public class ServiceOrderController {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
+    
+    public List<ServiceOrder> getServiceOrderList() {
+        if (this.search.isEmpty()) {
+            serviceOrderList = serviceOrderEJB.listServiceOrders();
+        }
+        return serviceOrderList;
+    }
+
+    public void setServiceOrderList(List<ServiceOrder> serviceOrderList) {
+        this.serviceOrderList = serviceOrderList;
+    }
+
+    public String getSearchBy() {
+        return searchBy;
+    }
+
+
+    public void setSearchBy(String searchBy) {
+        this.searchBy = searchBy;
+    }
+
+
+    public String getSearch() {
+        return search;
+    }
+
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
 
     public String doCreateServiceOrder() {
 
@@ -61,6 +97,27 @@ public class ServiceOrderController {
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Order Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "frontendCustomerProfile.xhtml?faces-redirect=true";
+    }
+    public String doDeleteServiceOrder(Long id){
+        serviceOrderEJB.deleteServiceOrder(id);
+        return "listServiceOrders.xhtml?faces-redirect=true";
+    }
+    
+    public String doCreateInvoice(Long id){
+        serviceOrderEJB.createInvoice(id);
+        return "listServiceOrders.xhtml?faces-redirect=true";
+    }
+    public String doCancelServiceOrder(Long id){
+         return "listServiceOrders.xhtml?faces-redirect=true";
+    }
+    public String doConfirmServiceOrder(Long id){
+        return "listServiceOrders.xhtml?faces-redirect=true";
+    }
+    public String doSearch() {
+        serviceOrderList = serviceOrderEJB.search(search, searchBy);
+        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
+        FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+        return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
 }
