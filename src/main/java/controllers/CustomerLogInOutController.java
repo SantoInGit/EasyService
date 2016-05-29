@@ -24,7 +24,7 @@ public class CustomerLogInOutController implements Serializable {
     private CustomerEJB customerEJB;
     private Customer customer = new Customer();
     private boolean loggedIn = false;
-    
+
     private String s_id = "";
 
     private String email, password;
@@ -69,23 +69,22 @@ public class CustomerLogInOutController implements Serializable {
         FacesMessage logInSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Succesful: ", "");
         FacesMessage logInFailure = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Failure! ", "");
 
-        ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
-        Map<String, Object> sessionMap = extContext.getSessionMap();
-        sessionMap.put("customer", customer);
         FacesContext fc = FacesContext.getCurrentInstance();
         Customer user = customerEJB.getCustomerByEmailAndPassword(email, password);
 
         if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
             FacesContext.getCurrentInstance().addMessage(null, logInSuccess);
             setCustomer(user);
+            ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+            Map<String, Object> sessionMap = extContext.getSessionMap();
             sessionMap.put("customer", customer);
             loggedIn = true;
-            
+
             if (!"".equals(s_id)) {
                 fc.getApplication().getNavigationHandler().handleNavigation(
                         fc,
                         null,
-                        "/frontendBookService.xhtml?faces-redirect=true&service_id="+s_id);
+                        "/frontendBookService.xhtml?faces-redirect=true&service_id=" + s_id);
             } else {
                 fc.getApplication().getNavigationHandler().handleNavigation(
                         fc,

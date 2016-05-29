@@ -2,14 +2,9 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 /**
  * Named queries for getting all customers with specified parameter
@@ -36,12 +31,6 @@ import javax.persistence.OneToMany;
 public class Customer extends User implements Serializable {
     private static final long serialVersionUID = 1L;
     private String status;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "jnd_Customer_ServiceOrder",
-            joinColumns = @JoinColumn(name = "customer_serviceOrder_fk")
-    )
-    private List<ServiceOrder> serviceOrder;
     
     public Customer(){
     
