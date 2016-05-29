@@ -32,7 +32,7 @@ public class ServiceOrderItem implements Serializable {
         return orderItemId;
     }
 
-    public void setOrderItemId(Long id) {
+    public void setOrderItemId(Long orderItemId) {
         this.orderItemId = orderItemId;
     }
     

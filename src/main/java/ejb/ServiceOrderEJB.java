@@ -38,6 +38,9 @@ public class ServiceOrderEJB {
     public void deleteServiceOrder(Long id){
        em.remove(getServiceOrder(id));
     }
+    
+    public void  createInvoice(Long id){
+    }
 
     public ServiceOrder getServiceOrder(Long id) {
         return em.find(ServiceOrder.class, id);
