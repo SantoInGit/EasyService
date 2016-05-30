@@ -26,7 +26,7 @@
                                 <div class="col-lg-6">
 
                                     <div class="form-group">
-                                        <h:outputLabel class="control-label col-sm-4" value="ID: "/>
+                                        <h:outputLabel class="control-label col-sm-4" value="Order ID: "/>
                                         <div class="col-md-8">
                                             <h:outputLabel id="serviceName" value="#{serviceOrderController.serviceOrder.serviceOrderId}" class="form-control"/>
                                         </div>
@@ -82,8 +82,8 @@
                                     <div class="form-group">
                                         <h:outputLabel class="control-label col-sm-4"  value="Choose #{serviceOrderController.serviceOrder.staffRequired} Staff(s) "/>
                                         <div class="col-md-8">                                                                                           
-                                            <h:selectManyListbox value="">
-                                                <f:selectItems value="#{staffController.staffList}" var="staffList" itemValue="#{staffList.firstName}" itemLabel="#{staffList.firstName} #{staffList.middleName} #{staffList.lastName} [Qualification: #{staffList.qualification}]" noSelectionValue="select staff"  />
+                                            <h:selectManyListbox value="#{serviceOrderController.staffid}">
+                                                <f:selectItems value="#{staffController.getUnAssignedStaff()}" var="staffList" itemValue="#{staffList.id}" itemLabel="#{staffList.firstName} #{staffList.middleName} #{staffList.lastName} [Qualification: #{staffList.qualification}]" noSelectionValue="select staff"  />
                                             </h:selectManyListbox>
                                         </div>
                                     </div>
@@ -99,7 +99,7 @@
                                         <div class="form-group">
                                           
                                             <div class="col-md-6" style="padding-left: 0">
-                                                <h:commandButton class ="btn btn-primary form-control "  value="Confirm" action="#{serviceOrderController.doConfirmServiceOrder(entityEditController.serviceOrder.serviceOrderId)}"/>
+                                                <h:commandButton disabled = "#{staffController.getUnAssignedStaff().size() le 0}" class ="btn btn-primary form-control "  value="Confirm" action="#{serviceOrderController.doConfirmServiceOrderCommit(serviceOrderController.serviceOrder.serviceOrderId)}"/>
                                             </div>
                                         </div>
                                     </div>

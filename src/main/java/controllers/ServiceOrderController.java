@@ -19,9 +19,19 @@ public class ServiceOrderController {
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
     private static ServiceOrder serviceOrder = new ServiceOrder();
-    private List<ServiceOrder> serviceOrderList = new ArrayList<ServiceOrder>();
+    private List<ServiceOrder> serviceOrderList = new ArrayList<>();
+    private List<String> staffid = new ArrayList<>();
+
+    public List<String> getStaffid() {
+        return staffid;
+    }
+
+    public void setStaffid(List<String> staffid) {
+        this.staffid = staffid;
+    }
     private String search ="";
     private String searchBy = "";
+    
     
     private int service_id;
     private String service_name;
@@ -57,7 +67,7 @@ public class ServiceOrderController {
     }
 
     public void setServiceOrder(ServiceOrder serviceOrder) {
-        this.serviceOrder = serviceOrder;
+        ServiceOrderController.serviceOrder = serviceOrder;
     }
     
     public List<ServiceOrder> getServiceOrderList() {
@@ -111,10 +121,15 @@ public class ServiceOrderController {
         serviceOrderEJB.changeStatusServiceOrder(id,status);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
-
+    
     public String doConfirmServiceOrder(Long id){
-        serviceOrder = serviceOrderEJB.getServiceOrder(id);
-        return "confirmServiceOrder.xhtml?faces-redirect=true";
+       serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
+       return "confirmServiceOrder.xhtml?faces-redirect=true";
+    }
+
+    public String doConfirmServiceOrderCommit(Long id){
+        serviceOrder = serviceOrderEJB.confirmServiceOrderCommit(id, staffid);
+        return "listServiceOrders.xhtml?faces-redirect=true";
     }
     public String doSearch() {
         serviceOrderList = serviceOrderEJB.search(search, searchBy);

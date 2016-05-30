@@ -6,7 +6,9 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -14,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,81 +32,91 @@ import javax.persistence.OneToMany;
     @NamedQuery(name = "findStaffById", query = "select s from Staff s where s.id=:id"),
 //update query
     @NamedQuery(name = "updateStaff", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
-            query="update Staff a Set  a.email = :stEmail, a.firstName = :stFirstName, a.jobTitle = :stJobTitle,"
-                    + "a.lastName = :stLastName, a.middleName=:stMiddleName, a.password = :stPassword,"
-                    + " a.phoneNo = :stPhoneNo, a.qualification = :stQualification, a.status = :stStatus, "
-                    + "a.userType = :stUserType, a.address.city = :stCity, a.address.country = :stCountry, "
-                    + "a.address.state = :stState, a.address.street = :stStreet, a.address.zipCode = :stZipCode "
-                    + "where a.id = :stId")       
-})        
-        
+            query = "update Staff a Set  a.email = :stEmail, a.firstName = :stFirstName, "
+                    + "a.fromDate=:stFromDate, a.jobTitle= :stJobTitle,"
+            + "a.lastName = :stLastName, a.middleName=:stMiddleName, a.password = :stPassword,"
+            + " a.phoneNo = :stPhoneNo, a.qualification = :stQualification, a.status = :stStatus, "
+            + "a.toDate = :stToDate, a.userType = :stUserType, a.address.city = :stCity, a.address.country = :stCountry, "
+            + "a.address.state = :stState, a.address.street = :stStreet, a.address.zipCode = :stZipCode "
+            + "where a.id = :stId"),
+    //update query for assigned staff 
+    @NamedQuery(name = "updateAssignedStaff",
+            query = "UPDATE Staff s SET s.jobTitle = :stJobTitle, s.fromDate = :stFromDate, s.toDate = :stToDate,"
+            + "s.status = :stStatus WHERE s.id = :stId"),
+    @NamedQuery(name = "findAllUnAssignedStaffs",
+            query = "SELECT s from Staff s WHERE s.status != :stStatus")
+})
 
-public class Staff extends User implements Serializable{
-    
+public class Staff extends User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private String qualification;
     private String jobTitle;
-    private String status;
+
+    private String fromDate;
    
-    @OneToMany(fetch = FetchType.EAGER)
+    private String toDate;
+    private String status;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name="jnd_Staff_ServiceOrderItem",
+            name = "jnd_Staff_ServiceOrderItem",
             joinColumns = @JoinColumn(name = "staff_serviceOrderItem_fk")
     )
     private List<ServiceOrderItem> serviceOrderItem;
 
     public Staff() {
     }
-    
 
- 
-    /**
-     * @return the serialVersionUID
-     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    /**
-     * @return the qualification
-     */
     public String getQualification() {
         return qualification;
     }
 
-    /**
-     * @param qualification the qualification to set
-     */
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
 
-    /**
-     * @return the jobTitle
-     */
     public String getJobTitle() {
         return jobTitle;
     }
 
-    /**
-     * @param jobTitle the jobTitle to set
-     */
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
-    /**
-     * @return the status
-     */
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public String getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
+    }
+
     public String getStatus() {
         return status;
     }
 
-    /**
-     * @param status the status to set
-     */
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public List<ServiceOrderItem> getServiceOrderItem() {
+        return serviceOrderItem;
+    }
+
+    public void setServiceOrderItem(List<ServiceOrderItem> serviceOrderItem) {
+        this.serviceOrderItem = serviceOrderItem;
+    }
 }

@@ -11,15 +11,15 @@
         <div class="row">   
             <div class="col-lg-12 panel-heading"></div>    
         </div>
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    
+
                     <div class="panel-heading">
                         <h3>Details Staff: #{entityEditController.staff.firstName} [ email: #{entityEditController.staff.email} ]</h3>
                     </div>
-                    
+
                     <div class="panel-body">
                         <h:form>
                             <div class="row">
@@ -60,14 +60,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
 
-                                        <h:outputLabel class="control-label col-sm-4" for="staffStatus" value="Status: "/>
-                                        <div class="col-md-8">
-                                            <h:outputLabel value="#{entityEditController.staff.status}" styleClass="form-control"/>
-                                        </div>
 
-                                    </div>
 
                                     <div class="form-group">
                                         <h:outputLabel class="control-label col-sm-4" value="Street "/>
@@ -108,7 +102,73 @@
                                             <h:outputLabel value="#{entityEditController.staff.email}" class="form-control"/>
                                         </div>
                                     </div>
-                               </div>
+                                    <div class="form-group">
+
+                                        <h:outputLabel class="control-label col-sm-4" for="staffStatus" value="Status: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{entityEditController.staff.status}" styleClass="form-control"/>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <h:outputLabel class="control-label col-sm-4" value="Job Title: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{entityEditController.staff.jobTitle}" styleClass="form-control"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+
+                                        <h:outputLabel class="control-label col-sm-4" value="From Date: "/>
+                                        <div class="col-md-8">
+                                            <h:outputLabel value="#{entityEditController.staff.fromDate}" styleClass="form-control"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+
+                                        <h:outputLabel class="control-label col-sm-8" value="Currently Assigned Job "/>
+
+                                    </div>
+
+                                    <div class="well" style="background-color: #c9e2b3" >
+                                        <div class="form-group">
+
+                                            <h:outputLabel class="control-label col-sm-4" for="staffStatus" value="Status: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.staff.status}" styleClass="form-control"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <h:outputLabel class="control-label col-sm-4" value="Job Title: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.staff.jobTitle}" styleClass="form-control"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+
+                                            <h:outputLabel class="control-label col-sm-4" value="From Date: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.staff.fromDate}" styleClass="form-control"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+
+                                            <h:outputLabel class="control-label col-sm-4" value="To Date: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.staff.toDate}" styleClass="form-control"/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>                              
                             <br/>                            
                             <div class="row">
@@ -129,11 +189,11 @@
                             </div>
                         </h:form>                        
                     </div>
-   
+
                 </div>
-             
+
             </div>
-           
+
         </div>
     </ui:define>
 </ui:composition>
