@@ -47,7 +47,11 @@ public class ServiceOrderEJB {
         
     }
     
-    public void  createInvoice(Long id){
+    public ServiceOrder createInvoice(Long id){
+        
+        TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrdersById", ServiceOrder.class);
+        query.setParameter("serOrderId",id);
+        return query.getSingleResult();
     }
 
     public ServiceOrder getServiceOrder(Long id) {
