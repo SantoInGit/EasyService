@@ -25,6 +25,11 @@ public class ServiceEJB {
         return query.getResultList();
     }
 
+    public List<Service> listServiceLimitFour() {
+        TypedQuery<Service> query = em.createNamedQuery("findAllService", Service.class);
+        return query.setMaxResults(4).getResultList();
+    }
+
     public Service addService(Service service, String serviceCatId) {
         Long sid = Long.parseLong(serviceCatId);
         ServiceCategory sCategory = em.find(ServiceCategory.class, sid);
@@ -76,6 +81,29 @@ public class ServiceEJB {
         //changed all upper case as in query field, set field name to upper case
         search = search.toUpperCase();
         query.setParameter(searchBy, "%" + search + "%");
+        return query.getResultList();
+    }
+
+    public List<Service> searchFrontend(String search, String searchBy) {
+
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String search_by = params.get("search_by");
+        String search_text = params.get("s");
+
+        if (search_by != null && search_text != null) {
+            search = search_text;
+            searchBy = search_by;
+        }
+
+        TypedQuery<Service> query = em.createNamedQuery("findServiceBy" + searchBy, Service.class);
+        //changed all upper case as in query field, set field name to upper case
+        search = search.toUpperCase();
+        if ("Category".equals(search_by)) {
+            Long c_id = Long.parseLong(search);
+            query.setParameter(searchBy, c_id);
+        } else {
+            query.setParameter(searchBy, "%" + search + "%");
+        }
         return query.getResultList();
     }
 

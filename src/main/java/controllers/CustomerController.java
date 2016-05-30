@@ -1,4 +1,3 @@
-
 package controllers;
 
 import ejb.CustomerEJB;
@@ -27,33 +26,43 @@ public class CustomerController {
 
     private String search = "";
     private String searchBy = "";
+    private String from = "Backend";
 
- 
     public String doCreateCustomer() {
         customer = customerEJB.addCustomer(customer);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listCustomers.xhtml?faces-redirect=true";
+        if ("Frontend".equals(from)) {
+            return "registerSuccess.xhtml?faces-redirect=true";
+        } else {
+            return "listCustomers.xhtml?faces-redirect=true";
+        }
     }
-    public String doDeleteCustomer(Long id){
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String doDeleteCustomer(Long id) {
         customerEJB.deleteCustomer(id);
         return "listCustomers.xhtml?faces-redirect=true";
     }
 
-  
     public String doSearch() {
         customerList = customerEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "listCustomers.xhtml?faces-redirect=true";
     }
-    
-    public String doLogInCustomer(){
-        
+
+    public String doLogInCustomer() {
+
         return "customerProfile.xhtml?faces-redirect=true";
     }
-    
-   
 
     /**
      *
@@ -91,24 +100,20 @@ public class CustomerController {
         return customer;
     }
 
- 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
- 
     public Customer getCustomerById(Long customer_id) {
         customer = customerEJB.getCustomer(customer_id);
         return customer;
     }
 
- 
     public Customer getCustomerByParamId() {
         customer = customerEJB.getCustomerByParamId();
         return customer;
     }
 
- 
     public List<Customer> getCustomerList() {
         if (this.search.isEmpty()) {
             customerList = customerEJB.listCustomers();
@@ -123,7 +128,5 @@ public class CustomerController {
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
     }
-
-  
 
 }

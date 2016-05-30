@@ -14,18 +14,28 @@
                 <br></br>
                 <div class="container" style="max-width: 500px;">
                     <div class="row">
-                        <h:form>
+                        <h:form id="search">
                             <div id="custom-search-input">
                                 <div class="input-group col-md-12">
-                                    <input type="text" class="form-control input-lg" placeholder="Search services..." />
+                                    <!--<input type="text" class="form-control input-lg" placeholder="Search services..." />-->
+                                    <h:inputText value="#{serviceController.search}" class="form-control input-lg" required="true" requiredMessage="FirstName is required field."/>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-info btn-lg" type="submit">
+<!--                                                                                                                        <button class="btn btn-info btn-lg" type="submit">
+                                                                                                                            <i class="glyphicon glyphicon-search"></i>
+                                                                                                                        </button>-->
+                                        <h:inputHidden class="form-control" id="search_by" value="#{serviceController.searchBy}" />
+
+                                        <h:commandButton class="btn btn-info btn-lg" action="#{serviceController.doFrontEndSearch()}" >
                                             <i class="glyphicon glyphicon-search"></i>
-                                        </button>
+                                        </h:commandButton>
+
                                     </span>
                                 </div>
                             </div>
                         </h:form>
+                        <script>
+                            document.getElementById('search:search_by').value = 'ServiceName';
+                        </script>
 
                     </div>
                 </div>
@@ -51,7 +61,7 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-lg-10 col-lg-offset-1">
-                        <h2>Our Services</h2>
+                        <h2>We Provide</h2>
                         <!--                        <hr class="small">-->
                         <div class="row">
                             <ui:repeat value="#{serviceCategoryController.serviceCategoryList}" var="serviceCategory">
@@ -65,7 +75,10 @@
                                             <strong>#{serviceCategory.serviceCategoryName}</strong>
                                         </h4>
                                         <p>#{serviceCategory.shortDescription}</p>
-                                        <a href="#" class="btn btn-light">Learn More</a>
+                                        <h:link class="btn btn-light" value="Learn More" outcome="frontendListServices.xhtml">
+                                            <f:param name="search_by" value="Category" />
+                                            <f:param name="s" value="#{serviceCategory.serviceCategoryId}" />
+                                        </h:link>
                                     </div>
                                 </div>
                             </ui:repeat>
@@ -92,18 +105,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-center">
-                        <h2>Services</h2>
+                        <h2>Our Services</h2>
                         <hr class="small"></hr>
                         <div class="row">
-                            <ui:repeat value="#{serviceController.serviceList}" var="service">
+                            <ui:repeat value="#{serviceController.serviceListLimitFour}" var="service">
                                 <div class="col-md-6">
                                     <div class="portfolio-item">
                                         <a href="#{helperController.baseURL}/faces/frontendViewService.xhtml?service_id=#{service.serviceId}">
                                             <img class="img-portfolio img-responsive" src="resources/img/placeholder.png" />
                                         </a>
 
-                                        <h3 style="margin: 15px 27px;width: 100%;text-align: left;">  #{service.serviceName}</h3>
-                                        <h:link class="btn btn-primary" style="margin: 0px 27px;float: left;" value="View Detail" outcome="frontendViewService.xhtml">
+                                        <h3>  #{service.serviceName}</h3>
+                                        <h:link class="btn btn-primary" value="View Detail" outcome="frontendViewService.xhtml">
                                             <f:param name="service_id" value="#{service.serviceId}" />
                                         </h:link>
                                     </div>

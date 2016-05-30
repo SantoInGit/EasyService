@@ -25,9 +25,19 @@ public class ServiceController {
 
     private Service service = new Service();
     private List<Service> serviceList = new ArrayList<>();
+    private List<Service> serviceListLimitFour = new ArrayList<>();
 
     private String search = "";
     private String searchBy = "";
+
+    public List<Service> getServiceListLimitFour() {
+        serviceListLimitFour = serviceEJB.listServiceLimitFour();
+        return serviceListLimitFour;
+    }
+
+    public void setServiceListLimitFour(List<Service> serviceListLimitFour) {
+        this.serviceListLimitFour = serviceListLimitFour;
+    }
 
     public String doCreateService() {
         service = serviceEJB.addService(service, serviceCategory);
@@ -45,7 +55,13 @@ public class ServiceController {
         serviceList = serviceEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listService.xhtml?faces-redirect=true";
+
+        return "listService.xhtml";
+
+    }
+
+    public String doFrontEndSearch() {
+        return "frontendListServices.xhtml?faces-redirect=true&search_by=" + searchBy + "&s=" + search;
     }
 
     public String getSearchBy() {
@@ -71,7 +87,16 @@ public class ServiceController {
 
     public List<Service> getServiceList() {
         if (this.search.isEmpty()) {
-            serviceList = serviceEJB.listService();
+            Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String search_by = params.get("search_by");
+            String search_text = params.get("s");
+            if (search_by != null && search_text != null) {
+                serviceList = serviceEJB.searchFrontend(search_text, search_by);
+                FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
+                FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+            } else {
+                serviceList = serviceEJB.listService();
+            }
         }
         return serviceList;
     }
@@ -108,16 +133,16 @@ public class ServiceController {
 
         Font f2 = new Font(pdf, CoreFont.HELVETICA);
         f2.setSize(7f);
-        
+
         Font f3 = new Font(pdf, CoreFont.HELVETICA_BOLD);
-         f3.setSize(20f);
+        f3.setSize(20f);
 
         TextLine text = new TextLine(f1,
                 "Easy Services");
         text.setPosition(90, 60);
-       // text.setColor(Color.dodgerblue);
+        // text.setColor(Color.dodgerblue);
         text.drawOn(page);
-        
+
         TextLine text2 = new TextLine(f2,
                 "400, Kent Street 2230");
         text2.setPosition(90, 70);
@@ -135,8 +160,8 @@ public class ServiceController {
         text4.setPosition(90, 90);
         //text4.setColor(Color.dodgerblue);
         text4.drawOn(page);
-        
-         TextLine text8 = new TextLine(f3,
+
+        TextLine text8 = new TextLine(f3,
                 "INVOICE");
         text8.setPosition(280, 30);
         text8.setColor(Color.dodgerblue);
@@ -147,8 +172,8 @@ public class ServiceController {
         text9.setPosition(90, 110);
         //text9.setColor(Color.dodgerblue);
         text9.drawOn(page);
-        
-         TextLine payable = new TextLine(f2,
+
+        TextLine payable = new TextLine(f2,
                 "Notes:");
         payable.setPosition(90, 320);
         //payable.setColor(Color.dodgerblue);
@@ -159,23 +184,23 @@ public class ServiceController {
         allpay.setPosition(90, 330);
         //allpay.setColor(Color.dodgerblue);
         allpay.drawOn(page);
-        
+
         TextLine totaldue = new TextLine(f2,
                 "2. Total amount due in 30 days");
         totaldue.setPosition(90, 340);
         //totaldue.setColor(Color.dodgerblue);
         totaldue.drawOn(page);
-        
-         TextLine include = new TextLine(f2,
+
+        TextLine include = new TextLine(f2,
                 "3. Include your invoice number on the cheque");
         include.setPosition(90, 350);
-       // include.setColor(Color.dodgerblue);
+        // include.setColor(Color.dodgerblue);
         include.drawOn(page);
 
         TextLine contact = new TextLine(f2,
                 "If you have any question about this invoice please email us at: info@easyservice.com");
         contact.setPosition(180, 400);
-       // contact.setColor(Color.dodgerblue);
+        // contact.setColor(Color.dodgerblue);
         contact.drawOn(page);
 
         TextLine thankyou = new TextLine(f1,
@@ -189,11 +214,8 @@ public class ServiceController {
         copyright.setPosition(265, 430);
         //copyright.setColor(Color.dodgerblue);
         copyright.drawOn(page);
-        
-        
-        
+
         // dynamic section
-        
         TextLine text5 = new TextLine(f2,
                 "Date: 26th May 2016");
         text5.setPosition(450, 60);
@@ -212,8 +234,6 @@ public class ServiceController {
         //text7.setColor(Color.dodgerblue);
         text7.drawOn(page);
 
-       
-        
         TextLine text10 = new TextLine(f2,
                 "Customer Name");
         text10.setPosition(90, 120);
@@ -384,8 +404,6 @@ public class ServiceController {
         dueamount.setPosition(430, 300);
         //dueamount.setColor(Color.dodgerblue);
         dueamount.drawOn(page);
-
-       
 
         Table table = new Table();
         table.setData(tableData, Table.DATA_HAS_1_HEADER_ROWS);

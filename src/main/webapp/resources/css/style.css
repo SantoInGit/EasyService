@@ -325,7 +325,7 @@ hr.small {
 }
 
 .login-container, .register-container{
-    padding-top: 100px;
+    /*padding-top: 100px;*/
 }
 
 .glyphicon { margin-right:5px; }
@@ -401,7 +401,16 @@ hr.small {
 .frontend-sidebar li:hover a{
     color: #000;
 }
+.list-group-item .f1{
+    width: 63%;
+}
+.list-group-item .f2{
+    width: 125px;
+}
 
+#register .form-group{
+    height: 30px;
+}
 @media(max-width:768px) {
     .map {
         height: 75%;

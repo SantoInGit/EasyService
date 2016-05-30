@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Customer;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -69,34 +70,36 @@ public class CustomerLogInOutController implements Serializable {
         FacesMessage logInFailure = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Failure! ", "");
 
         FacesContext fc = FacesContext.getCurrentInstance();
-        Customer user = customerEJB.getCustomerByEmailAndPassword(email, password);
+        List<Customer> user = customerEJB.getCustomerByEmailAndPassword(email, password);
 
-        if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-            FacesContext.getCurrentInstance().addMessage(null, logInSuccess);
-            setCustomer(user);
-            ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
-            Map<String, Object> sessionMap = extContext.getSessionMap();
-            sessionMap.put("customer", customer);
-            loggedIn = true;
+        for (Customer customerFromDB : user) {
+            if (customerFromDB.getEmail().equals(email) && customerFromDB.getPassword().equals(password)) {
+                FacesContext.getCurrentInstance().addMessage(null, logInSuccess);
+                setCustomer(customerFromDB);
+                ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+                Map<String, Object> sessionMap = extContext.getSessionMap();
+                sessionMap.put("customer", customer);
+                loggedIn = true;
 
-            if (!"".equals(s_id)) {
-                fc.getApplication().getNavigationHandler().handleNavigation(
-                        fc,
-                        null,
-                        "/frontendBookService.xhtml?faces-redirect=true&service_id=" + s_id);
+                if (!"".equals(s_id)) {
+                    fc.getApplication().getNavigationHandler().handleNavigation(
+                            fc,
+                            null,
+                            "/frontendBookService.xhtml?faces-redirect=true&service_id=" + s_id);
+                } else {
+                    fc.getApplication().getNavigationHandler().handleNavigation(
+                            fc,
+                            null,
+                            "/frontendCustomerProfile.xhtml?faces-redirect=true");
+                }
+
             } else {
+                FacesContext.getCurrentInstance().addMessage(null, logInFailure);
                 fc.getApplication().getNavigationHandler().handleNavigation(
                         fc,
                         null,
-                        "/frontendCustomerProfile.xhtml?faces-redirect=true");
+                        "/login.xhtml");
             }
-
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, logInFailure);
-            fc.getApplication().getNavigationHandler().handleNavigation(
-                    fc,
-                    null,
-                    "/login.xhtml");
         }
 
     }
