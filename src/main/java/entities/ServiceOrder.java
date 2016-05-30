@@ -23,9 +23,10 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "findAllServiceOrders", query = "select c from ServiceOrder c"),   
-    @NamedQuery(name = "cancelOrder", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
-            query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId")
+    @NamedQuery(name = "findAllServiceOrders", 
+            query = "select c from ServiceOrder c"),   
+    @NamedQuery(name = "changeServiceOrderStatus",
+            query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId")      
 })
 public class ServiceOrder implements Serializable {
 

@@ -10,6 +10,9 @@ import javax.faces.context.FacesContext;
 import entities.Service;
 import ejb.ServiceEJB;
 import com.pdfjet.*;
+import java.net.InetAddress;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 
@@ -121,11 +124,15 @@ public class ServiceController {
         this.serviceCategory = serviceCategory;
     }
 
+
     public void createPdf() throws Exception {
+        String machine_name = InetAddress.getLocalHost().getHostName();
+        String path_to_desktop = "C:/Documents and Settings/" + machine_name + "/Desktop/";
         PDF pdf = new PDF(
                 new BufferedOutputStream(
-                        new FileOutputStream("C:/Users/Niroshan/Desktop/invoices.pdf")));
-
+                        new FileOutputStream(path_to_desktop + "invoice.pdf")));
+        DateFormat df = new SimpleDateFormat("dd/MM/yy");
+        Date dateobj = new Date();
         Page page = new Page(pdf, A4.PORTRAIT);
 
         Font f1 = new Font(pdf, CoreFont.HELVETICA_BOLD);
@@ -137,7 +144,12 @@ public class ServiceController {
         Font f3 = new Font(pdf, CoreFont.HELVETICA_BOLD);
         f3.setSize(20f);
 
-        TextLine text = new TextLine(f1,
+        
+         Font f4 = new Font(pdf, CoreFont.HELVETICA_BOLD);
+        f4.setSize(10f);
+
+
+        TextLine text = new TextLine(f4,
                 "Easy Services");
         text.setPosition(90, 60);
         // text.setColor(Color.dodgerblue);
@@ -167,7 +179,7 @@ public class ServiceController {
         text8.setColor(Color.dodgerblue);
         text8.drawOn(page);
 
-        TextLine text9 = new TextLine(f1,
+        TextLine text9 = new TextLine(f4,
                 "Bill To");
         text9.setPosition(90, 110);
         //text9.setColor(Color.dodgerblue);
@@ -215,9 +227,13 @@ public class ServiceController {
         //copyright.setColor(Color.dodgerblue);
         copyright.drawOn(page);
 
+
         // dynamic section
+
+        // dynamic variables
+
         TextLine text5 = new TextLine(f2,
-                "Date: 26th May 2016");
+                "Date:"+dateobj);
         text5.setPosition(450, 60);
         //text5.setColor(Color.dodgerblue);
         text5.drawOn(page);
@@ -387,19 +403,19 @@ public class ServiceController {
         row.add(cell);
         tableData.add(row);
 
-        TextLine textsubtotal = new TextLine(f2,
+        TextLine textsubtotal = new TextLine(f1,
                 "Sub Total  $800");
         textsubtotal.setPosition(430, 280);
         //textsubtotal.setColor(Color.dodgerblue);
         textsubtotal.drawOn(page);
 
-        TextLine dueline = new TextLine(f2,
+        TextLine dueline = new TextLine(f1,
                 "-------------------------------");
         dueline.setPosition(430, 290);
         //dueline.setColor(Color.dodgerblue);
         dueline.drawOn(page);
 
-        TextLine dueamount = new TextLine(f2,
+        TextLine dueamount = new TextLine(f1,
                 "Total Due Amount  $800");
         dueamount.setPosition(430, 300);
         //dueamount.setColor(Color.dodgerblue);
