@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.HEAD;
 
 @Named(value = "serviceOrderController")
 @RequestScoped
@@ -26,16 +27,10 @@ public class ServiceOrderController {
     }
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
-<<<<<<< HEAD
-    private ServiceEJB serviceEJB;
     private ServiceOrder serviceOrder = new ServiceOrder();
     private List<ServiceOrder> serviceOrderList = new ArrayList<ServiceOrder>();
-    private String search = "";
-    private String searchBy = "";
-
-=======
-    private static ServiceOrder serviceOrder = new ServiceOrder();
-    private List<ServiceOrder> serviceOrderList = new ArrayList<>();
+    //private static ServiceOrder serviceOrder = new ServiceOrder();
+    //private List<ServiceOrder> serviceOrderList = new ArrayList<>();
     private List<String> staffid = new ArrayList<>();
 
     public List<String> getStaffid() {
@@ -49,7 +44,6 @@ public class ServiceOrderController {
     private String searchBy = "";
     
     
->>>>>>> 4338ac5419e1bd97fc9e1b9ec6ee5a014db6e22c
     private int service_id;
     private String service_name;
     private String customer_id;

@@ -57,18 +57,14 @@ public class ServiceOrderEJB {
         }
 
     }
-<<<<<<< HEAD
+
     
     public ServiceOrder createInvoice(Long id){
         
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrdersById", ServiceOrder.class);
         query.setParameter("serOrderId",id);
         return query.getSingleResult();
-=======
-
-    public void createInvoice(Long id) {
->>>>>>> 4338ac5419e1bd97fc9e1b9ec6ee5a014db6e22c
-    }
+  }
 
     public ServiceOrder getServiceOrder(Long id) {
         return em.find(ServiceOrder.class, id);

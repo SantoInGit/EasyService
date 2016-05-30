@@ -23,18 +23,15 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-<<<<<<< HEAD
+
     @NamedQuery(name = "findAllServiceOrders", query = "select c from ServiceOrder c"),   
     @NamedQuery(name = "cancelOrder", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
             query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId"),
-    @NamedQuery(name = "findServiceOrdersById", query = "select s from ServiceOrder s WHERE s.serviceOrderId = :serOrderId")  
-
-=======
-    @NamedQuery(name = "findAllServiceOrders", 
+    @NamedQuery(name = "findServiceOrdersById", query = "select s from ServiceOrder s WHERE s.serviceOrderId = :serOrderId"),  
+@NamedQuery(name = "findAllServiceOrders", 
             query = "select c from ServiceOrder c"),   
     @NamedQuery(name = "changeServiceOrderStatus",
             query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId")      
->>>>>>> 4338ac5419e1bd97fc9e1b9ec6ee5a014db6e22c
 })
 public class ServiceOrder implements Serializable {
 
