@@ -88,9 +88,13 @@
                                         
                                         <h:commandButton value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
                                         
-                                        <h:commandButton value="Create Invoice" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
-                                        <h:commandButton value="Cancel Order" action="#{serviceOrderController.doCancelServiceOrder(serviceOrder.serviceOrderId)}"/>
-                                        <h:commandButton value="Confirm Order" action="#{serviceOrderController.doConfirmServiceOrder(service.serviceId)}"/>
+                                        <h:commandButton value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
+                                        
+                                        <h:commandButton value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
+                                        
+                                        <h:commandButton value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
+                                        
+                                        <h:commandButton value="Complete" rendered="#{serviceOrder.serviceOrderStatus ne 'Completed' and serviceOrder.serviceOrderStatus ne 'Cancelled'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'completed')}"/>
                                     </h:form>
                                 </h:column>
 

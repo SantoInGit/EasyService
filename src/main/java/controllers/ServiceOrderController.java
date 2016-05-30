@@ -26,12 +26,30 @@ public class ServiceOrderController {
     }
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
+<<<<<<< HEAD
     private ServiceEJB serviceEJB;
     private ServiceOrder serviceOrder = new ServiceOrder();
     private List<ServiceOrder> serviceOrderList = new ArrayList<ServiceOrder>();
     private String search = "";
     private String searchBy = "";
 
+=======
+    private static ServiceOrder serviceOrder = new ServiceOrder();
+    private List<ServiceOrder> serviceOrderList = new ArrayList<>();
+    private List<String> staffid = new ArrayList<>();
+
+    public List<String> getStaffid() {
+        return staffid;
+    }
+
+    public void setStaffid(List<String> staffid) {
+        this.staffid = staffid;
+    }
+    private String search ="";
+    private String searchBy = "";
+    
+    
+>>>>>>> 4338ac5419e1bd97fc9e1b9ec6ee5a014db6e22c
     private int service_id;
     private String service_name;
     private String customer_id;
@@ -65,7 +83,7 @@ public class ServiceOrderController {
     }
 
     public void setServiceOrder(ServiceOrder serviceOrder) {
-        this.serviceOrder = serviceOrder;
+        ServiceOrderController.serviceOrder = serviceOrder;
     }
 
     public List<ServiceOrder> getServiceOrderList() {
@@ -377,6 +395,7 @@ public class ServiceOrderController {
 
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
+<<<<<<< HEAD
 
     public String doCancelServiceOrder(Long id) {
         serviceOrderEJB.cancelServiceOrder(id);
@@ -384,6 +403,20 @@ public class ServiceOrderController {
     }
 
     public String doConfirmServiceOrder(Long id) {
+=======
+    public String doChangeStatusServiceOrder(Long id,String status){
+        serviceOrderEJB.changeStatusServiceOrder(id,status);
+        return "listServiceOrders.xhtml?faces-redirect=true";
+    }
+    
+    public String doConfirmServiceOrder(Long id){
+       serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
+       return "confirmServiceOrder.xhtml?faces-redirect=true";
+    }
+
+    public String doConfirmServiceOrderCommit(Long id){
+        serviceOrder = serviceOrderEJB.confirmServiceOrderCommit(id, staffid);
+>>>>>>> 4338ac5419e1bd97fc9e1b9ec6ee5a014db6e22c
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 

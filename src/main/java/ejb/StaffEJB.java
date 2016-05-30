@@ -32,12 +32,10 @@ public class StaffEJB {
 
    public int editStaffCommit(Staff staff){
        TypedQuery<Staff> query = em.createNamedQuery("updateStaff",Staff.class);
-//       query.setParameter(1,admin.getEmail());
-//       query.setParameter(2,admin.getFirstName());
-//       query.setParameter(3,admin.getId());
-//       //query.setParameter(1, getAdmin(id).getId() );
+
        query.setParameter("stEmail", staff.getEmail() );
        query.setParameter("stFirstName", staff.getFirstName() );
+       query.setParameter("stFromDate", staff.getFromDate());
        query.setParameter("stJobTitle", staff.getJobTitle());
        query.setParameter("stLastName", staff.getLastName() );
        query.setParameter("stMiddleName", staff.getMiddleName() );
@@ -45,6 +43,7 @@ public class StaffEJB {
        query.setParameter("stPhoneNo", staff.getPhoneNo() );
        query.setParameter("stQualification", staff.getQualification() );
        query.setParameter("stStatus", staff.getStatus() );
+       query.setParameter("stToDate", staff.getToDate());
        query.setParameter("stUserType", staff.getUserType() );
        query.setParameter("stCity",staff.getAddress().getCity() );
        query.setParameter("stCountry",staff.getAddress().getCountry());
@@ -52,10 +51,14 @@ public class StaffEJB {
        query.setParameter("stStreet",staff.getAddress().getStreet() );
        query.setParameter("stZipCode",staff.getAddress().getZipCode() );
        query.setParameter("stId",staff.getId() );
-       
-       
-        return query.executeUpdate();
-       
+              
+       return query.executeUpdate();          
+   }
+   
+   public List<Staff> getUnAssignedStaff(){
+       TypedQuery<Staff> query = em.createNamedQuery("findAllUnAssignedStaffs", Staff.class);
+       query.setParameter("stStatus","Assigned");
+       return query.getResultList();
        
    }
    

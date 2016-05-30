@@ -22,6 +22,7 @@ public class StaffController {
     private List<Staff> staffList = new ArrayList<>();
     private String search = "";
     private String searchBy = "";
+   
 
     public String doCreateStaff() {
         
@@ -87,7 +88,11 @@ public class StaffController {
     public void setStaffList(List<Staff> staffList) {
         this.staffList = staffList;
     }
-
+    
+    public List<Staff> getUnAssignedStaff(){
+        return staffEJB.getUnAssignedStaff();
+         
+    }
   
 
 }

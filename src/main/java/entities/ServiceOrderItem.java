@@ -11,10 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author Santo
- */
+
 @Entity
 public class ServiceOrderItem implements Serializable {
 

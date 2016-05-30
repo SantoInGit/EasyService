@@ -49,14 +49,7 @@
                                         <h:inputText id="qualification" value="#{entityEditController.staff.qualification}" class="form-control"/>
                                     </div>
 
-                                    <div class="form-group">
-
-                                        <h:outputLabel for="staffStatus" value="Choose Status: "/>
-                                        <h:selectOneMenu value="#{entityEditController.staff.status}" styleClass="form-control">
-                                            <f:selectItem itemValue="Inactive" itemLabel="Inactive" />
-                                            <f:selectItem itemValue="Active" itemLabel="Active" />                                       
-                                        </h:selectOneMenu>
-                                    </div>
+                                    
 
                                     <div class="form-group">
                                         <h:outputLabel value="Street: "/>
@@ -84,6 +77,27 @@
                                     <div class="form-group">
                                         <h:outputLabel value="Email: "/>
                                         <h:inputText disabled="true" value="#{entityEditController.staff.email}" class="form-control" required="true" requiredMessage="Email is required field." validator="validators.EmailValidator"/>
+                                    </div>
+                                    
+                                    <div class="form-group">
+
+                                    <h:outputLabel for="staffStatus" value="Choose Status: "/>
+                                        <h:selectOneMenu value="#{entityEditController.staff.status}" styleClass="form-control">
+                                            <f:selectItem itemValue="Not Assigned" itemLabel="Not Assigned" />
+                                            <f:selectItem itemValue="Assigned" itemLabel="Assigned" />                                       
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel value="Job Title: "/>
+                                        <h:inputText value="#{entityEditController.staff.jobTitle}" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel value="From Date: "/>
+                                        <h:inputText value="#{entityEditController.staff.fromDate}" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel value="To Date:  "/>
+                                        <h:inputText value="#{entityEditController.staff.toDate}" class="form-control" />
                                     </div>
                                 </div>
                             </div>
