@@ -23,9 +23,11 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
+
     @NamedQuery(name = "findAllServiceOrders", query = "select c from ServiceOrder c"),  
     @NamedQuery(name = "findServiceOrderByOrderId", query = "select s from ServiceOrder s where s.serviceOrderId = :OrderId"),
     @NamedQuery(name = "findServiceOrderByStatus", query = "select s from ServiceOrder s where UPPER(s.serviceOrderStatus) LIKE :Status"),
+    @NamedQuery(name = "findServiceOrdersByCustomer", query = "select so from ServiceOrder so JOIN so.Customer c where c.id = :CID "),
     @NamedQuery(name = "changeServiceOrderStatus",
             query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId")      
 })

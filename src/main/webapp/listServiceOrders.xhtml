@@ -7,11 +7,11 @@
     <ui:define name="title">List Service Orders</ui:define>
 
     <ui:define name="content">
-        
+
         <div class="row">   
             <div class="col-lg-12 panel-heading"></div>    
         </div>
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -28,7 +28,17 @@
                                     </f:facet>
                                     <h:outputText value="#{serviceOrder.serviceOrderId}"/>
                                 </h:column>
-                                
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{serviceOrder.serviceOrderItem}"/>
+<!--                                    <h:dataTable value="#{serviceOrder.serviceOrderItem}" var="serviceItem">
+                                        <h:outputText value="#{serviceOrder.serviceOrderItem}"/>
+                                    </h:dataTable>-->
+                                </h:column>
+
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Customer Id"/>
@@ -36,14 +46,14 @@
                                     <h:outputText value="#{serviceOrder.customer.id}"/>
 
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Order Date"/>
                                     </f:facet>
                                     <h:outputText value="#{serviceOrder.serviceOrderDate} "/>
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Start Date"/>
@@ -59,14 +69,14 @@
                                     </f:facet>
                                     <h:outputText value="#{serviceOrder.toDate} "/>
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Staff Required"/>
                                     </f:facet>
                                     <h:outputText value="#{serviceOrder.staffRequired}"/>
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Hours per day"/>
@@ -85,15 +95,19 @@
                                     <f:facet name="header">
                                         <h:outputText value="Action"/>
                                     </f:facet>
-                                    <h:form>                                        
+
+                                    <h:form>
+                                        <!-- <h:commandButton class="btn btn-primary" value="Delete" action="{serviceOrderController.doDeleteServiceOrder(serviceOrder.serviceOrderId)}"/>-->
+
+
                                         <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
-                                        
+
                                         <h:commandButton class="btn btn-primary" value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
-                                        
+
                                         <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
-                                        
+
                                         <h:commandButton class="btn btn-primary" value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
-                                        
+
                                         <h:commandButton class="btn btn-primary" value="Complete" rendered="#{serviceOrder.serviceOrderStatus ne 'Completed' and serviceOrder.serviceOrderStatus ne 'Cancelled'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'completed')}"/>
                                     </h:form>
                                 </h:column>

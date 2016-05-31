@@ -56,7 +56,7 @@ public class Staff extends User implements Serializable {
     private String fromDate;
    
     private String toDate;
-    private String status;
+    private String status="Not Assigned";
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
