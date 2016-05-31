@@ -6,9 +6,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import ejb.ServiceOrderEJB;
+import entities.Customer;
 import entities.ServiceOrder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import javax.faces.context.ExternalContext;
 
 @Named(value = "serviceOrderController")
 @RequestScoped
@@ -20,19 +23,32 @@ public class ServiceOrderController {
     private ServiceOrderEJB serviceOrderEJB;
     private static ServiceOrder serviceOrder = new ServiceOrder();
     private List<ServiceOrder> serviceOrderList = new ArrayList<>();
+    private List<ServiceOrder> frontendServiceOrderList = new ArrayList<>();
     private List<String> staffid = new ArrayList<>();
 
     public List<String> getStaffid() {
         return staffid;
     }
 
+    public List<ServiceOrder> getFrontendServiceOrderList() {
+        ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = extContext.getSessionMap();
+        Customer cst = (Customer) sessionMap.get("customer");
+        
+        frontendServiceOrderList = serviceOrderEJB.customerListServiceOrders(cst.getId());
+        return frontendServiceOrderList;
+    }
+
+    public void setFrontendServiceOrderList(List<ServiceOrder> frontendServiceOrderList) {
+        this.frontendServiceOrderList = frontendServiceOrderList;
+    }
+
     public void setStaffid(List<String> staffid) {
         this.staffid = staffid;
     }
-    private String search ="";
+    private String search = "";
     private String searchBy = "";
-    
-    
+
     private int service_id;
     private String service_name;
     private String customer_id;
@@ -60,8 +76,7 @@ public class ServiceOrderController {
     public void setService_id(int service_id) {
         this.service_id = service_id;
     }
-    
-    
+
     public ServiceOrder getServiceOrder() {
         return serviceOrder;
     }
@@ -69,7 +84,7 @@ public class ServiceOrderController {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         ServiceOrderController.serviceOrder = serviceOrder;
     }
-    
+
     public List<ServiceOrder> getServiceOrderList() {
         if (this.search.isEmpty()) {
             serviceOrderList = serviceOrderEJB.listServiceOrders();
@@ -85,21 +100,17 @@ public class ServiceOrderController {
         return searchBy;
     }
 
-
     public void setSearchBy(String searchBy) {
         this.searchBy = searchBy;
     }
-
 
     public String getSearch() {
         return search;
     }
 
-
     public void setSearch(String search) {
         this.search = search;
     }
-
 
     public String doCreateServiceOrder() {
 
@@ -108,29 +119,37 @@ public class ServiceOrderController {
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "frontendCustomerProfile.xhtml?faces-redirect=true";
     }
-    public String doDeleteServiceOrder(Long id){
+
+    public String doDeleteServiceOrder(Long id) {
         serviceOrderEJB.deleteServiceOrder(id);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
-    
-    public String doCreateInvoice(Long id){
+
+    public String doCreateInvoice(Long id) {
         serviceOrderEJB.createInvoice(id);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
-    public String doChangeStatusServiceOrder(Long id,String status){
-        serviceOrderEJB.changeStatusServiceOrder(id,status);
+
+    public String doChangeStatusServiceOrder(Long id, String status) {
+        serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
     
-    public String doConfirmServiceOrder(Long id){
-       serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
-       return "confirmServiceOrder.xhtml?faces-redirect=true";
+     public String frontendDoChangeStatusServiceOrder(Long id, String status) {
+        serviceOrderEJB.changeStatusServiceOrder(id, status);
+        return "customerMyOrders.xhtml?faces-redirect=true";
     }
 
-    public String doConfirmServiceOrderCommit(Long id){
+    public String doConfirmServiceOrder(Long id) {
+        serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
+        return "confirmServiceOrder.xhtml?faces-redirect=true";
+    }
+
+    public String doConfirmServiceOrderCommit(Long id) {
         serviceOrder = serviceOrderEJB.confirmServiceOrderCommit(id, staffid);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
+
     public String doSearch() {
         serviceOrderList = serviceOrderEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");

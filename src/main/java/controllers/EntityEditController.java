@@ -39,17 +39,12 @@ public class EntityEditController implements Serializable {
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
 
-    
-    
     private static Admin admin = new Admin();
     private static Customer customer = new Customer();
     private static Staff staff = new Staff();
     private static Service service = new Service();
     private static ServiceCategory serviceCategory = new ServiceCategory();
     private static ServiceOrder serviceOrder = new ServiceOrder();
-
-
-            
 
     public String doEditEntity(Long id, String entityName) {
         switch (entityName.toLowerCase()) {
@@ -74,37 +69,37 @@ public class EntityEditController implements Serializable {
     }
 
     public String doEditEntityCommit(String entityName) {
-        switch (entityName.toLowerCase()){
+        switch (entityName.toLowerCase()) {
             case "admin":
-               
+
                 if (adminEJB.editAdminCommit(admin) >= 0) {
                     FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin Edited", "");
                     FacesContext.getCurrentInstance().addMessage(null, infoMsg);
                     return "listAdmins.xhtml?faces-redirect=true";
                 }
             case "customer":
-                
+
                 if (customerEJB.editCustomerCommit(customer) >= 0) {
                     FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "customer Edited", "");
                     FacesContext.getCurrentInstance().addMessage(null, infoMsg);
                     return "listCustomers.xhtml?faces-redirect=true";
                 }
             case "staff":
-                
+
                 if (staffEJB.editStaffCommit(staff) >= 0) {
                     FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Staff Edited", "");
                     FacesContext.getCurrentInstance().addMessage(null, infoMsg);
                     return "listStaffs.xhtml?faces-redirect=true";
                 }
-                case "service":
-                
+            case "service":
+
                 if (serviceEJB.editServiceCommit(service) >= 0) {
                     FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Edited", "");
                     FacesContext.getCurrentInstance().addMessage(null, infoMsg);
                     return "listService.xhtml?faces-redirect=true";
                 }
-                case "servicecategory":
-                
+            case "servicecategory":
+
                 if (serviceCategoryEJB.editServiceCategoryCommit(serviceCategory) >= 0) {
                     FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Category Edited", "");
                     FacesContext.getCurrentInstance().addMessage(null, infoMsg);
@@ -114,11 +109,11 @@ public class EntityEditController implements Serializable {
                 return null;
         }
     }
-    
-    public String doCancelEdit(String entityName){
+
+    public String doCancelEdit(String entityName) {
         //return "listServiceOrders.xhtml?faces-redirect=true";
-        
-        switch(entityName.toLowerCase()){
+
+        switch (entityName.toLowerCase()) {
             case "admin":
                 return "listAdmins.xhtml?faces-redirect=true";
             case "customer":
@@ -136,9 +131,9 @@ public class EntityEditController implements Serializable {
         }
 
     }
-    
+
     public String doVeiwDetails(Long id, String entityName) {
-        
+
         switch (entityName.toLowerCase()) {
             case "admin":
                 admin = adminEJB.getAdmin(id);
@@ -163,6 +158,45 @@ public class EntityEditController implements Serializable {
         }
     }
 
+    public String frontendDoEditEntityCommit(String entityName) {
+        switch (entityName.toLowerCase()) {
+
+            case "customer":
+
+                if (customerEJB.editCustomerCommit(customer) >= 0) {
+                    FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "customer Edited", "");
+                    FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+                    return "customerMyAccount.xhtml?faces-redirect=true";
+                }
+
+            default:
+                return null;
+        }
+    }
+
+    public String frontendDoVeiwDetails(Long id, String entityName) {
+
+        switch (entityName.toLowerCase()) {
+            case "serviceorder":
+                serviceOrder = serviceOrderEJB.getServiceOrder(id);
+                return "frontendViewServiceOrder.xhtml?faces-redirect=true";
+            default:
+                return null;
+        }
+    }
+
+    public String frontendDoCancelEdit(String entityName) {
+        //return "listServiceOrders.xhtml?faces-redirect=true";
+
+        switch (entityName.toLowerCase()) {
+            case "serviceorder":
+                return "customerMyOrders.xhtml?faces-redirect=true";
+            default:
+                return null;
+        }
+
+    }
+
     public Admin getAdmin() {
         return admin;
     }
@@ -170,7 +204,7 @@ public class EntityEditController implements Serializable {
     public void setAdmin(Admin admin) {
         EntityEditController.admin = admin;
     }
-    
+
     public Customer getCustomer() {
         return customer;
     }
@@ -186,7 +220,8 @@ public class EntityEditController implements Serializable {
     public void setStaff(Staff staff) {
         EntityEditController.staff = staff;
     }
-        public  Service getService() {
+
+    public Service getService() {
         return service;
     }
 
@@ -201,14 +236,13 @@ public class EntityEditController implements Serializable {
     public void setServiceCategory(ServiceCategory serviceCategory) {
         EntityEditController.serviceCategory = serviceCategory;
     }
-    
-    public  ServiceOrder getServiceOrder() {
+
+    public ServiceOrder getServiceOrder() {
         return serviceOrder;
     }
 
     public void setServiceOrder(ServiceOrder serviceOrder) {
         EntityEditController.serviceOrder = serviceOrder;
     }
-    
-    
+
 }
