@@ -25,6 +25,12 @@ public class ServiceOrderEJB {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findAllServiceOrders", ServiceOrder.class);
         return query.getResultList();
     }
+    
+    public List<ServiceOrder> customerListServiceOrders(Long id) {
+        TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrdersByCustomer", ServiceOrder.class);
+        query.setParameter("CID", id);
+        return query.getResultList();
+    }
 
     public ServiceOrder addServiceOrder(ServiceOrder serviceOrder) {
         em.persist(serviceOrder);

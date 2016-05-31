@@ -36,7 +36,7 @@
                     #{entityEditController.setCustomer(customerLogInOutController.customer)}
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           <h3>Welcome, #{entityEditController.customer.firstName} #{entityEditController.customer.middleName} #{entityEditController.customer.lastName}</h3>
+                            <h3>My Orders</h3>
                         </div>
                         <div class="panel-body">
                             <div class="panel-body">
@@ -82,15 +82,9 @@
                                                 <h:outputText value="Action"/>
                                             </f:facet>
                                             <h:form>
-                                                <!-- <h:commandButton class="btn btn-primary" value="Delete" action="{serviceOrderController.doDeleteServiceOrder(serviceOrder.serviceOrderId)}"/>-->
-
-                                                <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
-
+                                                <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.frontendDoVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
                                                 <h:commandButton class="btn btn-primary" value="Re-Schedule" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
-
-                                                <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
-
-
+                                                <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.frontendDoChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
                                             </h:form>
                                         </h:column>
 

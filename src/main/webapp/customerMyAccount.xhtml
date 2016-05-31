@@ -1,0 +1,127 @@
+<ui:composition template="/WEB-INF/templates/frontend/customerLoginLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">List Staffs</ui:define>
+
+    <ui:define name="content">
+        <div class="container">
+            <div class="row">   
+                <div class="col-lg-12 panel-heading"></div>    
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <!-- Navigation -->
+                <div class="col-md-2">
+                    <div class="frontend-sidebar">
+                        <ul class="nav" id="side-menu">
+
+
+                            <li>
+                                <a href="#{helperController.getBaseURL()}/faces/customerMyAccount.xhtml"><i class="glyphicon glyphicon-dashboard"></i> My Account</a>
+                            </li>
+                            <li>
+                                <a href="#{helperController.getBaseURL()}/faces/customerMyOrders.xhtml"><i class="glyphicon glyphicon-expand"></i> My Orders</a>
+                            </li>
+                            <li>
+                                <h:form> <i class="glyphicon glyphicon-expand"></i><h:commandButton class="btn-custom" value="Log out" action="#{customerLogInOutController.doLogOutCustomer()}"/></h:form>
+                            </li>
+                        </ul>
+                        <!-- /.sidebar-collapse -->
+                    </div> 
+
+                </div>
+                <div class="col-md-10">
+                    #{entityEditController.setCustomer(customerLogInOutController.customer)}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Edit/Update</h3>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <div class="row">
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+                                            <h:outputLabel for="firstName" value="First Name: "/>
+                                            <h:inputText id="firstName" value="#{entityEditController.customer.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field." />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel for="middleName" value="Middle Name: "/>
+                                            <h:inputText id="middleName" value="#{entityEditController.customer.middleName}" class="form-control" required="false"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel for="lastName" value="Last Name: "/>
+                                            <h:inputText id="lastName" value="#{entityEditController.customer.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel for="contactNo" value="Contact No.: "/>
+                                            <h:inputText id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control" validator="validators.PhoneNumberValidator" maxlength="10"/>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <h:outputLabel value="Street: "/>
+                                            <h:inputText value="#{entityEditController.customer.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel value="City: "/>
+                                            <h:inputText value="#{entityEditController.customer.address.city}" class="form-control" required="true" requiredMessage="City is required field."/>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel value="Zip Code: "/>
+                                            <h:inputText value="#{entityEditController.customer.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field." validator="validators.ZipCodeValidator" maxlength="4"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel value="State: "/>
+                                            <h:inputText value="#{entityEditController.customer.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel value="Country: "/>
+                                            <h:inputText value="#{entityEditController.customer.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel value="Email: "/>
+                                            <h:inputText disabled="true" value="#{entityEditController.customer.email}" class="form-control" required="true" requiredMessage="Email is required field." validator="validators.EmailValidator"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                <div class="row">                               
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-6" style="padding-left: 0">
+                                                <h:commandButton class="btn btn-primary form-control " value="Commit" action="#{entityEditController.frontendDoEditEntityCommit('customer')}"/>
+                                            </div>
+                                            <div class="col-md-6" style="padding-left: 0">
+                                                <h:link value="Change Password" class="btn btn-primary form-control" outcome="customerEditAccount.xhtml">
+                                                </h:link>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </h:form>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
