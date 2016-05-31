@@ -47,13 +47,13 @@ public class ServiceOrderEJB {
                 query.setParameter("status", "Completed");
                 query.setParameter("serOrderId", id);
                 return query.executeUpdate();
+                
             case "staff assigned":
                 query.setParameter("status","Staff assigned");
                 query.setParameter("serOrderId", id);
                 return query.executeUpdate();
             default:
                 return 0;
-
         }
 
     }
@@ -91,8 +91,14 @@ public class ServiceOrderEJB {
 
     public List<ServiceOrder> search(String search, String searchBy) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrderBy" + searchBy, ServiceOrder.class);
-        search = search.toUpperCase();
-        query.setParameter(searchBy, "%" + search + "%");
+       
+        if ("OrderId".equals(searchBy)) {
+            query.setParameter(searchBy, Long.parseLong(search));
+        } else {
+            search = search.toUpperCase();
+            query.setParameter(searchBy, "%" + search + "%");
+        }
+ 
         return query.getResultList();
 
     }
@@ -103,21 +109,20 @@ public class ServiceOrderEJB {
         Customer customer = em.find(Customer.class, c_id);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        //System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
+        Date date = new Date();      
 
         List<ServiceOrderItem> SOI = new ArrayList<>();
         ServiceOrderItem s = new ServiceOrderItem();
         s.setOrderItemName(service_name);
         s.setServiceStatus("processing");
         SOI.add(s);
+        
         serOrder.setServiceOrderStatus("processing");
         serOrder.setServiceOrderItem(SOI);
 
         serOrder.setCustomer(customer);
         serOrder.setServiceOrderDate(dateFormat.format(date));
-        //serOrder.setFromDate(dateFormat.format(serOrder.getFromDate()));
-
+        
         em.persist(serOrder);
         return serOrder;
 

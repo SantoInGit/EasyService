@@ -48,9 +48,6 @@
                     </button>
                     <a class="navbar-brand" href="#{helperController.getBaseURL()}/faces/dashboard.xhtml" style="color:blue;"><i class="glyphicon glyphicon-home"></i>&nbsp;EasyServices Booking System</a>
                 </div>
-                <!-- /.navbar-header -->
-
-                <!-- /.navbar-top-links -->
 
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="backend-sidebar sidebar-nav navbar-collapse">
@@ -60,7 +57,7 @@
                                 <a href="#{helperController.getBaseURL()}/faces/dashboard.xhtml"><i class="glyphicon glyphicon-dashboard"></i>&nbsp;Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-dashboard"></i>&nbsp;User Management</a>
+                                <a href="#"><i class="glyphicon glyphicon-expand"></i>&nbsp;User Management</a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="#"><i class="glyphicon glyphicon-expand"></i> Admins</a>
@@ -114,7 +111,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-dashboard"></i>&nbsp;Service Management</a>
+                                <a href="#"><i class="glyphicon glyphicon-expand"></i>&nbsp;Service Management</a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="#"><i class="glyphicon glyphicon-expand"></i> Service Category</a>
@@ -163,7 +160,7 @@
                             </li>
 
                             <li>
-                                <h:form> <h:commandButton class="btn-custom" value="Log out" action="#{adminLogInOutController.doLogOutAdmin()}"/></h:form>
+                                <h:form> <h:commandButton class="btn btn-primary" value="Log out" action="#{adminLogInOutController.doLogOutAdmin()}"/></h:form>
                             </li>
                         </ul>
                     </div>
@@ -173,18 +170,16 @@
             </nav>
 
             <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                
+                <div class="row">
+                    <div class="col-lg-12">
 
-                <h:messages for="errorMessage" class="alert alert-danger"/>
+                        <h:messages class="alert alert-danger"/>
+                        <ui:insert name="content" />
 
-                <ui:insert name="content" />
-                   
-            </div>
-        </div>
-                    
-                
+                    </div>
+                </div>
+
+
                 <footer>
                     <div class="container">
                         <div class="row">

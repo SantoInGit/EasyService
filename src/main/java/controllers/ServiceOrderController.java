@@ -135,7 +135,11 @@ public class ServiceOrderController {
         serviceOrderList = serviceOrderEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listServiceOrders.xhtml?faces-redirect=true";
+        return "listServiceOrders.xhtml";
+    }
+    
+    public int doSearchServiceOrderByStatusForDashboard(String status, String searchBy){
+        return serviceOrderEJB.search(status, searchBy).size();
     }
 
 }

@@ -18,7 +18,7 @@
                     <div class="panel-heading">
                         <h3>List of all service orders</h3>
                     </div>
-                    <!-- /.panel-heading -->
+                
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
                             <h:dataTable value="#{serviceOrderController.serviceOrderList}" var="serviceOrder" class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -48,7 +48,9 @@
                                     <f:facet name="header">
                                         <h:outputText value="Start Date"/>
                                     </f:facet>
-                                    <h:outputText value="#{serviceOrder.fromDate} "/>
+                                    <h:outputText value="#{serviceOrder.fromDate} ">
+                                        <f:convertDateTime dateStyle="medium" type="date"/>
+                                    </h:outputText>
                                 </h:column>
 
                                 <h:column>
@@ -83,9 +85,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Action"/>
                                     </f:facet>
-                                    <h:form>
-                                        <!-- <h:commandButton class="btn btn-primary" value="Delete" action="{serviceOrderController.doDeleteServiceOrder(serviceOrder.serviceOrderId)}"/>-->
-                                        
+                                    <h:form>                                        
                                         <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
                                         
                                         <h:commandButton class="btn btn-primary" value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
@@ -105,5 +105,6 @@
                 </div>
             </div>
         </div>
+        
     </ui:define>
 </ui:composition>

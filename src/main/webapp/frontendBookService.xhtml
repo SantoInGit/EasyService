@@ -14,8 +14,8 @@
                         <div class="form-group">
                             <label>From date</label>
                             <div class='input-group date' id='fromdate'>
-                                <h:inputText value="#{serviceOrderController.serviceOrder.fromDate}" class="form-control" required="true" requiredMessage="Starting date is required field">
-                                    <f:convertDateTime  pattern="yyyy-MM-dd"  type="date" class="form-control"/>
+                                <h:inputText  value="#{serviceOrderController.serviceOrder.fromDate}" class="form-control" required="true" requiredMessage="Starting date is required field">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"  type="date" class="form-control"/>
                                 </h:inputText>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
