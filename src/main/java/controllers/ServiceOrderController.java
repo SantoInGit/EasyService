@@ -10,14 +10,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import ejb.ServiceOrderEJB;
 
-import ejb.ServiceEJB;
 import entities.ServiceOrder;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.HEAD;
 
 @Named(value = "serviceOrderController")
 @RequestScoped
@@ -389,15 +387,14 @@ public class ServiceOrderController {
 
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
-<<<<<<< HEAD
+
 
     public String doCancelServiceOrder(Long id) {
         serviceOrderEJB.cancelServiceOrder(id);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
-    public String doConfirmServiceOrder(Long id) {
-=======
+
     public String doChangeStatusServiceOrder(Long id,String status){
         serviceOrderEJB.changeStatusServiceOrder(id,status);
         return "listServiceOrders.xhtml?faces-redirect=true";
@@ -410,7 +407,6 @@ public class ServiceOrderController {
 
     public String doConfirmServiceOrderCommit(Long id){
         serviceOrder = serviceOrderEJB.confirmServiceOrderCommit(id, staffid);
->>>>>>> 4338ac5419e1bd97fc9e1b9ec6ee5a014db6e22c
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
