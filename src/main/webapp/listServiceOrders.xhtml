@@ -84,17 +84,17 @@
                                         <h:outputText value="Action"/>
                                     </f:facet>
                                     <h:form>
-                                        <h:commandButton value="Delete" action="#{serviceOrderController.doDeleteServiceOrder(serviceOrder.serviceOrderId)}"/>
+                                        <!-- <h:commandButton class="btn btn-primary" value="Delete" action="{serviceOrderController.doDeleteServiceOrder(serviceOrder.serviceOrderId)}"/>-->
                                         
-                                        <h:commandButton value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
+                                        <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
                                         
-                                        <h:commandButton value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
+                                        <h:commandButton class="btn btn-primary" value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
                                         
-                                        <h:commandButton value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
+                                        <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
                                         
-                                        <h:commandButton value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
+                                        <h:commandButton class="btn btn-primary" value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
                                         
-                                        <h:commandButton value="Complete" rendered="#{serviceOrder.serviceOrderStatus ne 'Completed' and serviceOrder.serviceOrderStatus ne 'Cancelled'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'completed')}"/>
+                                        <h:commandButton class="btn btn-primary" value="Complete" rendered="#{serviceOrder.serviceOrderStatus ne 'Completed' and serviceOrder.serviceOrderStatus ne 'Cancelled'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'completed')}"/>
                                     </h:form>
                                 </h:column>
 

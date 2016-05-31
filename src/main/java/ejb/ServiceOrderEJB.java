@@ -121,6 +121,7 @@ public class ServiceOrderEJB {
 
         serOrder.setCustomer(customer);
         serOrder.setServiceOrderDate(dateFormat.format(date));
+        //serOrder.setFromDate(dateFormat.format(serOrder.getFromDate()));
 
         em.persist(serOrder);
         return serOrder;
