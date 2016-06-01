@@ -36,68 +36,123 @@
                     #{entityEditController.setCustomer(customerLogInOutController.customer)}
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           <h3>Welcome, #{entityEditController.customer.firstName} #{entityEditController.customer.middleName} #{entityEditController.customer.lastName}</h3>
+                            <h3>Welcome, #{entityEditController.customer.firstName} #{entityEditController.customer.middleName} #{entityEditController.customer.lastName} on the EasyServices. </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <h:dataTable value="#{serviceOrderController.frontendServiceOrderList}" var="serviceOrder" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Order Id"/>
-                                            </f:facet>
-                                            <h:outputText value="#{serviceOrder.serviceOrderId}"/>
-                                        </h:column>
 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Order Date"/>
-                                            </f:facet>
-                                            <h:outputText value="#{serviceOrder.serviceOrderDate} "/>
-                                        </h:column>
+                            <h:form>
+                                <div class="row">
+                                    <div class="col-lg-6">
 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Start Date"/>
-                                            </f:facet>
-                                            <h:outputText value="#{serviceOrder.fromDate} "/>
-                                        </h:column>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" for="firstName" value="First Name: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="firstName" value="#{entityEditController.customer.firstName}" class="form-control"/>
+                                            </div>
+                                        </div>
 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="End Date"/>
-                                            </f:facet>
-                                            <h:outputText value="#{serviceOrder.toDate} "/>
-                                        </h:column>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" for="middleName" value="Middle Name: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="middleName" value="#{entityEditController.customer.middleName}" class="form-control"/>
+                                            </div>
+                                        </div>
 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Status"/>
-                                            </f:facet>
-                                            <h:outputText value="#{serviceOrder.serviceOrderStatus} "/>
-                                        </h:column>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" for="lastName" value="Last Name: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="lastName" value="#{entityEditController.customer.lastName}" class="form-control"/>
+                                            </div>
+                                        </div>
 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Action"/>
-                                            </f:facet>
-                                            <h:form>
-                                                <!-- <h:commandButton class="btn btn-primary" value="Delete" action="{serviceOrderController.doDeleteServiceOrder(serviceOrder.serviceOrderId)}"/>-->
-
-                                                <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
-
-                                                <h:commandButton class="btn btn-primary" value="Re-Schedule" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
-
-                                                <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" for="contactNo" value="Contact No.: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control"/>
+                                            </div>
+                                        </div>
 
 
-                                            </h:form>
-                                        </h:column>
+                                        <div class="form-group">
 
+                                            <h:outputLabel class="control-label col-sm-4" for="staffStatus" value="Status: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.status}" styleClass="form-control"/>
+                                            </div>
 
-                                    </h:dataTable>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Street: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.street}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="City: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.city}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Zipcode: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.zipCode}" class="form-control"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="State: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.state}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Country: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.country}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Email: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.email}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Useful links</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="#{helperController.getBaseURL()}/faces/customerMyOrders.xhtml">manage service</a></li>
+                                                    <li><a href="#{helperController.getBaseURL()}/faces/frontendListServices.xhtml" target="_blank">order new service</a></li>
+
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <div class="col-md-6" style="padding-left: 0">
+                                                    <h:link value="Edit Profile" class="btn btn-primary form-control" outcome="customerMyAccount.xhtml">
+                                                    </h:link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
 
