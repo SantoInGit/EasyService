@@ -18,7 +18,7 @@
                     <div class="panel-heading">
                         <h3>List of all service orders</h3>
                     </div>
-                
+
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
                             <h:dataTable value="#{serviceOrderController.serviceOrderList}" var="serviceOrder" class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -34,7 +34,7 @@
                                         <h:outputText value="Name"/>
                                     </f:facet>
                                     <h:outputText value="#{serviceOrder.serviceOrderItem.get(0)}"/>
-                                    
+
                                 </h:column>
 
                                 <h:column>
@@ -95,16 +95,12 @@
                                     </f:facet>
 
                                     <h:form>
-                                        <!-- <h:commandButton class="btn btn-primary" value="Delete" action="{serviceOrderController.doDeleteServiceOrder(serviceOrder.serviceOrderId)}"/>-->
-
-
                                         <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
 
                                         <h:commandButton class="btn btn-primary" value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
-                                        
-                                        <c:if test='#{serviceOrderController.isAssignedStaffToOrder(serviceOrder.serviceOrderStatus)}'>
-                                            <a class="btn btn-primary" href="mailto:#{serviceOrder.customer.email}">Send email notification</a>
-                                        </c:if>
+
+                                        <h:outputLink class="btn btn-primary" value="mailto:#{serviceOrder.customer.email}" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}">Send email notification</h:outputLink>
+
                                         <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
 
                                         <h:commandButton class="btn btn-primary" value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
@@ -120,6 +116,6 @@
                 </div>
             </div>
         </div>
-        
+
     </ui:define>
 </ui:composition>

@@ -185,11 +185,4 @@ public class ServiceOrderController {
         return serviceOrderEJB.search(status, searchBy).size();
     }
 
-    public boolean isAssignedStaffToOrder(String status) {
-        if (status == "processing") {
-            return true;
-        }
-        return false;
-    }
-
 }
