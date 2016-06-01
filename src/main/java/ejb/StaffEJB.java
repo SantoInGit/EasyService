@@ -57,7 +57,7 @@ public class StaffEJB {
    
    public List<Staff> getUnAssignedStaff(){
        TypedQuery<Staff> query = em.createNamedQuery("findAllUnAssignedStaffs", Staff.class);
-       query.setParameter("stStatus","Not Assigned");
+       query.setParameter("stStatus","Assigned");
        return query.getResultList();
        
    }
