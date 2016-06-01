@@ -99,7 +99,7 @@
 
                                         <h:commandButton class="btn btn-primary" value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
 
-                                        <h:outputLink class="btn btn-primary" value="mailto:#{serviceOrder.customer.email}" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}">Send email notification</h:outputLink>
+                                        <h:outputLink class="btn btn-primary" value="mailto:#{serviceOrder.customer.email}" rendered="#{serviceOrder.serviceOrderStatus eq 'Staff assigned'}">Send email notification</h:outputLink>
 
                                         <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
 
