@@ -71,7 +71,7 @@ public class ServiceOrderItem implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.ServiceOrderItem[ id=" + orderItemId + " ]";
+        return orderItemName;
     }
 
    
