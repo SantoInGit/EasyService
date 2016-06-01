@@ -48,6 +48,13 @@
                                             </f:facet>
                                             <h:outputText value="#{serviceOrder.serviceOrderId}"/>
                                         </h:column>
+                                        
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Service Name"/>
+                                            </f:facet>
+                                            <h:outputText value="#{serviceOrder.serviceOrderItem.get(0)}"/>
+                                        </h:column>
 
                                         <h:column>
                                             <f:facet name="header">

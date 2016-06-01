@@ -120,7 +120,7 @@ public class ServiceOrderEJB {
 
         for (String id : staffid) {
             TypedQuery<Staff> query = em.createNamedQuery("updateAssignedStaff", Staff.class);
-            query.setParameter("stJobTitle", serviceOrder.getServiceOrderId().toString());
+            query.setParameter("stJobTitle", serviceOrder.getServiceOrderItem().toString());
             query.setParameter("stFromDate", serviceOrder.getFromDate());
             query.setParameter("stToDate", serviceOrder.getToDate());
             query.setParameter("stStatus", "Assigned");
