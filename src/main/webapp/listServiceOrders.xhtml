@@ -101,7 +101,10 @@
                                         <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.doVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
 
                                         <h:commandButton class="btn btn-primary" value="Create Invoice" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
-
+                                        
+                                        <c:if test='#{serviceOrderController.isAssignedStaffToOrder(serviceOrder.serviceOrderStatus)}'>
+                                            <a class="btn btn-primary" href="mailto:#{serviceOrder.customer.email}">Send email notification</a>
+                                        </c:if>
                                         <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
 
                                         <h:commandButton class="btn btn-primary" value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>

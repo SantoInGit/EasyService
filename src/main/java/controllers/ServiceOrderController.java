@@ -33,7 +33,7 @@ public class ServiceOrderController {
     public List<ServiceOrder> getFrontendServiceOrderList() {
 //        MailController sender = new MailController();
 //        sender.sendSimpleMail();
-       // GmailSender sender = new GmailSender();
+        // GmailSender sender = new GmailSender();
 
 //        try {
 //            sender.setSender("info@noriskwebsolutions.com", "jagat@123");
@@ -45,7 +45,6 @@ public class ServiceOrderController {
 //        } catch (MessagingException ex) {
 //            Logger.getLogger(ServiceOrderController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
         ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = extContext.getSessionMap();
         Customer cst = (Customer) sessionMap.get("customer");
@@ -154,16 +153,16 @@ public class ServiceOrderController {
         serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "customerMyOrders.xhtml?faces-redirect=true";
     }
-    
-     public String doRescheduleServiceOrder(Long id){
-         serviceOrder = serviceOrderEJB.rescheduleServiceOrder(id);
-         return "cutomerRescheduleOrder.xhtml?faces-redirect=true";
-     }
-     
-     public String doRescheduleServiceOrderCommit(Long id){
-         serviceOrder = serviceOrderEJB.rescheduleServiceOrderCommit(serviceOrder,id);
-         return "customerMyOrders.xhtml";
-     }
+
+    public String doRescheduleServiceOrder(Long id) {
+        serviceOrder = serviceOrderEJB.rescheduleServiceOrder(id);
+        return "cutomerRescheduleOrder.xhtml?faces-redirect=true";
+    }
+
+    public String doRescheduleServiceOrderCommit(Long id) {
+        serviceOrder = serviceOrderEJB.rescheduleServiceOrderCommit(serviceOrder, id);
+        return "customerMyOrders.xhtml";
+    }
 
     public String doConfirmServiceOrder(Long id) {
         serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
@@ -184,6 +183,13 @@ public class ServiceOrderController {
 
     public int doSearchServiceOrderByStatusForDashboard(String status, String searchBy) {
         return serviceOrderEJB.search(status, searchBy).size();
+    }
+
+    public boolean isAssignedStaffToOrder(String status) {
+        if (status == "processing") {
+            return true;
+        }
+        return false;
     }
 
 }
