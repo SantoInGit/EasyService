@@ -389,7 +389,7 @@ hr.small {
 .btn-custom{
     border: none;
     background: none;
-    
+
 }
 .frontend-sidebar form{
     padding: 10px 15px;
@@ -411,6 +411,11 @@ hr.small {
 #register .form-group{
     height: 30px;
 }
+
+.fromdate, .todate{
+    pointer-events: none;
+}
+
 @media(max-width:768px) {
     .map {
         height: 75%;

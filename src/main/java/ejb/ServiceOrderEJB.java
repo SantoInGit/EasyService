@@ -8,10 +8,13 @@ import entities.ServiceOrder;
 import entities.ServiceOrderItem;
 import entities.Staff;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.TypedQuery;
 
 @Stateless
@@ -25,7 +28,7 @@ public class ServiceOrderEJB {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findAllServiceOrders", ServiceOrder.class);
         return query.getResultList();
     }
-    
+
     public List<ServiceOrder> customerListServiceOrders(Long id) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrdersByCustomer", ServiceOrder.class);
         query.setParameter("CID", id);
@@ -53,14 +56,14 @@ public class ServiceOrderEJB {
                 query.setParameter("status", "Completed");
                 query.setParameter("serOrderId", id);
                 return query.executeUpdate();
-                
+
             case "staff assigned":
-                query.setParameter("status","Staff assigned");
+                query.setParameter("status", "Staff assigned");
                 query.setParameter("serOrderId", id);
                 return query.executeUpdate();
-                
+
             case "rescheduled":
-                query.setParameter("status","Rescheduled");
+                query.setParameter("status", "Rescheduled");
                 query.setParameter("serOrderId", id);
                 return query.executeUpdate();
             default:
@@ -75,33 +78,34 @@ public class ServiceOrderEJB {
     public ServiceOrder getServiceOrder(Long id) {
         return em.find(ServiceOrder.class, id);
     }
-    
-    public ServiceOrder rescheduleServiceOrder(Long id){
+
+    public ServiceOrder rescheduleServiceOrder(Long id) {
         return getServiceOrder(id);
     }
-    public ServiceOrder rescheduleServiceOrderCommit(ServiceOrder so, Long id){
+
+    public ServiceOrder rescheduleServiceOrderCommit(ServiceOrder so, Long id) {
         serviceOrder = getServiceOrder(id);
         //int pkey = updateServiceOrder(so,id);
         //System.out.println(pkey);
-        if(updateServiceOrder(so,id) > 0){
-            changeStatusServiceOrder(id, "Rescheduled"); 
-          //  System.out.println("rescheduled");
+        if (updateServiceOrder(so, id) > 0) {
+            changeStatusServiceOrder(id, "Rescheduled");
+            //  System.out.println("rescheduled");
         }
         return serviceOrder;
     }
-    
-    public int  updateServiceOrder(ServiceOrder so,Long id){
+
+    public int updateServiceOrder(ServiceOrder so, Long id) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("updateServiceOrderReschedule", ServiceOrder.class);
-        query.setParameter("serFromDate",so.getFromDate() );
-        query.setParameter("serToDate",so.getToDate() );
-        query.setParameter("serHrsPerDay",so.getHoursPerDay() );
-        query.setParameter("serStaffReqd",so.getStaffRequired() );
-        query.setParameter("serCustNote",so.getCustomerNote() );
-        query.setParameter("serId",so.getServiceOrderId() );
+        query.setParameter("serFromDate", so.getFromDate());
+        query.setParameter("serToDate", so.getToDate());
+        query.setParameter("serHrsPerDay", so.getHoursPerDay());
+        query.setParameter("serStaffReqd", so.getStaffRequired());
+        query.setParameter("serCustNote", so.getCustomerNote());
+        query.setParameter("serId", so.getServiceOrderId());
         return query.executeUpdate();
     }
-    
-    public ServiceOrder confirmServiceOrder(Long id){
+
+    public ServiceOrder confirmServiceOrder(Long id) {
         return getServiceOrder(id);
     }
 
@@ -113,7 +117,7 @@ public class ServiceOrderEJB {
     }
 
     public void updateAssignedStaff(List<String> staffid) {
-        
+
         for (String id : staffid) {
             TypedQuery<Staff> query = em.createNamedQuery("updateAssignedStaff", Staff.class);
             query.setParameter("stJobTitle", serviceOrder.getServiceOrderId().toString());
@@ -127,14 +131,14 @@ public class ServiceOrderEJB {
 
     public List<ServiceOrder> search(String search, String searchBy) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrderBy" + searchBy, ServiceOrder.class);
-       
+
         if ("OrderId".equals(searchBy)) {
             query.setParameter(searchBy, Long.parseLong(search));
         } else {
             search = search.toUpperCase();
             query.setParameter(searchBy, "%" + search + "%");
         }
- 
+
         return query.getResultList();
 
     }
@@ -145,20 +149,30 @@ public class ServiceOrderEJB {
         Customer customer = em.find(Customer.class, c_id);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();      
+        Date date = new Date();
+
+        try {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date fromDate = df.parse(serOrder.getFromDate());
+            Date toDate = df.parse(serOrder.getToDate());
+            serOrder.setFromDate(df.format(fromDate));
+            serOrder.setToDate(df.format(toDate));
+        } catch (ParseException ex) {
+            Logger.getLogger(ServiceOrderEJB.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         List<ServiceOrderItem> SOI = new ArrayList<>();
         ServiceOrderItem s = new ServiceOrderItem();
         s.setOrderItemName(service_name);
         s.setServiceStatus("processing");
         SOI.add(s);
-        
+
         serOrder.setServiceOrderStatus("processing");
         serOrder.setServiceOrderItem(SOI);
 
         serOrder.setCustomer(customer);
         serOrder.setServiceOrderDate(dateFormat.format(date));
-        
+
         em.persist(serOrder);
         return serOrder;
 
