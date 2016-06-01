@@ -59,6 +59,8 @@ public class ServiceOrder implements Serializable {
             joinColumns=@JoinColumn(name="serviceOrder_Customer_fk")
     )
     private Customer Customer;
+    
+   
 
     public String getStaffRequired() {
         return staffRequired;

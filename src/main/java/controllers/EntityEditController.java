@@ -126,6 +126,8 @@ public class EntityEditController implements Serializable {
                 return "listServiceCategory.xhtml?faces-redirect=true";
             case "serviceorder":
                 return "listServiceOrders.xhtml?faces-redirect=true";
+            case "ratefeedback":
+                return "customerMyOrders.xhtml?faces-redirect=true";
             default:
                 return null;
         }
