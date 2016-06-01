@@ -83,7 +83,7 @@
                                             </f:facet>
                                             <h:form>
                                                 <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.frontendDoVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
-                                                <h:commandButton class="btn btn-primary" value="Re-Schedule" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doCreateInvoice(serviceOrder.serviceOrderId)}"/>
+                                                <h:commandButton class="btn btn-primary" value="Re-Schedule" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doRescheduleServiceOrder(serviceOrder.serviceOrderId)}"/>
                                                 <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.frontendDoChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
                                             </h:form>
                                         </h:column>

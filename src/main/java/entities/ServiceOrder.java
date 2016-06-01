@@ -29,11 +29,12 @@ import javax.persistence.OneToMany;
     @NamedQuery(name = "findServiceOrderByStatus", query = "select s from ServiceOrder s where UPPER(s.serviceOrderStatus) LIKE :Status"),
     @NamedQuery(name = "findServiceOrdersByCustomer", query = "select so from ServiceOrder so JOIN so.Customer c where c.id = :CID "),
     @NamedQuery(name = "changeServiceOrderStatus",
-            query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId")      
+            query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId"),
+    @NamedQuery(name = "updateServiceOrderReschedule", query = "UPDATE ServiceOrder s SET s.fromDate = :serFromDate,"
+            + "s.toDate = :serToDate, s.hoursPerDay = :serHrsPerDay, s.staffRequired = :serStaffReqd, "
+            + "s.customerNote = :serCustNote WHERE s.serviceOrderId = :serId")
 })
 public class ServiceOrder implements Serializable {
-
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

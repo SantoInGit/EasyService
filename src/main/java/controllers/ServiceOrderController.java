@@ -139,6 +139,16 @@ public class ServiceOrderController {
         serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "customerMyOrders.xhtml?faces-redirect=true";
     }
+    
+     public String doRescheduleServiceOrder(Long id){
+         serviceOrder = serviceOrderEJB.rescheduleServiceOrder(id);
+         return "cutomerRescheduleOrder.xhtml?faces-redirect=true";
+     }
+     
+     public String doRescheduleServiceOrderCommit(Long id){
+         serviceOrder = serviceOrderEJB.rescheduleServiceOrderCommit(serviceOrder,id);
+         return "customerMyOrders.xhtml";
+     }
 
     public String doConfirmServiceOrder(Long id) {
         serviceOrder = serviceOrderEJB.confirmServiceOrder(id);

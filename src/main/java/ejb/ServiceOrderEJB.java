@@ -58,6 +58,11 @@ public class ServiceOrderEJB {
                 query.setParameter("status","Staff assigned");
                 query.setParameter("serOrderId", id);
                 return query.executeUpdate();
+                
+            case "rescheduled":
+                query.setParameter("status","Rescheduled");
+                query.setParameter("serOrderId", id);
+                return query.executeUpdate();
             default:
                 return 0;
         }
@@ -69,8 +74,33 @@ public class ServiceOrderEJB {
 
     public ServiceOrder getServiceOrder(Long id) {
         return em.find(ServiceOrder.class, id);
-
     }
+    
+    public ServiceOrder rescheduleServiceOrder(Long id){
+        return getServiceOrder(id);
+    }
+    public ServiceOrder rescheduleServiceOrderCommit(ServiceOrder so, Long id){
+        serviceOrder = getServiceOrder(id);
+        //int pkey = updateServiceOrder(so,id);
+        //System.out.println(pkey);
+        if(updateServiceOrder(so,id) > 0){
+            changeStatusServiceOrder(id, "Rescheduled"); 
+          //  System.out.println("rescheduled");
+        }
+        return serviceOrder;
+    }
+    
+    public int  updateServiceOrder(ServiceOrder so,Long id){
+        TypedQuery<ServiceOrder> query = em.createNamedQuery("updateServiceOrderReschedule", ServiceOrder.class);
+        query.setParameter("serFromDate",so.getFromDate() );
+        query.setParameter("serToDate",so.getToDate() );
+        query.setParameter("serHrsPerDay",so.getHoursPerDay() );
+        query.setParameter("serStaffReqd",so.getStaffRequired() );
+        query.setParameter("serCustNote",so.getCustomerNote() );
+        query.setParameter("serId",so.getServiceOrderId() );
+        return query.executeUpdate();
+    }
+    
     public ServiceOrder confirmServiceOrder(Long id){
         return getServiceOrder(id);
     }
