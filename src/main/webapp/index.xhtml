@@ -3,6 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:define name="title">EasyServices</ui:define>
 
@@ -17,12 +18,11 @@
                         <h:form id="search">
                             <div id="custom-search-input">
                                 <div class="input-group col-md-12">
-                                    <!--<input type="text" class="form-control input-lg" placeholder="Search services..." />-->
-                                    <h:inputText value="#{serviceController.search}" class="form-control input-lg" required="true" requiredMessage="FirstName is required field."/>
+                                    <h:inputText value="#{serviceController.search}" class="form-control input-lg" p:placeholder="Search services..." required="true" requiredMessage="FirstName is required field."/>
                                     <span class="input-group-btn">
-<!--                                                                                                                        <button class="btn btn-info btn-lg" type="submit">
-                                                                                                                            <i class="glyphicon glyphicon-search"></i>
-                                                                                                                        </button>-->
+                                        <!--                                                                                                                        <button class="btn btn-info btn-lg" type="submit">
+                                                                                                                                                                    <i class="glyphicon glyphicon-search"></i>
+                                                                                                                                                                </button>-->
                                         <h:inputHidden class="form-control" id="search_by" value="#{serviceController.searchBy}" />
 
                                         <h:commandButton class="btn btn-info btn-lg" action="#{serviceController.doFrontEndSearch()}" >
@@ -46,8 +46,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-                        <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p>
+
+
+
+                        <h2>EasyServices is the perfect for the booking order system!</h2>
+                        <p class="lead">It provides customers to search for varieties of services like cleaning, gardening, plumbing etc.</p>
                     </div>
                 </div>
                 <!-- /.row -->

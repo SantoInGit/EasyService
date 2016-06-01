@@ -31,10 +31,25 @@ public class ServiceOrderController {
     }
 
     public List<ServiceOrder> getFrontendServiceOrderList() {
+//        MailController sender = new MailController();
+//        sender.sendSimpleMail();
+       // GmailSender sender = new GmailSender();
+
+//        try {
+//            sender.setSender("info@noriskwebsolutions.com", "jagat@123");
+//            sender.addRecipient("prajapatijagat2009@gmail.com");
+//            sender.setSubject("The subject");
+//            sender.setBody("The body");
+//            // sender.addAttachment("TestFile.txt");
+//            sender.send();
+//        } catch (MessagingException ex) {
+//            Logger.getLogger(ServiceOrderController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
         ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = extContext.getSessionMap();
         Customer cst = (Customer) sessionMap.get("customer");
-        
+
         frontendServiceOrderList = serviceOrderEJB.customerListServiceOrders(cst.getId());
         return frontendServiceOrderList;
     }
@@ -134,8 +149,8 @@ public class ServiceOrderController {
         serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
-    
-     public String frontendDoChangeStatusServiceOrder(Long id, String status) {
+
+    public String frontendDoChangeStatusServiceOrder(Long id, String status) {
         serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "customerMyOrders.xhtml?faces-redirect=true";
     }
@@ -166,8 +181,8 @@ public class ServiceOrderController {
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "listServiceOrders.xhtml";
     }
-    
-    public int doSearchServiceOrderByStatusForDashboard(String status, String searchBy){
+
+    public int doSearchServiceOrderByStatusForDashboard(String status, String searchBy) {
         return serviceOrderEJB.search(status, searchBy).size();
     }
 
