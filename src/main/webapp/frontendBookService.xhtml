@@ -84,12 +84,13 @@
                         <h:inputHidden class="form-control" id="service_name" value="#{serviceOrderController.service_name}" />
                         <h:inputHidden class="form-control" id="service_id" value="#{serviceOrderController.service_id}" />
                         <h:inputHidden class="form-control" id="customer_id" value="#{serviceOrderController.customer_id}" />
-
+                        <h:inputHidden class="form-control" id="service_rate" value="#{serviceOrderController.service_rate}" />
 
                         <script>
                             document.getElementById('booking:customer_id').value = '#{customerLogInOutController.customer.id}';
                             document.getElementById('booking:service_id').value = '#{serviceController.serviceByParamId.serviceId}';
                             document.getElementById('booking:service_name').value = '#{serviceController.serviceByParamId.serviceName}';
+                            document.getElementById('booking:service_rate').value = '#{serviceController.serviceByParamId.ratePerHour}';
                             document.getElementById('booking').action = location.href;
                         </script>
 

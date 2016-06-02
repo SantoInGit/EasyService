@@ -42,6 +42,7 @@ public class ServiceOrderController {
     private List<ServiceOrder> serviceOrderList = new ArrayList<>();
     private List<ServiceOrder> frontendServiceOrderList = new ArrayList<>();
     private List<String> staffid = new ArrayList<>();
+
     public List<String> getStaffid() {
         return staffid;
     }
@@ -91,6 +92,20 @@ public class ServiceOrderController {
     private String service_name;
     private String service_rate;
     private String customer_id;
+
+    public String getServiceItemName(String s) {
+        String serOrderItem = s;
+
+        String[] serOrderItemArray = serOrderItem.split(",");
+        return serOrderItemArray[0];
+    }
+    
+    public String getServiceItemRate(String s) {
+        String serOrderItem = s;
+
+        String[] serOrderItemArray = serOrderItem.split(",");
+        return serOrderItemArray[1];
+    }
 
     public String getCustomer_id() {
         return customer_id;
@@ -161,7 +176,7 @@ public class ServiceOrderController {
 
     public String doCreateServiceOrder() {
 
-        serviceOrderBook = serviceOrderEJB.addServiceOrder(serviceOrderBook, service_id, service_name,service_rate, customer_id);
+        serviceOrderBook = serviceOrderEJB.addServiceOrder(serviceOrderBook, service_id, service_name, service_rate, customer_id);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Order Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "frontendCustomerProfile.xhtml?faces-redirect=true";
@@ -174,12 +189,12 @@ public class ServiceOrderController {
 
     public String doCreateInvoice(Long id) throws Exception {
         serviceOrder = serviceOrderEJB.createInvoice(id);
-                
+
         String machine_name = InetAddress.getLocalHost().getHostName();
         String path_to_desktop = "C:/Documents and Settings/" + machine_name + "/Desktop/";
         PDF pdf = new PDF(
                 new BufferedOutputStream(
-                new FileOutputStream(path_to_desktop + "invoice_for_order_no_" + serviceOrder.getServiceOrderId() + ".pdf")));
+                        new FileOutputStream(path_to_desktop + "invoice_for_order_no_" + serviceOrder.getServiceOrderId() + ".pdf")));
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
         Date dateobj = new Date();
         Page page = new Page(pdf, A4.PORTRAIT);
@@ -339,7 +354,7 @@ public class ServiceOrderController {
 
         tableData.add(row);
         row = new ArrayList<Cell>();
-        cell = new Cell(f2, String.valueOf(serviceOrder.getServiceOrderItem().get(0)));
+        cell = new Cell(f2, getServiceItemName(serviceOrder.getServiceOrderItem().get(0).toString()));
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
@@ -364,14 +379,16 @@ public class ServiceOrderController {
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-        //serviceOrder = serviceOrderEJB.serviceName(serviceOrder());
-       //serviceOrder.getServiceOrderItem().get(0);
-        cell = new Cell(f2,String.valueOf(serviceOrder.getServiceOrderItem()));
+
+        String rate = getServiceItemRate(serviceOrder.getServiceOrderItem().get(0).toString());
+        cell = new Cell(f2, rate);
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-
-        cell = new Cell(f2, "400");
+        
+             
+        Float totalPrice = Float.parseFloat(String.valueOf(totalhour)) * Float.parseFloat(rate);
+        cell = new Cell(f2, String.valueOf(totalPrice));
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
@@ -417,7 +434,7 @@ public class ServiceOrderController {
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-        cell = new Cell(f2, "$600");
+        cell = new Cell(f2,String.valueOf(totalPrice));
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);

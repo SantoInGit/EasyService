@@ -33,7 +33,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Name"/>
                                     </f:facet>
-                                    <h:outputText value="#{serviceOrder.serviceOrderItem}"/>
+                                    <h:outputText value="#{serviceOrderController.getServiceItemName(serviceOrder.serviceOrderItem.get(0))}"/>
 
                                 </h:column>
 
@@ -105,7 +105,7 @@
 
                                         <h:commandButton class="btn btn-primary" value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
 
-                                        <h:commandButton class="btn btn-primary" value="Complete" rendered="#{serviceOrder.serviceOrderStatus ne 'Completed' and serviceOrder.serviceOrderStatus ne 'Cancelled'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'completed')}"/>
+                                        <h:commandButton class="btn btn-primary" value="Complete" rendered="#{serviceOrder.serviceOrderStatus ne 'Completed' and serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'processing'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'completed')}"/>
                                     </h:form>
                                 </h:column>
 

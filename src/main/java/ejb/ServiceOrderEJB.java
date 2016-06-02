@@ -74,7 +74,7 @@ public class ServiceOrderEJB {
 
     public ServiceOrder createInvoice(Long id) {
 
-        TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrdersById", ServiceOrder.class);
+        TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrderByOrderId", ServiceOrder.class);
         query.setParameter("OrderId", id);
         return query.getSingleResult();
     }
@@ -158,7 +158,7 @@ public class ServiceOrderEJB {
         Date date = new Date();
 
         try {
-            System.out.print(serOrder.getFromDate()+"jagat");
+            System.out.print(serOrder.getFromDate());
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date fromDate = df.parse(serOrder.getFromDate());
             Date toDate = df.parse(serOrder.getToDate());

@@ -81,6 +81,6 @@ public class ServiceOrderItem implements Serializable {
     }
     @Override
     public String toString() {
-        return orderItemName;
+        return orderItemName+","+orderItemRate;
     }       
 }
