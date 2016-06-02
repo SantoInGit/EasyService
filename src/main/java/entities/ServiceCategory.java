@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Entity class for service category
  */
 package entities;
 
@@ -13,16 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-/**
- *
- * @author Santo
- */
+
 @Entity
 @NamedQueries({
+    //select queries for service category search
     @NamedQuery(name = "findAllServiceCategory", query = "select s from ServiceCategory s"),
     @NamedQuery(name = "findServiceCategoryByCategoryName", query = "select s from ServiceCategory s where UPPER(s.serviceCategoryName) LIKE :CategoryName"),
     @NamedQuery(name = "findServiceCategoryByStatus", query = "select s from ServiceCategory s where UPPER(s.status) LIKE :Status"),
-    //update query
+    
+    //update query to update service category
     @NamedQuery(name = "updateServiceCategory", 
             query = "update ServiceCategory a Set "
                     + "a.longDescription = :serCatLongDescription, "
@@ -42,19 +39,53 @@ public class ServiceCategory implements Serializable {
     private String longDescription;
     private String status;
     
-
+    //constructor
     public ServiceCategory() {
     }
     
-
+    //getter and setter funtions
+    
+    //get and set function for category id
     public Long getServiceCategoryId() {
         return serviceCategoryId;
     }
-
     public void setServiceCategoryId(Long id) {
         this.serviceCategoryId = id;
     }
 
+    //get and set function for service category name
+    public String getServiceCategoryName() {
+        return serviceCategoryName;
+    }
+    public void setServiceCategoryName(String serviceCategoryName) {
+        this.serviceCategoryName = serviceCategoryName;
+    }
+
+    //get and set function for service category short description
+    public String getShortDescription() {
+        return shortDescription;
+    }
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    //get and set function for service category long description
+    public String getLongDescription() {
+        return longDescription;
+    }
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    //get and set function for service category status
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    //auto generated codes
     @Override
     public int hashCode() {
         int hash = 0;
@@ -80,36 +111,5 @@ public class ServiceCategory implements Serializable {
         return "entities.ServiceCategory[ id=" + serviceCategoryId + " ]";
     }
 
-    public String getServiceCategoryName() {
-        return serviceCategoryName;
-    }
-
-    public void setServiceCategoryName(String serviceCategoryName) {
-        this.serviceCategoryName = serviceCategoryName;
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public String getLongDescription() {
-        return longDescription;
-    }
-
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
     
 }
