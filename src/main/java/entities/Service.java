@@ -19,8 +19,10 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     //select queries for service search
     @NamedQuery(name = "findAllService", query = "select s from Service s"),
+    @NamedQuery(name = "findAllActiveService", query = "select s from Service s where UPPER(s.status) = :status"),
     @NamedQuery(name = "findServiceByServiceName", query = "select s from Service s where UPPER(s.serviceName) LIKE :ServiceName"),
-    @NamedQuery(name = "findServiceByCategory", query = "select s from Service s JOIN s.serviceCategory sc where sc.serviceCategoryId = :Category"),
+    @NamedQuery(name = "findServiceByFrontendServiceName", query = "select s from Service s where UPPER(s.serviceName) LIKE :ServiceName AND UPPER(s.status) = :status"),
+    @NamedQuery(name = "findServiceByFrontendCategory", query = "select s from Service s JOIN s.serviceCategory sc where sc.serviceCategoryId = :Category AND UPPER(s.status) = :status"),
     @NamedQuery(name = "findServiceByStatus", query = "select s from Service s where UPPER(s.status) LIKE :Status"),
     //update query for service update
     @NamedQuery(name = "updateService", 

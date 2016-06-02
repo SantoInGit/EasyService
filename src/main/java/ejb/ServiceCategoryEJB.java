@@ -22,6 +22,15 @@ public class ServiceCategoryEJB {
         return query.getResultList();
     }
 
+     public List<ServiceCategory> listFrontendServiceCategory() {
+        // TODO not implemented with eclipselink 2.0 TypedQuery query = em.createNamedQuery("findAllBooks", Book.class);
+        TypedQuery<ServiceCategory> query = em.createNamedQuery("findAllFrontendServiceCategory", ServiceCategory.class);
+        String active = "Active";
+        active = active.toUpperCase();
+        query.setParameter("status", active);
+        return query.getResultList();
+    }
+
  
     public ServiceCategory addServiceCategory(ServiceCategory serCat) {
         em.persist(serCat);

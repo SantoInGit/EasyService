@@ -30,14 +30,14 @@
                                     <div class="form-group">
                                         <h:outputLabel class="control-label col-sm-4" value="Short Description: "/>
                                         <div class="col-md-8">
-                                            <h:outputLabel value="#{entityEditController.serviceCategory.shortDescription}" class="form-control"/>
+                                            <h:inputTextarea rows="5" style="resize: none;" value="#{entityEditController.serviceCategory.shortDescription}" class="form-control"/>
                                         </div>
 
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="control-label col-sm-4"  value="Long Description: "/>
                                         <div class="col-md-8">
-                                            <h:outputLabel id="serviceDescription" value="#{entityEditController.serviceCategory.longDescription}" class="form-control"/>
+                                            <h:inputTextarea rows="7" style="resize: none;" id="serviceDescription" value="#{entityEditController.serviceCategory.longDescription}" class="form-control"/>
                                         </div>
 
                                     </div>

@@ -41,17 +41,19 @@
                         <li>
                             <a href="#{helperController.getBaseURL()}/faces/index.xhtml"  onclick = '$("#menu-close").click();' >Home</a>
                         </li>
-                        <li>
-                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#about" onclick = '$("#menu-close").click();' >About</a>
-                        </li>
-                        <li>
-                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#services" onclick = '$("#menu-close").click();' >We Provide</a>
-                        </li>
-                        <li>
+                         <li>
                             <a href="#{helperController.getBaseURL()}/faces/index.xhtml#portfolio" onclick = '$("#menu-close").click();' >Services</a>
                         </li>
                         <li>
-                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#contact" onclick = '$("#menu-close").click();' >Contact</a>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#services" onclick = '$("#menu-close").click();' >Our Strength</a>
+                        </li>
+                        <li>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#about" onclick = '$("#menu-close").click();' >About Us</a>
+                        </li>
+                        
+                       
+                        <li>
+                            <a href="#{helperController.getBaseURL()}/faces/index.xhtml#contact" onclick = '$("#menu-close").click();' >Contact Us</a>
                         </li>
                         <c:if test="#{customerLogInOutController.loggedIn}">
                             <li>

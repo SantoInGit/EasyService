@@ -22,12 +22,21 @@ public class ServiceOrderController {
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
     private static ServiceOrder serviceOrder = new ServiceOrder();
+    private ServiceOrder serviceOrderBook = new ServiceOrder();
     private List<ServiceOrder> serviceOrderList = new ArrayList<>();
     private List<ServiceOrder> frontendServiceOrderList = new ArrayList<>();
     private List<String> staffid = new ArrayList<>();
 
     public List<String> getStaffid() {
         return staffid;
+    }
+
+    public ServiceOrder getServiceOrderBook() {
+        return serviceOrderBook;
+    }
+
+    public void setServiceOrderBook(ServiceOrder serviceOrderBook) {
+        this.serviceOrderBook = serviceOrderBook;
     }
 
     public List<ServiceOrder> getFrontendServiceOrderList() {
@@ -128,7 +137,7 @@ public class ServiceOrderController {
 
     public String doCreateServiceOrder() {
 
-        serviceOrder = serviceOrderEJB.addServiceOrder(serviceOrder, service_id, service_name, customer_id);
+        serviceOrderBook = serviceOrderEJB.addServiceOrder(serviceOrderBook, service_id, service_name, customer_id);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Order Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "frontendCustomerProfile.xhtml?faces-redirect=true";

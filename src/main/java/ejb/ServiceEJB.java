@@ -25,8 +25,19 @@ public class ServiceEJB {
         return query.getResultList();
     }
 
+    public List<Service> listFrontendService() {
+        TypedQuery<Service> query = em.createNamedQuery("findAllActiveService", Service.class);
+        String active = "Active";
+        active = active.toUpperCase();
+        query.setParameter("status", active);
+        return query.getResultList();
+    }
+
     public List<Service> listServiceLimitFour() {
-        TypedQuery<Service> query = em.createNamedQuery("findAllService", Service.class);
+        TypedQuery<Service> query = em.createNamedQuery("findAllActiveService", Service.class);
+        String active = "Active";
+        active = active.toUpperCase();
+        query.setParameter("status", active);
         return query.setMaxResults(4).getResultList();
     }
 
@@ -95,7 +106,7 @@ public class ServiceEJB {
             searchBy = search_by;
         }
 
-        TypedQuery<Service> query = em.createNamedQuery("findServiceBy" + searchBy, Service.class);
+        TypedQuery<Service> query = em.createNamedQuery("findServiceByFrontend" + searchBy, Service.class);
         //changed all upper case as in query field, set field name to upper case
         search = search.toUpperCase();
         if ("Category".equals(search_by)) {
@@ -104,6 +115,9 @@ public class ServiceEJB {
         } else {
             query.setParameter(searchBy, "%" + search + "%");
         }
+        String active = "Active";
+        active = active.toUpperCase();
+        query.setParameter("status", active);
         return query.getResultList();
     }
 

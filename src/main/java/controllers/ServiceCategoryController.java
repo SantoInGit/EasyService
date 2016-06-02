@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import entities.ServiceCategory;
 import ejb.ServiceCategoryEJB;
 import java.util.ArrayList;
 
-
 @Named(value = "serviceCategoryController")
 @RequestScoped
 public class ServiceCategoryController {
@@ -22,10 +20,21 @@ public class ServiceCategoryController {
     private ServiceCategoryEJB serviceCategoryEJB;
     private ServiceCategory serviceCategory = new ServiceCategory();
     private List<ServiceCategory> serviceCategoryList = new ArrayList<>();
+    private List<ServiceCategory> serviceCategoryFrontendList = new ArrayList<>();
     private String search = "";
     private String searchBy = "";
-    
-    public String doDeleteServiceCategory(Long id){
+
+    public List<ServiceCategory> getServiceCategoryFrontendList() {
+        serviceCategoryFrontendList = serviceCategoryEJB.listFrontendServiceCategory();
+
+        return serviceCategoryFrontendList;
+    }
+
+    public void setServiceCategoryFrontendList(List<ServiceCategory> serviceCategoryFrontendList) {
+        this.serviceCategoryFrontendList = serviceCategoryFrontendList;
+    }
+
+    public String doDeleteServiceCategory(Long id) {
         serviceCategoryEJB.deleteServiceCategory(id);
         return "listServiceCategory.xhtml?faces-redirect=true";
     }
@@ -37,7 +46,7 @@ public class ServiceCategoryController {
     public void setServiceCategory(ServiceCategory serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
-    
+
     public String getSearchBy() {
         return searchBy;
     }
@@ -46,12 +55,10 @@ public class ServiceCategoryController {
         this.searchBy = searchBy;
     }
 
- 
     public String getSearch() {
         return search;
     }
 
- 
     public void setSearch(String search) {
         this.search = search;
     }
@@ -68,15 +75,12 @@ public class ServiceCategoryController {
         return serviceCategoryList;
     }
 
-
     public void setServiceCategoryList(List<ServiceCategory> serviceCategoryList) {
         this.serviceCategoryList = serviceCategoryList;
     }
 
-
- 
     public String doCreateServiceCategory() {
-       
+
         serviceCategory = serviceCategoryEJB.addServiceCategory(serviceCategory);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Category Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
@@ -89,9 +93,5 @@ public class ServiceCategoryController {
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "listServiceCategory.xhtml?faces-redirect=true";
     }
-    
-
-
-  
 
 }

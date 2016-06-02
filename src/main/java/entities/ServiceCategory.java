@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     //select queries for service category search
     @NamedQuery(name = "findAllServiceCategory", query = "select s from ServiceCategory s"),
+    @NamedQuery(name = "findAllFrontendServiceCategory", query = "select s from ServiceCategory s WHERE UPPER(s.status) LIKE :status"),
     @NamedQuery(name = "findServiceCategoryByCategoryName", query = "select s from ServiceCategory s where UPPER(s.serviceCategoryName) LIKE :CategoryName"),
     @NamedQuery(name = "findServiceCategoryByStatus", query = "select s from ServiceCategory s where UPPER(s.status) LIKE :Status"),
     

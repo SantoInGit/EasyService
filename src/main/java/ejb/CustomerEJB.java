@@ -45,6 +45,17 @@ public class CustomerEJB {
 
     }
 
+    public boolean checkExistingCustomerByEmail(String email) {
+        TypedQuery<Customer> query = em.createNamedQuery("findCustomerByEmail", Customer.class);
+        //changed all upper case as in query field, set field name to upper case
+
+        query.setParameter("email", email);
+        if (query.getResultList().size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public int editCustomerCommit(Customer customer) {
         TypedQuery<Customer> query = em.createNamedQuery("updateCustomer", Customer.class);
 

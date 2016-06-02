@@ -805,3 +805,6 @@ body .ui-tooltip {
     background: none;
     
 }
+.staff-list select option{
+    padding: 5px 0;
+}

@@ -40,7 +40,7 @@ import javax.persistence.OneToMany;
             + "s.status = :stStatus WHERE s.id = :stId"),
     
     @NamedQuery(name = "findAllUnAssignedStaffs",
-            query = "SELECT s from Staff s WHERE s.status != :stStatus")
+            query = "SELECT s from Staff s WHERE s.status != :stStatus or s.toDate < :orderStartDate or s.fromDate > :orderToDate")
 })
 
 public class Staff extends User implements Serializable {

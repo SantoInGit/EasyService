@@ -29,9 +29,31 @@ public class ServiceController {
     private Service service = new Service();
     private List<Service> serviceList = new ArrayList<>();
     private List<Service> serviceListLimitFour = new ArrayList<>();
+    private List<Service> frontendServiceList = new ArrayList<>();
 
     private String search = "";
     private String searchBy = "";
+
+    public List<Service> getFrontendServiceList() {
+        if (this.search.isEmpty()) {
+            Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String search_by = params.get("search_by");
+            String search_text = params.get("s");
+            if (search_by != null && search_text != null) {
+                frontendServiceList = serviceEJB.searchFrontend(search_text, search_by);
+                FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
+                FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+            } else {
+                frontendServiceList = serviceEJB.listFrontendService();
+            }
+        }
+
+        return frontendServiceList;
+    }
+
+    public void setFrontendServiceList(List<Service> frontendServiceList) {
+        this.frontendServiceList = frontendServiceList;
+    }
 
     public List<Service> getServiceListLimitFour() {
         serviceListLimitFour = serviceEJB.listServiceLimitFour();
@@ -90,16 +112,7 @@ public class ServiceController {
 
     public List<Service> getServiceList() {
         if (this.search.isEmpty()) {
-            Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            String search_by = params.get("search_by");
-            String search_text = params.get("s");
-            if (search_by != null && search_text != null) {
-                serviceList = serviceEJB.searchFrontend(search_text, search_by);
-                FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
-                FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-            } else {
-                serviceList = serviceEJB.listService();
-            }
+            serviceList = serviceEJB.listService();
         }
         return serviceList;
     }
@@ -124,7 +137,6 @@ public class ServiceController {
         this.serviceCategory = serviceCategory;
     }
 
-
     public void createPdf() throws Exception {
         String machine_name = InetAddress.getLocalHost().getHostName();
         String path_to_desktop = "C:/Documents and Settings/" + machine_name + "/Desktop/";
@@ -144,10 +156,8 @@ public class ServiceController {
         Font f3 = new Font(pdf, CoreFont.HELVETICA_BOLD);
         f3.setSize(20f);
 
-        
-         Font f4 = new Font(pdf, CoreFont.HELVETICA_BOLD);
+        Font f4 = new Font(pdf, CoreFont.HELVETICA_BOLD);
         f4.setSize(10f);
-
 
         TextLine text = new TextLine(f4,
                 "Easy Services");
@@ -227,13 +237,10 @@ public class ServiceController {
         //copyright.setColor(Color.dodgerblue);
         copyright.drawOn(page);
 
-
         // dynamic section
-
         // dynamic variables
-
         TextLine text5 = new TextLine(f2,
-                "Date:"+dateobj);
+                "Date:" + dateobj);
         text5.setPosition(450, 60);
         //text5.setColor(Color.dodgerblue);
         text5.drawOn(page);

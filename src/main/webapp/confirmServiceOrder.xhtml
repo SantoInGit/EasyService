@@ -79,11 +79,11 @@
                                             <h:outputLabel value="#{serviceOrderController.serviceOrder.serviceOrderStatus}" styleClass="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group staff-list">
                                         <h:outputLabel class="control-label col-sm-4"  value="Choose #{serviceOrderController.serviceOrder.staffRequired} Staff(s) "/>
                                         <div class="col-md-8">                                                                                           
-                                            <h:selectManyListbox value="#{serviceOrderController.staffid}">
-                                                <f:selectItems value="#{staffController.getUnAssignedStaff()}" var="staffList" itemValue="#{staffList.id}" itemLabel="#{staffList.firstName} #{staffList.middleName} #{staffList.lastName} [Qualification: #{staffList.qualification}]" noSelectionValue="select staff"  />
+                                            <h:selectManyListbox class="col-md-12" value="#{serviceOrderController.staffid}" size="8">
+                                                <f:selectItems value="#{staffController.getUnAssignedStaff(serviceOrderController.serviceOrder.fromDate,serviceOrderController.serviceOrder.toDate)}" var="staffList" itemValue="#{staffList.id}" itemLabel="#{staffList.firstName} #{staffList.middleName} #{staffList.lastName} [Qualification: #{staffList.qualification}]" noSelectionValue="select staff" />
                                             </h:selectManyListbox>
                                         </div>
                                     </div>
@@ -99,7 +99,7 @@
                                         <div class="form-group">
                                           
                                             <div class="col-md-6" style="padding-left: 0">
-                                                <h:commandButton disabled = "#{staffController.getUnAssignedStaff().size() le 0}" class ="btn btn-primary form-control "  value="Confirm" action="#{serviceOrderController.doConfirmServiceOrderCommit(serviceOrderController.serviceOrder.serviceOrderId)}"/>
+                                                <h:commandButton disabled = "#{staffController.getUnAssignedStaff(serviceOrderController.serviceOrder.fromDate,serviceOrderController.serviceOrder.toDate).size() le 0}" class ="btn btn-primary form-control "  value="Confirm" action="#{serviceOrderController.doConfirmServiceOrderCommit(serviceOrderController.serviceOrder.serviceOrderId)}"/>
                                             </div>
                                         </div>
                                     </div>

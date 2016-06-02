@@ -1,6 +1,4 @@
-
 package ejb;
-
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import entities.Staff;
+import javax.persistence.TemporalType;
 
 @Stateless
 public class StaffEJB {
@@ -30,45 +29,47 @@ public class StaffEJB {
         return query.getResultList();
     }
 
-   public int editStaffCommit(Staff staff){
-       TypedQuery<Staff> query = em.createNamedQuery("updateStaff",Staff.class);
+    public int editStaffCommit(Staff staff) {
+        TypedQuery<Staff> query = em.createNamedQuery("updateStaff", Staff.class);
 
-       query.setParameter("stEmail", staff.getEmail() );
-       query.setParameter("stFirstName", staff.getFirstName() );
-       query.setParameter("stFromDate", staff.getFromDate());
-       query.setParameter("stJobTitle", staff.getJobTitle());
-       query.setParameter("stLastName", staff.getLastName() );
-       query.setParameter("stMiddleName", staff.getMiddleName() );
-       query.setParameter("stPassword", staff.getPassword() );
-       query.setParameter("stPhoneNo", staff.getPhoneNo() );
-       query.setParameter("stQualification", staff.getQualification() );
-       query.setParameter("stStatus", staff.getStatus() );
-       query.setParameter("stToDate", staff.getToDate());
-       query.setParameter("stUserType", staff.getUserType() );
-       query.setParameter("stCity",staff.getAddress().getCity() );
-       query.setParameter("stCountry",staff.getAddress().getCountry());
-       query.setParameter("stState",staff.getAddress().getState() );
-       query.setParameter("stStreet",staff.getAddress().getStreet() );
-       query.setParameter("stZipCode",staff.getAddress().getZipCode() );
-       query.setParameter("stId",staff.getId() );
-              
-       return query.executeUpdate();          
-   }
-   
-   public List<Staff> getUnAssignedStaff(){
-       TypedQuery<Staff> query = em.createNamedQuery("findAllUnAssignedStaffs", Staff.class);
-       query.setParameter("stStatus","Assigned");
-       return query.getResultList();
-       
-   }
-   
+        query.setParameter("stEmail", staff.getEmail());
+        query.setParameter("stFirstName", staff.getFirstName());
+        query.setParameter("stFromDate", staff.getFromDate());
+        query.setParameter("stJobTitle", staff.getJobTitle());
+        query.setParameter("stLastName", staff.getLastName());
+        query.setParameter("stMiddleName", staff.getMiddleName());
+        query.setParameter("stPassword", staff.getPassword());
+        query.setParameter("stPhoneNo", staff.getPhoneNo());
+        query.setParameter("stQualification", staff.getQualification());
+        query.setParameter("stStatus", staff.getStatus());
+        query.setParameter("stToDate", staff.getToDate());
+        query.setParameter("stUserType", staff.getUserType());
+        query.setParameter("stCity", staff.getAddress().getCity());
+        query.setParameter("stCountry", staff.getAddress().getCountry());
+        query.setParameter("stState", staff.getAddress().getState());
+        query.setParameter("stStreet", staff.getAddress().getStreet());
+        query.setParameter("stZipCode", staff.getAddress().getZipCode());
+        query.setParameter("stId", staff.getId());
+
+        return query.executeUpdate();
+    }
+
+    public List<Staff> getUnAssignedStaff(String fromDate, String toDate) {
+        TypedQuery<Staff> query = em.createNamedQuery("findAllUnAssignedStaffs", Staff.class);
+        query.setParameter("stStatus", "Assigned");
+        query.setParameter("orderStartDate", fromDate);
+        query.setParameter("orderToDate", toDate);
+        return query.getResultList();
+
+    }
+
     public Staff addStaff(Staff staff) {
         em.persist(staff);
         return staff;
     }
-    
-    public void deleteStaff(Long id){
-       em.remove(getStaff(id));
+
+    public void deleteStaff(Long id) {
+        em.remove(getStaff(id));
     }
 
     public Staff getStaff(Long staff_id) {

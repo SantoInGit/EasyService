@@ -89,8 +89,9 @@ public class StaffController {
         this.staffList = staffList;
     }
     
-    public List<Staff> getUnAssignedStaff(){
-        return staffEJB.getUnAssignedStaff();
+    public List<Staff> getUnAssignedStaff(String fromDate, String toDate){
+       
+        return staffEJB.getUnAssignedStaff(fromDate, toDate);
          
     }
   

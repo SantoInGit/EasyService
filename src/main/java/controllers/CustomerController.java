@@ -29,13 +29,24 @@ public class CustomerController {
     private String from = "Backend";
 
     public String doCreateCustomer() {
-        customer = customerEJB.addCustomer(customer);
-        FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer Created Succefully.", "");
-        FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        if ("Frontend".equals(from)) {
-            return "registerSuccess.xhtml?faces-redirect=true";
+        /**
+         * check existing customer before registration
+         */
+        boolean isExist = customerEJB.checkExistingCustomerByEmail(customer.getEmail());
+        if (isExist) {
+            FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Email address: " + customer.getEmail() + " already exist", "");
+            FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+            return "register.xhtml";
+
         } else {
-            return "listCustomers.xhtml?faces-redirect=true";
+            customer = customerEJB.addCustomer(customer);
+            FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer Created Succefully.", "");
+            FacesContext.getCurrentInstance().addMessage(null, infoMsg);
+            if ("Frontend".equals(from)) {
+                return "registerSuccess.xhtml?faces-redirect=true";
+            } else {
+                return "listCustomers.xhtml?faces-redirect=true";
+            }
         }
     }
 
