@@ -416,8 +416,6 @@ hr.small {
     pointer-events: none;
 }
 
-
-
 @media(max-width:768px) {
     .map {
         height: 75%;

@@ -72,8 +72,14 @@ public class ServiceOrderEJB {
 
     }
 
-    public void createInvoice(Long id) {
+    public ServiceOrder createInvoice(Long id) {
+
+        TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrdersById", ServiceOrder.class);
+        query.setParameter("OrderId", id);
+        return query.getSingleResult();
     }
+    
+    
 
     public ServiceOrder getServiceOrder(Long id) {
         return em.find(ServiceOrder.class, id);
@@ -143,7 +149,7 @@ public class ServiceOrderEJB {
 
     }
 
-    public ServiceOrder addServiceOrder(ServiceOrder serOrder, int service_id, String service_name, String customer_id) {
+    public ServiceOrder addServiceOrder(ServiceOrder serOrder, int service_id, String service_name, String service_rate, String customer_id) {
 
         Long c_id = Long.parseLong(customer_id);
         Customer customer = em.find(Customer.class, c_id);
@@ -152,6 +158,7 @@ public class ServiceOrderEJB {
         Date date = new Date();
 
         try {
+            System.out.print(serOrder.getFromDate()+"jagat");
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date fromDate = df.parse(serOrder.getFromDate());
             Date toDate = df.parse(serOrder.getToDate());
@@ -164,6 +171,7 @@ public class ServiceOrderEJB {
         List<ServiceOrderItem> SOI = new ArrayList<>();
         ServiceOrderItem s = new ServiceOrderItem();
         s.setOrderItemName(service_name);
+        s.setOrderItemRate(service_rate);
         s.setServiceStatus("processing");
         SOI.add(s);
 

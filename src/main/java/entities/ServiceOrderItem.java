@@ -20,6 +20,7 @@ public class ServiceOrderItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderItemId;
     private String orderItemName;
+    private String orderItemRate;
     private String serviceStatus;
 
     //constructor
@@ -33,6 +34,14 @@ public class ServiceOrderItem implements Serializable {
     }
     public void setOrderItemId(Long orderItemId) {
         this.orderItemId = orderItemId;
+    }
+
+    public String getOrderItemRate() {
+        return orderItemRate;
+    }
+
+    public void setOrderItemRate(String orderItemRate) {
+        this.orderItemRate = orderItemRate;
     }
     
     //get and set order item name

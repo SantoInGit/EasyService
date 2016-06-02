@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "findCustomerById", query = "select c from Customer c where c.id=:id"),
     @NamedQuery(name = "findCustomerByEmailAndPassword", query = "select c from Customer c where c.email=:email and c.password = :password"),
     @NamedQuery(name = "findCustomerByEmail", query = "select c from Customer c where c.email=:email"),
+
     //update query for customer
     @NamedQuery(name = "updateCustomer", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
             query = "update Customer a Set  a.email = :custEmail, a.firstName = :custFirstName, a.lastName = :custLastName, "
@@ -33,6 +34,7 @@ public class Customer extends User implements Serializable {
     private String status = "Active";
 
     //constructors
+    
     public Customer() {
 
     }

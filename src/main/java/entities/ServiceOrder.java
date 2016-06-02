@@ -18,10 +18,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
 @Entity
 @NamedQueries({
     //select queries to search for service orders
+
     @NamedQuery(name = "findAllServiceOrders", query = "select c from ServiceOrder c"),  
     @NamedQuery(name = "findServiceOrderByOrderId", query = "select s from ServiceOrder s where s.serviceOrderId = :OrderId"),
     @NamedQuery(name = "findServiceOrderByStatus", query = "select s from ServiceOrder s where UPPER(s.serviceOrderStatus) LIKE :Status"),
@@ -31,12 +31,14 @@ import javax.persistence.OneToMany;
     @NamedQuery(name = "changeServiceOrderStatus",
             query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId"),
     
+
     //update query to update rescheduled service orders
     @NamedQuery(name = "updateServiceOrderReschedule", query = "UPDATE ServiceOrder s SET s.fromDate = :serFromDate,"
             + "s.toDate = :serToDate, s.hoursPerDay = :serHrsPerDay, s.staffRequired = :serStaffReqd, "
             + "s.customerNote = :serCustNote WHERE s.serviceOrderId = :serId")
 })
 public class ServiceOrder implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,20 +50,20 @@ public class ServiceOrder implements Serializable {
     private String toDate;
     private String staffRequired;
     private String serviceOrderStatus;
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "jnd_ServiceOrder_ServiceOrderItem",
             joinColumns = @JoinColumn(name = "ServiceOrder_ServiceOrderItem_fk")
     )
     private List<ServiceOrderItem> serviceOrderItem;
-    
-    @ManyToOne(fetch=FetchType.EAGER)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(
-            name="jnd_ServiceOrder_Customer",
-            joinColumns=@JoinColumn(name="serviceOrder_Customer_fk")
+            name = "jnd_ServiceOrder_Customer",
+            joinColumns = @JoinColumn(name = "serviceOrder_Customer_fk")
     )
     private Customer Customer;
-    
+
     //getter and setter functions
     //get and set staff required to carry out the service order
     public String getStaffRequired() {
@@ -71,13 +73,14 @@ public class ServiceOrder implements Serializable {
         this.staffRequired = staffRequired;
     }
     //get and set customer who orders the service
+
     public Customer getCustomer() {
         return Customer;
     }
     public void setCustomer(Customer Customer) {
         this.Customer = Customer;
     }
-    //constructor
+
     public ServiceOrder() {
     }
 
