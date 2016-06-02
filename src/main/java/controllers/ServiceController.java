@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.*;
 import java.util.*;
-import com.pdfjet.*;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -10,7 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Service;
 import ejb.ServiceEJB;
-//import com.pdfjet.*;
+import com.pdfjet.*;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -1,0 +1,129 @@
+
+<ui:composition template="/WEB-INF/templates/frontend/customerLoginLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Reschedule Service Order </ui:define>
+
+    <ui:define name="content">
+        <div class="container">
+            <div class="row">   
+                <div class="col-lg-12 panel-heading"></div>    
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <!-- Navigation -->
+                <div class="col-md-2">
+                    <div class="frontend-sidebar">
+                        <ul class="nav" id="side-menu">
+
+
+                            <li>
+                                <a href="#{helperController.getBaseURL()}/faces/customerMyAccount.xhtml"><i class="glyphicon glyphicon-dashboard"></i> My Account</a>
+                            </li>
+                            <li>
+                                <a href="#{helperController.getBaseURL()}/faces/customerMyOrders.xhtml"><i class="glyphicon glyphicon-expand"></i> My Orders</a>
+                            </li>
+                            <li>
+                                <h:form> <i class="glyphicon glyphicon-expand"></i><h:commandButton class="btn-custom" value="Log out" action="#{customerLogInOutController.doLogOutCustomer()}"/></h:form>
+                            </li>
+                        </ul>
+                        <!-- /.sidebar-collapse -->
+                    </div> 
+
+                </div>
+                <div class="col-md-10">
+                    <!--{entityEditController.setCustomer(customerLogInOutController.customer)}-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3> Reschedule Service Order: [ ID: #{serviceOrderController.serviceOrder.serviceOrderId} ]</h3>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <div class="row">
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="ID: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="serviceName" value="#{serviceOrderController.serviceOrder.serviceOrderId}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Order Date: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{serviceOrderController.serviceOrder.serviceOrderDate}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Start Date: "/>
+                                            <div class="col-md-8">
+                                                <h:inputText value="#{serviceOrderController.serviceOrder.fromDate}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="End Date: "/>
+                                            <div class="col-md-8">
+                                                <h:inputText value="#{serviceOrderController.serviceOrder.toDate}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Staff Required:"/>
+                                            <div class="col-md-8">
+                                                <h:inputText value="#{serviceOrderController.serviceOrder.staffRequired}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Hours Per Day: "/>
+                                            <div class="col-md-8">
+                                                <h:inputText value="#{serviceOrderController.serviceOrder.hoursPerDay}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Coustomer Note: "/>
+                                            <div class="col-md-8">
+                                                <h:inputText value="#{serviceOrderController.serviceOrder.customerNote}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Status : "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{serviceOrderController.serviceOrder.serviceOrderStatus}" class="form-control"/>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">                               
+                                    <div class="col-md-6">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+
+                                                <div class="col-md-6" style="padding-left: 0">
+                                                    <h:commandButton class ="btn btn-primary form-control "  value="Back" action="#{entityEditController.frontendDoCancelEdit('serviceOrder')}"/>
+                                                </div>
+                                                <div class="col-md-6" style="padding-right:  0">
+                                                    <h:commandButton class ="btn btn-primary form-control "  value="Commit" action="#{serviceOrderController.doRescheduleServiceOrderCommit(serviceOrderController.serviceOrder.serviceOrderId)}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

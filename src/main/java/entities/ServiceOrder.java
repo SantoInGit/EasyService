@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Entity class for Service Order
  */
 package entities;
 
@@ -20,22 +18,30 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
 @Entity
 @NamedQueries({
+    //select queries to search for service orders
+    @NamedQuery(name = "findAllServiceOrders", query = "select c from ServiceOrder c"),
+    @NamedQuery(name = "findServiceOrderByOrderId", query = "select s from ServiceOrder s where s.serviceOrderId = :OrderId"),
+    @NamedQuery(name = "findServiceOrderByStatus", query = "select s from ServiceOrder s where UPPER(s.serviceOrderStatus) LIKE :Status"),
+    @NamedQuery(name = "findServiceOrdersByCustomer", query = "select so from ServiceOrder so JOIN so.Customer c where c.id = :CID "),
 
-    @NamedQuery(name = "findAllServiceOrders", query = "select c from ServiceOrder c"),   
-    @NamedQuery(name = "cancelOrder", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
-            query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId"),
-    @NamedQuery(name = "findServiceOrdersById", query = "select s from ServiceOrder s WHERE s.serviceOrderId = :serOrderId"),  
-@NamedQuery(name = "findAllServiceOrders", 
-            query = "select c from ServiceOrder c"),   
+    //@NamedQuery(name = "findServiceOrdersById", query = "select so from ServiceOrder so JOIN so.serviceOrderItem s WHERE s.orderItemId = :OrderId"),
+    @NamedQuery(name = "findServiceOrdersNameId", query = "select s from ServiceOrderItem s WHERE s.orderItemId = :OrderId"),
+
+    @NamedQuery(name = "findServiceOrdersById", query = "select s from ServiceOrder s WHERE s.serviceOrderId = :OrderId"),
+
+    //update query to change the status of the service order
     @NamedQuery(name = "changeServiceOrderStatus",
-            query="update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId")      
+            query = "update ServiceOrder s Set s.serviceOrderStatus = :status WHERE s.serviceOrderId = :serOrderId"),
+
+    //update query to update rescheduled service orders
+    @NamedQuery(name = "updateServiceOrderReschedule", query = "UPDATE ServiceOrder s SET s.fromDate = :serFromDate,"
+            + "s.toDate = :serToDate, s.hoursPerDay = :serHrsPerDay, s.staffRequired = :serStaffReqd, "
+            + "s.customerNote = :serCustNote WHERE s.serviceOrderId = :serId")
 })
 public class ServiceOrder implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,20 +53,22 @@ public class ServiceOrder implements Serializable {
     private String toDate;
     private String staffRequired;
     private String serviceOrderStatus;
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "jnd_ServiceOrder_ServiceOrderItem",
             joinColumns = @JoinColumn(name = "ServiceOrder_ServiceOrderItem_fk")
     )
     private List<ServiceOrderItem> serviceOrderItem;
-    
-    @ManyToOne(fetch=FetchType.EAGER)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(
-            name="jnd_ServiceOrder_Customer",
-            joinColumns=@JoinColumn(name="serviceOrder_Customer_fk")
+            name = "jnd_ServiceOrder_Customer",
+            joinColumns = @JoinColumn(name = "serviceOrder_Customer_fk")
     )
     private Customer Customer;
 
+    //getter and setter functions
+    //get and set staff required to carry out the service order
     public String getStaffRequired() {
         return staffRequired;
     }
@@ -68,6 +76,8 @@ public class ServiceOrder implements Serializable {
     public void setStaffRequired(String staffRequired) {
         this.staffRequired = staffRequired;
     }
+
+    //get and set customer who orders the service
 
     public Customer getCustomer() {
         return Customer;
@@ -77,9 +87,12 @@ public class ServiceOrder implements Serializable {
         this.Customer = Customer;
     }
 
+    //constructor
+
     public ServiceOrder() {
     }
 
+    //get and set service order starting date
     public String getFromDate() {
         return fromDate;
     }
@@ -88,6 +101,7 @@ public class ServiceOrder implements Serializable {
         this.fromDate = fromDate;
     }
 
+    //get and set service order finishing date
     public String getToDate() {
         return toDate;
     }
@@ -96,6 +110,7 @@ public class ServiceOrder implements Serializable {
         this.toDate = toDate;
     }
 
+    //get and set id of the service order
     public Long getServiceOrderId() {
         return serviceOrderId;
     }
@@ -104,6 +119,7 @@ public class ServiceOrder implements Serializable {
         this.serviceOrderId = serviceOrderId;
     }
 
+    //get and set note made by the customer for the service order
     public String getCustomerNote() {
         return customerNote;
     }
@@ -112,6 +128,7 @@ public class ServiceOrder implements Serializable {
         this.customerNote = customerNote;
     }
 
+    //get and set hour per day to be worked
     public String getHoursPerDay() {
         return hoursPerDay;
     }
@@ -120,6 +137,7 @@ public class ServiceOrder implements Serializable {
         this.hoursPerDay = hoursPerDay;
     }
 
+    //get and set date of order made
     public String getServiceOrderDate() {
         return serviceOrderDate;
     }
@@ -128,6 +146,7 @@ public class ServiceOrder implements Serializable {
         this.serviceOrderDate = serviceOrderDate;
     }
 
+    //get and set the status of the service order
     public String getServiceOrderStatus() {
         return serviceOrderStatus;
     }
@@ -136,6 +155,7 @@ public class ServiceOrder implements Serializable {
         this.serviceOrderStatus = serviceOrderStatus;
     }
 
+    //get and set the order items in the order
     public List<ServiceOrderItem> getServiceOrderItem() {
         return serviceOrderItem;
     }
@@ -144,6 +164,7 @@ public class ServiceOrder implements Serializable {
         this.serviceOrderItem = serviceOrderItem;
     }
 
+    //auto generated codes
     @Override
     public int hashCode() {
         int hash = 0;

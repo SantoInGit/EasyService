@@ -17,11 +17,12 @@
                     <div class="frontend-sidebar">
                         <ul class="nav" id="side-menu">
 
+
                             <li>
-                                <a href="#{helperController.getBaseURL()}/faces/frontendCustomerProfile.xhtml"><i class="glyphicon glyphicon-dashboard"></i> My Account</a>
+                                <a href="#{helperController.getBaseURL()}/faces/customerMyAccount.xhtml"><i class="glyphicon glyphicon-dashboard"></i> My Account</a>
                             </li>
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-expand"></i> My Orders</a>
+                                <a href="#{helperController.getBaseURL()}/faces/customerMyOrders.xhtml"><i class="glyphicon glyphicon-expand"></i> My Orders</a>
                             </li>
                             <li>
                                 <h:form> <i class="glyphicon glyphicon-expand"></i><h:commandButton class="btn-custom" value="Log out" action="#{customerLogInOutController.doLogOutCustomer()}"/></h:form>
@@ -35,77 +36,122 @@
                     #{entityEditController.setCustomer(customerLogInOutController.customer)}
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3>Customer Edit/Update: #{entityEditController.customer.firstName} [ email: #{entityEditController.customer.email} ]</h3>
+                            <h3>Welcome, #{entityEditController.customer.firstName} #{entityEditController.customer.middleName} #{entityEditController.customer.lastName} on the EasyServices. </h3>
                         </div>
                         <div class="panel-body">
+
                             <h:form>
                                 <div class="row">
                                     <div class="col-lg-6">
 
                                         <div class="form-group">
-                                            <h:outputLabel for="firstName" value="First Name: "/>
-                                            <h:inputText id="firstName" value="#{entityEditController.customer.firstName}" class="form-control" required="true" requiredMessage="FirstName is required field." />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <h:outputLabel for="middleName" value="Middle Name: "/>
-                                            <h:inputText id="middleName" value="#{entityEditController.customer.middleName}" class="form-control" required="false"/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <h:outputLabel for="lastName" value="Last Name: "/>
-                                            <h:inputText id="lastName" value="#{entityEditController.customer.lastName}" class="form-control" required="true" requiredMessage="LastName is required field."/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <h:outputLabel for="contactNo" value="Contact No.: "/>
-                                            <h:inputText id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control" validator="validators.PhoneNumberValidator" maxlength="10"/>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <h:outputLabel value="Street: "/>
-                                            <h:inputText value="#{entityEditController.customer.address.street}" class="form-control" required="true" requiredMessage="Street is required field."/>
-                                        </div>
-                                        <div class="form-group">
-                                            <h:outputLabel value="City: "/>
-                                            <h:inputText value="#{entityEditController.customer.address.city}" class="form-control" required="true" requiredMessage="City is required field."/>
-                                        </div>
-                                        <div class="form-group">
-                                            <h:outputLabel value="Zip Code: "/>
-                                            <h:inputText value="#{entityEditController.customer.address.zipCode}" class="form-control" required="true" requiredMessage="ZipCode is required field." validator="validators.ZipCodeValidator" maxlength="4"/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <h:outputLabel value="State: "/>
-                                            <h:inputText value="#{entityEditController.customer.address.state}" class="form-control" required="true" requiredMessage="ZipCode is required field."/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <h:outputLabel value="Country: "/>
-                                            <h:inputText value="#{entityEditController.customer.address.country}" class="form-control" required="true" requiredMessage="Country is required field."/>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <h:outputLabel value="Email: "/>
-                                            <h:inputText disabled="true" value="#{entityEditController.customer.email}" class="form-control" required="true" requiredMessage="Email is required field." validator="validators.EmailValidator"/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <br/>
-
-                                <div class="row">                               
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-6" style="padding-left: 0">
-                                                <h:commandButton class="btn btn-primary form-control " value="Commit" action="#{entityEditController.doEditEntityCommit('customer')}"/>
+                                            <h:outputLabel class="control-label col-sm-4" for="firstName" value="First Name: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="firstName" value="#{entityEditController.customer.firstName}" class="form-control"/>
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" for="middleName" value="Middle Name: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="middleName" value="#{entityEditController.customer.middleName}" class="form-control"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" for="lastName" value="Last Name: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="lastName" value="#{entityEditController.customer.lastName}" class="form-control"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" for="contactNo" value="Contact No.: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel id="contactNo" value="#{entityEditController.customer.phoneNo}" class="form-control"/>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+
+                                            <h:outputLabel class="control-label col-sm-4" for="staffStatus" value="Status: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.status}" styleClass="form-control"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Street: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.street}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="City: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.city}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Zipcode: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.zipCode}" class="form-control"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="State: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.state}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Country: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.address.country}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel class="control-label col-sm-4" value="Email: "/>
+                                            <div class="col-md-8">
+                                                <h:outputLabel value="#{entityEditController.customer.email}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Useful links</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="#{helperController.getBaseURL()}/faces/customerMyOrders.xhtml">manage service</a></li>
+                                                    <li><a href="#{helperController.getBaseURL()}/faces/frontendListServices.xhtml" target="_blank">order new service</a></li>
+
+                                                </ul>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <div class="col-md-6" style="padding-left: 0">
+                                                    <h:link value="Edit Profile" class="btn btn-primary form-control" outcome="customerMyAccount.xhtml">
+                                                    </h:link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </h:form>
                         </div>
                     </div>

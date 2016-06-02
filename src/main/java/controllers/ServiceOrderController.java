@@ -1,21 +1,33 @@
 package controllers;
 
-import java.io.*;
-import java.util.*;
-import com.pdfjet.*;
+import com.pdfjet.A4;
+import com.pdfjet.Cell;
+import com.pdfjet.Color;
+import com.pdfjet.CoreFont;
+import com.pdfjet.Font;
+import com.pdfjet.PDF;
+import com.pdfjet.Page;
+import com.pdfjet.Table;
+import com.pdfjet.TextLine;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import ejb.ServiceOrderEJB;
-
+import entities.Customer;
 import entities.ServiceOrder;
+import entities.ServiceOrderItem;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import javax.faces.context.ExternalContext;
 
 @Named(value = "serviceOrderController")
 @RequestScoped
@@ -25,25 +37,50 @@ public class ServiceOrderController {
     }
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
-    private ServiceOrder serviceOrder = new ServiceOrder();
-    private List<ServiceOrder> serviceOrderList = new ArrayList<ServiceOrder>();
-    //private static ServiceOrder serviceOrder = new ServiceOrder();
-    //private List<ServiceOrder> serviceOrderList = new ArrayList<>();
+    private static ServiceOrder serviceOrder = new ServiceOrder();
+    private List<ServiceOrder> serviceOrderList = new ArrayList<>();
+    private List<ServiceOrder> frontendServiceOrderList = new ArrayList<>();
     private List<String> staffid = new ArrayList<>();
-
     public List<String> getStaffid() {
         return staffid;
+    }
+
+    public List<ServiceOrder> getFrontendServiceOrderList() {
+//        MailController sender = new MailController();
+//        sender.sendSimpleMail();
+        // GmailSender sender = new GmailSender();
+
+//        try {
+//            sender.setSender("info@noriskwebsolutions.com", "jagat@123");
+//            sender.addRecipient("prajapatijagat2009@gmail.com");
+//            sender.setSubject("The subject");
+//            sender.setBody("The body");
+//            // sender.addAttachment("TestFile.txt");
+//            sender.send();
+//        } catch (MessagingException ex) {
+//            Logger.getLogger(ServiceOrderController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = extContext.getSessionMap();
+        Customer cst = (Customer) sessionMap.get("customer");
+
+        frontendServiceOrderList = serviceOrderEJB.customerListServiceOrders(cst.getId());
+        return frontendServiceOrderList;
+    }
+
+    public void setFrontendServiceOrderList(List<ServiceOrder> frontendServiceOrderList) {
+        this.frontendServiceOrderList = frontendServiceOrderList;
     }
 
     public void setStaffid(List<String> staffid) {
         this.staffid = staffid;
     }
-    private String search ="";
+    private String search = "";
     private String searchBy = "";
-    
-    
+
     private int service_id;
     private String service_name;
+    private String service_rate;
     private String customer_id;
 
     public String getCustomer_id() {
@@ -60,6 +97,14 @@ public class ServiceOrderController {
 
     public void setService_name(String service_name) {
         this.service_name = service_name;
+    }
+
+    public String getService_rate() {
+        return service_rate;
+    }
+
+    public void setService_rate(String service_rate) {
+        this.service_rate = service_rate;
     }
 
     public int getService_id() {
@@ -107,7 +152,7 @@ public class ServiceOrderController {
 
     public String doCreateServiceOrder() {
 
-        serviceOrder = serviceOrderEJB.addServiceOrder(serviceOrder, service_id, service_name, customer_id);
+        serviceOrder = serviceOrderEJB.addServiceOrder(serviceOrder, service_id, service_name,service_rate, customer_id);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Order Created Succefully.", "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
         return "frontendCustomerProfile.xhtml?faces-redirect=true";
@@ -120,11 +165,12 @@ public class ServiceOrderController {
 
     public String doCreateInvoice(Long id) throws Exception {
         serviceOrder = serviceOrderEJB.createInvoice(id);
+                
         String machine_name = InetAddress.getLocalHost().getHostName();
         String path_to_desktop = "C:/Documents and Settings/" + machine_name + "/Desktop/";
         PDF pdf = new PDF(
                 new BufferedOutputStream(
-                        new FileOutputStream(path_to_desktop +"invoice_for_orderno_"+serviceOrder.getServiceOrderId()+ ".pdf")));
+                new FileOutputStream(path_to_desktop + "invoice_for_order_no_" + serviceOrder.getServiceOrderId() + ".pdf")));
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
         Date dateobj = new Date();
         Page page = new Page(pdf, A4.PORTRAIT);
@@ -141,7 +187,7 @@ public class ServiceOrderController {
         Font f4 = new Font(pdf, CoreFont.HELVETICA_BOLD);
         f4.setSize(10f);
 
-        TextLine text = new TextLine(f4,"Easy Services");
+        TextLine text = new TextLine(f4, "Easy Services");
         text.setPosition(90, 60);
         // text.setColor(Color.dodgerblue);
         text.drawOn(page);
@@ -226,30 +272,30 @@ public class ServiceOrderController {
         text5.drawOn(page);
 
         TextLine text6 = new TextLine(f2,
-                "INVOICE NO:"+serviceOrder.getServiceOrderId());
+                "INVOICE NO:" + serviceOrder.getServiceOrderId());
         text6.setPosition(450, 70);
         //text6.setColor(Color.dodgerblue);
         text6.drawOn(page);
 
         TextLine text7 = new TextLine(f2,
-                "CUSTOMER NO:"+serviceOrder.getCustomer().getId());
+                "CUSTOMER NO:" + serviceOrder.getCustomer().getId());
         text7.setPosition(450, 80);
         //text7.setColor(Color.dodgerblue);
         text7.drawOn(page);
 
-        TextLine text10 = new TextLine(f2,serviceOrder.getCustomer().getFirstName());
+        TextLine text10 = new TextLine(f2, serviceOrder.getCustomer().getFirstName());
         text10.setPosition(90, 120);
         //text10.setColor(Color.dodgerblue);
         text10.drawOn(page);
 
         TextLine text11 = new TextLine(f2,
-                "Phone No:"+serviceOrder.getCustomer().getPhoneNo());
+                "Phone No:" + serviceOrder.getCustomer().getPhoneNo());
         text11.setPosition(90, 130);
         //text11.setColor(Color.dodgerblue);
         text11.drawOn(page);
 
         TextLine text12 = new TextLine(f2,
-                "Address:"+serviceOrder.getCustomer().getAddress().getStreet()+" " +serviceOrder.getCustomer().getAddress().getStreet()+" " +serviceOrder.getCustomer().getAddress().getZipCode());
+                "Address:" + serviceOrder.getCustomer().getAddress().getStreet() + " " + serviceOrder.getCustomer().getAddress().getStreet() + " " + serviceOrder.getCustomer().getAddress().getZipCode());
         text12.setPosition(90, 140);
         //text12.setColor(Color.dodgerblue);
         text12.drawOn(page);
@@ -271,7 +317,7 @@ public class ServiceOrderController {
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-        
+
         cell = new Cell(f1, "Rate");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
@@ -283,26 +329,35 @@ public class ServiceOrderController {
         row.add(cell);
 
         tableData.add(row);
-
         row = new ArrayList<Cell>();
-        cell = new Cell(f2, "Service Name");
+        cell = new Cell(f2, String.valueOf(serviceOrder.getServiceOrderItem().get(0)));
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
 
-        cell = new Cell(f2,serviceOrder.getStaffRequired());
+        cell = new Cell(f2, serviceOrder.getStaffRequired());
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-        
-        //int noofdays = Integer.parseInt(serviceOrder.getToDate())- Integer.parseInt(serviceOrder.getFromDate());
-        int total = Integer.parseInt(serviceOrder.getHoursPerDay())* Integer.parseInt(serviceOrder.getStaffRequired());
-        cell = new Cell(f2, Integer.toString(total));
+        String dateStart = serviceOrder.getFromDate();
+        String dateStop = serviceOrder.getToDate();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date d1 = null;
+        Date d2 = null;
+        d1 = format.parse(dateStart);
+        d2 = format.parse(dateStop);
+
+        long diff = d2.getTime() - d1.getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long totalhour = diffDays * Integer.parseInt(serviceOrder.getHoursPerDay()) * Integer.parseInt(serviceOrder.getStaffRequired());
+        cell = new Cell(f2, String.valueOf(totalhour));
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-        
-         cell = new Cell(f2, "test");
+        //serviceOrder = serviceOrderEJB.serviceName(serviceOrder());
+       //serviceOrder.getServiceOrderItem().get(0);
+        cell = new Cell(f2,String.valueOf(serviceOrder.getServiceOrderItem()));
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
@@ -312,55 +367,53 @@ public class ServiceOrderController {
         cell.setBottomPadding(5f);
         row.add(cell);
         tableData.add(row);
-        
-        row = new ArrayList<Cell>(); 
+
+        row = new ArrayList<Cell>();
         cell = new Cell(f2, "");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-         cell = new Cell(f2, "");
-        cell.setTopPadding(5f);
-        cell.setBottomPadding(5f);
-        row.add(cell);
-         cell = new Cell(f2, "");
-        cell.setTopPadding(5f);
-        cell.setBottomPadding(5f);
-        row.add(cell);
-         cell = new Cell(f2, "");
-        cell.setTopPadding(5f);
-        cell.setBottomPadding(5f);
-        row.add(cell);
-         cell = new Cell(f2, "");
-        cell.setTopPadding(5f);
-        cell.setBottomPadding(5f);
-        row.add(cell);
-        tableData.add(row);
-        
-       
- 
-        row = new ArrayList<Cell>(); 
         cell = new Cell(f2, "");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-         cell = new Cell(f2, "");
+        cell = new Cell(f2, "");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-         cell = new Cell(f2, "");
+        cell = new Cell(f2, "");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
-         cell = new Cell(f2, "Total Due");
-        cell.setTopPadding(5f);
-        cell.setBottomPadding(5f);
-        row.add(cell);
-         cell = new Cell(f2, "$600");
+        cell = new Cell(f2, "");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
         tableData.add(row);
-        
+
+        row = new ArrayList<Cell>();
+        cell = new Cell(f2, "");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+        cell = new Cell(f2, "");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+        cell = new Cell(f2, "");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+        cell = new Cell(f2, "Total Due");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+        cell = new Cell(f2, "$600");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+        tableData.add(row);
+
         Table table = new Table();
         table.setData(tableData, Table.DATA_HAS_1_HEADER_ROWS);
         table.setLocation(90f, 170f);
@@ -368,7 +421,7 @@ public class ServiceOrderController {
         table.setColumnWidth(1, 100f);
         table.setColumnWidth(2, 100f);
         table.setColumnWidth(3, 100f);
-        
+
         table.setColumnWidth(3, 100f);
         table.wrapAroundCellText();
         // table.wrapAroundCellText2();
@@ -388,24 +441,32 @@ public class ServiceOrderController {
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
-
-    public String doCancelServiceOrder(Long id) {
-        serviceOrderEJB.cancelServiceOrder(id);
+    public String doChangeStatusServiceOrder(Long id, String status) {
+        serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
-
-    public String doChangeStatusServiceOrder(Long id,String status){
-        serviceOrderEJB.changeStatusServiceOrder(id,status);
-        return "listServiceOrders.xhtml?faces-redirect=true";
-    }
-    
-    public String doConfirmServiceOrder(Long id){
-       serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
-       return "confirmServiceOrder.xhtml?faces-redirect=true";
+    public String frontendDoChangeStatusServiceOrder(Long id, String status) {
+        serviceOrderEJB.changeStatusServiceOrder(id, status);
+        return "customerMyOrders.xhtml?faces-redirect=true";
     }
 
-    public String doConfirmServiceOrderCommit(Long id){
+    public String doRescheduleServiceOrder(Long id) {
+        serviceOrder = serviceOrderEJB.rescheduleServiceOrder(id);
+        return "cutomerRescheduleOrder.xhtml?faces-redirect=true";
+    }
+
+    public String doRescheduleServiceOrderCommit(Long id) {
+        serviceOrder = serviceOrderEJB.rescheduleServiceOrderCommit(serviceOrder, id);
+        return "customerMyOrders.xhtml";
+    }
+
+    public String doConfirmServiceOrder(Long id) {
+        serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
+        return "confirmServiceOrder.xhtml?faces-redirect=true";
+    }
+
+    public String doConfirmServiceOrderCommit(Long id) {
         serviceOrder = serviceOrderEJB.confirmServiceOrderCommit(id, staffid);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
@@ -414,7 +475,11 @@ public class ServiceOrderController {
         serviceOrderList = serviceOrderEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
         FacesContext.getCurrentInstance().addMessage(null, infoMsg);
-        return "listServiceOrders.xhtml?faces-redirect=true";
+        return "listServiceOrders.xhtml";
+    }
+
+    public int doSearchServiceOrderByStatusForDashboard(String status, String searchBy) {
+        return serviceOrderEJB.search(status, searchBy).size();
     }
 
 }
