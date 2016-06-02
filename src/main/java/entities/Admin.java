@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Admin entity class.
  */
 package entities;
 
@@ -10,10 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-/**
- *
- * @author Santo
- */
+
 @Entity
 @NamedQueries({
     
@@ -25,7 +20,7 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "findAdminById", query = "select a from Admin a where a.id=:id"),
     
     //update query
-    @NamedQuery(name = "updateAdmin", //query = "update Admin a Set a.email=?1, a.firstName=?2 Where a.id = ?3")
+    @NamedQuery(name = "updateAdmin",
             query="update Admin a Set  a.email = :adEmail, a.firstName = :adFirstName, a.lastName = :adLastName, "
                     + "a.middleName = :adMiddleName, a.password = :adPassword, a.phoneNo = :adPhoneNo, a.qualification = :adQualification, "
                     + "a.status = :adStatus, a.userType = :adUserType, a.address.city = :adCity, a.address.country = :adCountry, "
@@ -38,14 +33,16 @@ public class Admin extends User implements Serializable{
     private String qualification;
     private String status;
     
+    //constructor
     public Admin(){
         
     }
+    
+    //getter  and setter functions for attributes
  
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
-
 
     public String getQualification() {
         return qualification;

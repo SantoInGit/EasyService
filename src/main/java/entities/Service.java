@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Entity class for  Service 
  */
 package entities;
 
@@ -17,17 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-/**
- *
- * @author Santo
- */
 @Entity
 @NamedQueries({
+    //select queries for service search
     @NamedQuery(name = "findAllService", query = "select s from Service s"),
     @NamedQuery(name = "findServiceByServiceName", query = "select s from Service s where UPPER(s.serviceName) LIKE :ServiceName"),
     @NamedQuery(name = "findServiceByCategory", query = "select s from Service s JOIN s.serviceCategory sc where sc.serviceCategoryId = :Category"),
     @NamedQuery(name = "findServiceByStatus", query = "select s from Service s where UPPER(s.status) LIKE :Status"),
-//update query
+    //update query for service update
     @NamedQuery(name = "updateService", 
             query="UPDATE Service a SET  "
                     + "a.description = :serDescription, "
@@ -55,26 +50,60 @@ public class Service implements Serializable {
     private ServiceCategory serviceCategory;
     
 
-
+    //constrcutoer
     public Service() {
     }
 
+    //getter and setter functions
+    //get and set service category
     public ServiceCategory getServiceCategory() {
         return serviceCategory;
     }
-
     public void setServiceCategory(ServiceCategory serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
     
+    //get and set service id
     public Long getServiceId() {
         return serviceId;
     }
-
     public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
     }
 
+    //get and set for service name
+    public String getServiceName() {
+        return serviceName;
+    }
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    //get and set function for rate per hour
+    public Float getRatePerHour() {
+        return ratePerHour;
+    }
+    public void setRatePerHour(Float ratePerHour) {
+        this.ratePerHour = ratePerHour;
+    }
+
+    //get and set function for service description
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    //get and set function for service status
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    //auto generated codes
     @Override
     public int hashCode() {
         int hash = 0;
@@ -100,36 +129,5 @@ public class Service implements Serializable {
         return "entities.Service[ id=" + serviceId + " ]";
     }
 
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    public Float getRatePerHour() {
-        return ratePerHour;
-    }
-
-    public void setRatePerHour(Float ratePerHour) {
-        this.ratePerHour = ratePerHour;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
     
 }

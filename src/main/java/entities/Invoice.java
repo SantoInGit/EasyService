@@ -18,10 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Santo
- */
+
 @Entity
 public class Invoice implements Serializable {
 
