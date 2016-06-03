@@ -103,7 +103,7 @@
 
                                         <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'Completed'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
 
-                                        <h:commandButton class="btn btn-primary" value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
+                                        <h:commandButton class="btn btn-primary" value="Confirm" rendered = "#{serviceOrder.serviceOrderStatus eq 'processing' or serviceOrder.serviceOrderStatus eq 'Rescheduled'}" action="#{serviceOrderController.doConfirmServiceOrder(serviceOrder.serviceOrderId)}"/>
 
                                         <h:commandButton class="btn btn-primary" value="Complete" rendered="#{serviceOrder.serviceOrderStatus ne 'Completed' and serviceOrder.serviceOrderStatus ne 'Cancelled' and serviceOrder.serviceOrderStatus ne 'processing'}" action="#{serviceOrderController.doChangeStatusServiceOrder(serviceOrder.serviceOrderId,'completed')}"/>
                                     </h:form>

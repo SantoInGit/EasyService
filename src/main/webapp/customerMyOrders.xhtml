@@ -90,8 +90,8 @@
                                             </f:facet>
                                             <h:form>
                                                 <h:commandButton class="btn btn-primary" value="Details" action="#{entityEditController.frontendDoVeiwDetails(serviceOrder.serviceOrderId, 'serviceOrder')}"/>
-                                                <h:commandButton class="btn btn-primary" value="Re-Schedule" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.doRescheduleServiceOrder(serviceOrder.serviceOrderId)}"/>
-                                                <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus eq 'processing'}" action="#{serviceOrderController.frontendDoChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
+                                                <h:commandButton class="btn btn-primary" value="Re-Schedule" rendered="#{serviceOrder.serviceOrderStatus eq 'processing' or serviceOrder.serviceOrderStatus eq 'Rescheduled'}" action="#{serviceOrderController.doRescheduleServiceOrder(serviceOrder.serviceOrderId)}"/>
+                                                <h:commandButton class="btn btn-primary" value="Cancel" rendered="#{serviceOrder.serviceOrderStatus eq 'processing' or serviceOrder.serviceOrderStatus eq 'Rescheduled'}" action="#{serviceOrderController.frontendDoChangeStatusServiceOrder(serviceOrder.serviceOrderId,'Cancelled')}"/>
                                                 <h:commandButton class="btn btn-primary" value="Rate/Feedback" rendered="#{serviceOrder.serviceOrderStatus eq 'Completed'}" action="#{rateNFeedbackController.doCreateRateNFeedback(serviceOrder.serviceOrderId)}"/>
 
                                             </h:form>

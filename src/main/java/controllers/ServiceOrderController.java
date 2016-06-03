@@ -327,12 +327,17 @@ public class ServiceOrderController {
         List<List<Cell>> tableData = new ArrayList<List<Cell>>();
 
         List<Cell> row = new ArrayList<Cell>();
-        Cell cell = new Cell(f1, "Description");
+        Cell cell = new Cell(f1, "OrderID");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+        
+        cell = new Cell(f1, "Description");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
 
-        cell = new Cell(f1, "Number of Staff");
+        cell = new Cell(f1, "Start/End date");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
@@ -354,12 +359,17 @@ public class ServiceOrderController {
 
         tableData.add(row);
         row = new ArrayList<Cell>();
+        cell = new Cell(f2, getServiceItemName(serviceOrder.getServiceOrderId().toString()));
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+        
         cell = new Cell(f2, getServiceItemName(serviceOrder.getServiceOrderItem().get(0).toString()));
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
 
-        cell = new Cell(f2, serviceOrder.getStaffRequired());
+        cell = new Cell(f2, serviceOrder.getFromDate()+"  /  "+serviceOrder.getToDate());
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
@@ -415,6 +425,10 @@ public class ServiceOrderController {
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
+        cell = new Cell(f2, "");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
         tableData.add(row);
 
         row = new ArrayList<Cell>();
@@ -427,6 +441,10 @@ public class ServiceOrderController {
         cell.setBottomPadding(5f);
         row.add(cell);
         cell = new Cell(f2, "");
+        cell.setTopPadding(5f);
+        cell.setBottomPadding(5f);
+        row.add(cell);
+         cell = new Cell(f2, "");
         cell.setTopPadding(5f);
         cell.setBottomPadding(5f);
         row.add(cell);
@@ -443,12 +461,13 @@ public class ServiceOrderController {
         Table table = new Table();
         table.setData(tableData, Table.DATA_HAS_1_HEADER_ROWS);
         table.setLocation(90f, 170f);
-        table.setColumnWidth(0, 100f);
-        table.setColumnWidth(1, 100f);
+        table.setColumnWidth(0,50f);
+        table.setColumnWidth(1, 70f);
         table.setColumnWidth(2, 100f);
-        table.setColumnWidth(3, 100f);
+        table.setColumnWidth(3, 70f);
+        table.setColumnWidth(4, 70f);
 
-        table.setColumnWidth(3, 100f);
+        table.setColumnWidth(5, 100f);
         table.wrapAroundCellText();
         // table.wrapAroundCellText2();
 
