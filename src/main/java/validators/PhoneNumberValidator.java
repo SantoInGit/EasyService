@@ -11,6 +11,10 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ *
+ * A validator class to validate the numbers provided by users as 10 digit phone number
+ */
 @FacesValidator("validators.PhoneNumberValidator")
 public class PhoneNumberValidator implements Validator {
 
@@ -19,6 +23,9 @@ public class PhoneNumberValidator implements Validator {
     private Pattern pattern;
     private Matcher matcher;
 
+    /**
+     * Default constructor
+     */
     public PhoneNumberValidator() {
         pattern = Pattern.compile(PHONE_NUMBER_PATTERN);
     }

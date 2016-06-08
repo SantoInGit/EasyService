@@ -18,11 +18,21 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.event.ComponentSystemEvent;
 
+/**
+ *
+ * AdminLogInOutController:
+ * A session scoped controller to handle the log in and log out functionality of the admin. The variables in this
+ * class are put in the session scope which can live for a single session
+ */
 @Named(value = "adminLogInOutController")
 @SessionScoped
 public class AdminLogInOutController implements Serializable {
 
     //controller
+
+    /**
+     *Default constructor
+     */
     public AdminLogInOutController() {
     }
 
@@ -34,38 +44,75 @@ public class AdminLogInOutController implements Serializable {
     private String email, password;
 
     //setter and getter function
+
+    /**
+     *
+     * @param loggedIn to set the attribute loggedIn
+     */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
     //set and get admin object
+
+    /**
+     *
+     * @return the admin object
+     */
     public Admin getAdmin() {
         return admin;
     }
 
+    /**
+     *
+     * @param admin to set the attribute admin
+     */
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
     //set and get email
+
+    /**
+     *
+     * @return  email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email to set the attribute email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
     //set and get password
+
+    /**
+     *
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password to set the attribute password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
     //function to handle the login fucntionality of an admin.
+
+    /**
+     * function to handle the login fucntionality of an admin.
+     * @return string: name of the page as per the success / failure of login
+     */
     public String doLogInAdmin() {
         //set login related messages
         FacesMessage logInSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Succesful! ", "");
@@ -108,6 +155,11 @@ public class AdminLogInOutController implements Serializable {
     }
 
     //function for admin logout
+
+    /**
+     * function for admin logout
+     * @return string: name of the page after admin logs out
+     */
     public String doLogOutAdmin() {
         loggedIn = false;
         FacesMessage logOutSuccess = new FacesMessage(FacesMessage.SEVERITY_INFO, "Log out success! ", "");
@@ -115,11 +167,19 @@ public class AdminLogInOutController implements Serializable {
         return "loginAdmin.xhtml?faces-redirect=true";
     }
 
+    /**
+     *
+     * @return boolean loggedIn attribute
+     */
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
     //function to redirect admin to the dashboard if admin is logged in and types other url address of pages
+
+    /**
+     * function to redirect admin to the dashboard if admin is logged in and types other url address of pages
+     */
     public void forwardToDashboardIfLogIn() {
         FacesContext fc = FacesContext.getCurrentInstance();
         if (loggedIn) {
@@ -131,6 +191,11 @@ public class AdminLogInOutController implements Serializable {
     }
 
     //function to redirect admin to login page if admin is not logged in and types other url address of pages
+
+    /**
+     * function to redirect admin to login page if admin is not logged in and types other url address of pages
+     * @param cse
+     */
     public void forwardToLoginIfNotLoggedIn(ComponentSystemEvent cse) {
         FacesContext fc = FacesContext.getCurrentInstance();
 

@@ -8,27 +8,33 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import entities.Staff;
-import javax.persistence.TemporalType;
 
+/**
+ *
+ * A stateless enterprise java bean to handle all the business logic related to staff object
+ */
 @Stateless
 public class StaffEJB {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    //persistence context name for database persistence   
     @PersistenceContext(unitName = "EASYSERVICES_PU")
     private EntityManager em;
 
-    // ======================================
-    // =           Public Methods           =
-    // ======================================
+    /**
+     * Business logic to find all the persisted staff objects and return the list of these objects
+     * @return list of staff objects
+     */
     public List<Staff> listStaffs() {
         // TODO not implemented with eclipselink 2.0 TypedQuery query = em.createNamedQuery("findAllBooks", Book.class);
         TypedQuery<Staff> query = em.createNamedQuery("findAllStaff", Staff.class);
         return query.getResultList();
     }
 
+    /**
+     * Business logic to update an staff object
+     * @param staff to be passed to be updated its attributes
+     * @return the currently edited staff object
+     */
     public int editStaffCommit(Staff staff) {
         TypedQuery<Staff> query = em.createNamedQuery("updateStaff", Staff.class);
 
@@ -54,6 +60,12 @@ public class StaffEJB {
         return query.executeUpdate();
     }
 
+    /**
+     * Business logic to return a list of staff who are not assigned yet in any service order
+     * @param fromDate to set the fromDate parameter
+     * @param toDate to set the toDate parameter
+     * @return list of unassigned staff
+     */
     public List<Staff> getUnAssignedStaff(String fromDate, String toDate) {
         TypedQuery<Staff> query = em.createNamedQuery("findAllUnAssignedStaffs", Staff.class);
         query.setParameter("stStatus", "Assigned");
@@ -63,20 +75,38 @@ public class StaffEJB {
 
     }
 
+    /**
+     *
+     * @param staff to be passed to be persisted in the database
+     * @return the currently persisted staff object
+     */
     public Staff addStaff(Staff staff) {
         em.persist(staff);
         return staff;
     }
 
+    /**
+     * Business logic to delete an staff object
+     * @param id to be passed to find the staff object to be deleted from the database
+     */
     public void deleteStaff(Long id) {
         em.remove(getStaff(id));
     }
 
+    /**
+     *
+     * @param staff_id to be passed to find the staff object in the database
+     * @return the currently found staff object
+     */
     public Staff getStaff(Long staff_id) {
         Staff staff = em.find(Staff.class, staff_id);
         return staff;
     }
 
+    /**
+     * Function to find a staff object by id passed as parameter
+     * @return the currently found staff object
+     */
     public Staff getStaffByParamId() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = params.get("staff_id");
@@ -84,6 +114,12 @@ public class StaffEJB {
         return this.getStaff(staff_id);
     }
 
+     /**
+     * Business logic to search an staff object
+     * @param search to passed to set the search text
+     * @param searchBy to be passed to select the search method
+     * @return list of staff object which follow the search condition
+     */
     public List<Staff> search(String search, String searchBy) {
         TypedQuery<Staff> query = em.createNamedQuery("findStaffBy" + searchBy, Staff.class);
         //changed all upper case as in query field, set field name to upper case

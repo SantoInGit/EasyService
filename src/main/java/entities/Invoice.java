@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package entities;
 
 import java.io.Serializable;
@@ -18,7 +14,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
+/**
+ *
+ * An entity class to represent an invoice object
+ */
 @Entity
 public class Invoice implements Serializable {
 
@@ -36,37 +35,72 @@ public class Invoice implements Serializable {
     private ServiceOrder serviceOrder;
     private Float price;
 
+    /**
+     * Default constructor
+     */
     public Invoice() {
     }
     
-
+    /**
+     *
+     * @return invoiceId
+     */
     public Long getInvoiceId() {
         return invoiceId;
     }
 
+    /**
+     *
+     * @param invoiceId to set the attribute invoiceId
+     */
     public void setInvoiceId(Long invoiceId) {
         this.invoiceId = invoiceId;
     }
+
+    /**
+     *
+     * @return invoiceDate
+     */
     public Date getInvoiceDate() {
         return invoiceDate;
     }
 
+    /**
+     *
+     * @param invoiceDate to set the attribute invoiceDate
+     */
     public void setInvoiceDate(Date invoiceDate) {
         this.invoiceDate = invoiceDate;
     }
 
+    /**
+     *
+     * @return serviceOrder
+     */
     public ServiceOrder getServiceOrder() {
         return serviceOrder;
     }
 
+    /**
+     *
+     * @param serviceOrder to set the attribute serviceOrder 
+     */
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
 
+    /**
+     *
+     * @return price
+     */
     public Float getPrice() {
         return price;
     }
 
+    /**
+     *
+     * @param price to set the attribute price
+     */
     public void setPrice(Float price) {
         this.price = price;
     }

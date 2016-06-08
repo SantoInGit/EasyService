@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+/**
+ *
+ * An entity class to represent customer object
+ */
 @Entity
 @NamedQueries({
     //select queries for customers
@@ -34,20 +38,37 @@ public class Customer extends User implements Serializable {
     private String status = "Active";
 
     //constructors
+
+    /**
+     * Default constructor
+     */
     
     public Customer() {
 
     }
 
     //getter and setter functions
+
+    /**
+     *
+     * @return serialVersionUID
+     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
+    /**
+     *
+     * @return status
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status to set the attribute status
+     */
     public void setStatus(String status) {
         this.status = status;
     }

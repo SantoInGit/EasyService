@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-
+/**
+ *
+ * An entity class to represent a service category object
+ */
 @Entity
 @NamedQueries({
     //select queries for service category search
@@ -41,47 +44,101 @@ public class ServiceCategory implements Serializable {
     private String status;
     
     //constructor
+
+    /**
+     * Default constructor
+     */
     public ServiceCategory() {
     }
     
     //getter and setter funtions
     
     //get and set function for category id
+
+    /**
+     *
+     * @return serviceCategoryId
+     */
     public Long getServiceCategoryId() {
         return serviceCategoryId;
     }
+
+    /**
+     *
+     * @param id to set the attribute serviceCategoryId
+     */
     public void setServiceCategoryId(Long id) {
         this.serviceCategoryId = id;
     }
 
     //get and set function for service category name
+
+    /**
+     *
+     * @return serviceCategoryName
+     */
     public String getServiceCategoryName() {
         return serviceCategoryName;
     }
+
+    /**
+     *
+     * @param serviceCategoryName to set the attribute serviceCategoryName
+     */
     public void setServiceCategoryName(String serviceCategoryName) {
         this.serviceCategoryName = serviceCategoryName;
     }
 
     //get and set function for service category short description
+
+    /**
+     *
+     * @return shortDescription
+     */
     public String getShortDescription() {
         return shortDescription;
     }
+
+    /**
+     *
+     * @param shortDescription to set the attribute shortDescription
+     */
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
     }
 
     //get and set function for service category long description
+
+    /**
+     *
+     * @return longDescription
+     */
     public String getLongDescription() {
         return longDescription;
     }
+
+    /**
+     *
+     * @param longDescription to set the attribute longDescription
+     */
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
     }
 
     //get and set function for service category status
+
+    /**
+     *
+     * @return status
+     */
     public String getStatus() {
         return status;
     }
+
+    /**
+     *
+     * @param status to set the attribute status
+     */
     public void setStatus(String status) {
         this.status = status;
     }

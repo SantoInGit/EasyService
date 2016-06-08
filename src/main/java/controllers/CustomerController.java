@@ -10,12 +10,18 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entities.Customer;
 
+/**
+ *
+ * CustomerController:
+ * A controller to handle all the operations that a customer can perform on the system after the customer has logged in
+ * in the the system. It is a request scoped managed bean which connects the related views with the model(ejbs and entities)
+ */
 @Named(value = "customerController")
 @RequestScoped
 public class CustomerController {
 
     /**
-     * Creates a new instance of CustomerController
+     * Default constructor
      */
     public CustomerController() {
     }
@@ -28,6 +34,11 @@ public class CustomerController {
     private String searchBy = "";
     private String from = "Backend";
 
+    /**
+     * Function to create a new customer. 
+     * It creates a new customer and persist into the database only if the customer has not already existed.
+     * @return
+     */
     public String doCreateCustomer() {
         /**
          * check existing customer before registration
@@ -50,19 +61,36 @@ public class CustomerController {
         }
     }
 
+    /**
+     *
+     * @return string from
+     */
     public String getFrom() {
         return from;
     }
 
+    /**
+     *
+     * @param from to set the attribute from
+     */
     public void setFrom(String from) {
         this.from = from;
     }
 
+    /**
+     * Function to delete a customer from the database
+     * @param id to be passed to find customer
+     * @return string: page to be rendered
+     */
     public String doDeleteCustomer(Long id) {
         customerEJB.deleteCustomer(id);
         return "listCustomers.xhtml?faces-redirect=true";
     }
 
+    /**
+     * function to search a customer
+     * @return string: page to be rendered after succesful search
+     */
     public String doSearch() {
         customerList = customerEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
@@ -70,6 +98,10 @@ public class CustomerController {
         return "listCustomers.xhtml?faces-redirect=true";
     }
 
+    /**
+     *
+     * @return
+     */
     public String doLogInCustomer() {
 
         return "customerProfile.xhtml?faces-redirect=true";
@@ -77,7 +109,7 @@ public class CustomerController {
 
     /**
      *
-     * @return String
+     * @return String searchBy
      */
     public String getSearchBy() {
         return searchBy;
@@ -85,7 +117,7 @@ public class CustomerController {
 
     /**
      *
-     * @param searchBy
+     * @param searchBy to set the attribute searchBy
      */
     public void setSearchBy(String searchBy) {
         this.searchBy = searchBy;
@@ -93,7 +125,7 @@ public class CustomerController {
 
     /**
      *
-     * @return String
+     * @return String search
      */
     public String getSearch() {
         return search;
@@ -101,30 +133,51 @@ public class CustomerController {
 
     /**
      *
-     * @param search
+     * @param search to set the attribute search
      */
     public void setSearch(String search) {
         this.search = search;
     }
 
+    /**
+     *
+     * @return a customer object
+     */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     *
+     * @param customer to set the attribute customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
+    /**
+     * function to find a customer by customer id
+     * @param customer_id to be passed to find a customer
+     * @return a customer object
+     */
     public Customer getCustomerById(Long customer_id) {
         customer = customerEJB.getCustomer(customer_id);
         return customer;
     }
 
+    /**
+     * function to find a customer by id passed in parameter
+     * @return a customer object
+     */
     public Customer getCustomerByParamId() {
         customer = customerEJB.getCustomerByParamId();
         return customer;
     }
 
+    /**
+     * function to return a list of customer object
+     * @return list of customer object
+     */
     public List<Customer> getCustomerList() {
         if (this.search.isEmpty()) {
             customerList = customerEJB.listCustomers();
@@ -133,8 +186,8 @@ public class CustomerController {
     }
 
     /**
-     *
-     * @param customerList
+     * 
+     * @param customerList to set the attribute customerList
      */
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;

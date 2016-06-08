@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A Validator class for email
  */
 package validators;
 
@@ -15,6 +13,10 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ *
+ * A validator class to validate the email address provided by the users
+ */
 @FacesValidator("validators.EmailValidator")
 public class EmailValidator implements Validator {
 
@@ -25,10 +27,14 @@ public class EmailValidator implements Validator {
     private Pattern pattern;
     private Matcher matcher;
 
+    /**
+     * Default constructor
+     */
     public EmailValidator() {
         pattern = Pattern.compile(EMAIL_PATTERN);
     }
 
+    
     @Override
     public void validate(FacesContext context, UIComponent component,
             Object value) throws ValidatorException {

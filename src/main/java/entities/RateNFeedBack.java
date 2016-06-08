@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+/**
+ *
+ * An entity class to represent a rate and feedback object
+ */
 @Entity
 @NamedQueries({
     //select query to search all rate and feedbacks 
@@ -29,41 +33,91 @@ public class RateNFeedBack implements Serializable {
     
     //getter and setter functions
     //get and set rate and feedback id
+
+    /**
+     *
+     * @return id
+     */
     public Long getId() {
         return id;
     }
+
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
     
     //get and set the feedback note by customer
+
+    /**
+     *
+     * @return feedbackNote
+     */
     public String getFeedbackNote() {
         return feedbackNote;
     }
+
+    /**
+     *
+     * @param feedbackNote to set the attribute feedbackNote
+     */
     public void setFeedbackNote(String feedbackNote) {
         this.feedbackNote = feedbackNote;
     }
 
     //get and set the rating value
+
+    /**
+     *
+     * @return rating
+     */
     public String getRating() {
         return rating;
     }
+
+    /**
+     *
+     * @param rating to set the attribute rating
+     */
     public void setRating(String rating) {
         this.rating = rating;
     }
     
     //get and set the customer name who made the feedback
+
+    /**
+     *
+     * @return customerName
+     */
     public String getCustomerName() {
         return customerName;
     }
+
+    /**
+     *
+     * @param customerName to set the attribute customerName
+     */
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
     //get and set the serviceorder for which the feedback is made
+
+    /**
+     *
+     * @return serviceOrderId
+     */
     public Long getServiceOrderId() {
         return serviceOrderId;
     }
+
+    /**
+     *
+     * @param serviceOrderId to set the attribute serviceOrderId
+     */
     public void setServiceOrderId(Long serviceOrderId) {
         this.serviceOrderId = serviceOrderId;
     }

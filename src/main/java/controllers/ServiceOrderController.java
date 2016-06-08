@@ -29,12 +29,20 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.context.ExternalContext;
 
+/**
+ *
+ * A request scoped controller to handle all the operations related to service order object
+ */
 @Named(value = "serviceOrderController")
 @RequestScoped
 public class ServiceOrderController {
 
+    /**
+     * Default constructor
+     */
     public ServiceOrderController() {
     }
+    //EJB injection
     @EJB
     private ServiceOrderEJB serviceOrderEJB;
     private static ServiceOrder serviceOrder = new ServiceOrder();
@@ -43,18 +51,34 @@ public class ServiceOrderController {
     private List<ServiceOrder> frontendServiceOrderList = new ArrayList<>();
     private List<String> staffid = new ArrayList<>();
 
+    /**
+     *
+     * @return
+     */
     public List<String> getStaffid() {
         return staffid;
     }
 
+    /**
+     *
+     * @return
+     */
     public ServiceOrder getServiceOrderBook() {
         return serviceOrderBook;
     }
 
+    /**
+     *
+     * @param serviceOrderBook
+     */
     public void setServiceOrderBook(ServiceOrder serviceOrderBook) {
         this.serviceOrderBook = serviceOrderBook;
     }
 
+    /**
+     * Function to list the service orders made by customer in the frontend
+     * @return string: name of the page to be rendered
+     */
     public List<ServiceOrder> getFrontendServiceOrderList() {
 //        MailController sender = new MailController();
 //        sender.sendSimpleMail();
@@ -78,10 +102,18 @@ public class ServiceOrderController {
         return frontendServiceOrderList;
     }
 
+    /**
+     *
+     * @param frontendServiceOrderList to set the attribute frontendServiceOrderList
+     */
     public void setFrontendServiceOrderList(List<ServiceOrder> frontendServiceOrderList) {
         this.frontendServiceOrderList = frontendServiceOrderList;
     }
 
+    /**
+     *
+     * @param staffid
+     */
     public void setStaffid(List<String> staffid) {
         this.staffid = staffid;
     }
@@ -93,6 +125,11 @@ public class ServiceOrderController {
     private String service_rate;
     private String customer_id;
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public String getServiceItemName(String s) {
         String serOrderItem = s;
 
@@ -100,6 +137,11 @@ public class ServiceOrderController {
         return serOrderItemArray[0];
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public String getServiceItemRate(String s) {
         String serOrderItem = s;
 
@@ -107,46 +149,90 @@ public class ServiceOrderController {
         return serOrderItemArray[1];
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCustomer_id() {
         return customer_id;
     }
 
+    /**
+     *
+     * @param customer_id
+     */
     public void setCustomer_id(String customer_id) {
         this.customer_id = customer_id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getService_name() {
         return service_name;
     }
 
+    /**
+     *
+     * @param service_name
+     */
     public void setService_name(String service_name) {
         this.service_name = service_name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getService_rate() {
         return service_rate;
     }
 
+    /**
+     *
+     * @param service_rate
+     */
     public void setService_rate(String service_rate) {
         this.service_rate = service_rate;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getService_id() {
         return service_id;
     }
 
+    /**
+     *
+     * @param service_id
+     */
     public void setService_id(int service_id) {
         this.service_id = service_id;
     }
 
+    /**
+     *
+     * @return
+     */
     public ServiceOrder getServiceOrder() {
         return serviceOrder;
     }
 
+    /**
+     *
+     * @param serviceOrder
+     */
     public void setServiceOrder(ServiceOrder serviceOrder) {
         ServiceOrderController.serviceOrder = serviceOrder;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<ServiceOrder> getServiceOrderList() {
         if (this.search.isEmpty()) {
             serviceOrderList = serviceOrderEJB.listServiceOrders();
@@ -154,26 +240,50 @@ public class ServiceOrderController {
         return serviceOrderList;
     }
 
+    /**
+     *
+     * @param serviceOrderList
+     */
     public void setServiceOrderList(List<ServiceOrder> serviceOrderList) {
         this.serviceOrderList = serviceOrderList;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSearchBy() {
         return searchBy;
     }
 
+    /**
+     *
+     * @param searchBy
+     */
     public void setSearchBy(String searchBy) {
         this.searchBy = searchBy;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSearch() {
         return search;
     }
 
+    /**
+     *
+     * @param search
+     */
     public void setSearch(String search) {
         this.search = search;
     }
 
+    /**
+     * Function to create serviceOrder object and persist to the database
+     * @return string: name of the page to be rendered
+     */
     public String doCreateServiceOrder() {
 
         serviceOrderBook = serviceOrderEJB.addServiceOrder(serviceOrderBook, service_id, service_name, service_rate, customer_id);
@@ -182,11 +292,22 @@ public class ServiceOrderController {
         return "frontendCustomerProfile.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to delete serviceOrder object
+     * @param id to be passed to find service order object
+     * @return string: name of the page to be rendered
+     */
     public String doDeleteServiceOrder(Long id) {
         serviceOrderEJB.deleteServiceOrder(id);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to create invoice as per the service order made by customer
+     * @param id to be passed to find the service order object
+     * @return string: name of the page to be rendered
+     * @throws Exception
+     */
     public String doCreateInvoice(Long id) throws Exception {
         serviceOrder = serviceOrderEJB.createInvoice(id);
 
@@ -486,36 +607,72 @@ public class ServiceOrderController {
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to change the status of the service order 
+     * @param id to be passed to find service order object
+     * @param status to be passed to set the status of the service order
+     * @return string: name of the page to be rendered
+     */
     public String doChangeStatusServiceOrder(Long id, String status) {
         serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to change the status of service order in the customer side front end
+     * @param id to be passed to find the service orders made by the customer
+     * @param status to be passed to set the status of the service order
+     * @return string: name of the page to be rendered
+     */
     public String frontendDoChangeStatusServiceOrder(Long id, String status) {
         serviceOrderEJB.changeStatusServiceOrder(id, status);
         return "customerMyOrders.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to find a service order to reschedule
+     * @param id to be passed to find service order object
+     * @return string: name of the page to be rendered
+     */
     public String doRescheduleServiceOrder(Long id) {
         serviceOrder = serviceOrderEJB.rescheduleServiceOrder(id);
         return "cutomerRescheduleOrder.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to perform reschedule of the service order
+     * @param id to be passed to find service order object
+     * @return string: name of the page to be rendered
+     */
     public String doRescheduleServiceOrderCommit(Long id) {
         serviceOrder = serviceOrderEJB.rescheduleServiceOrderCommit(serviceOrder, id);
         return "customerMyOrders.xhtml";
     }
 
+    /**
+     * Function to find the service order object to confirm the oreder
+     * @param id to be passed to find the service order object
+     * @return string: name of the page to be rendered
+     */
     public String doConfirmServiceOrder(Long id) {
         serviceOrder = serviceOrderEJB.confirmServiceOrder(id);
         return "confirmServiceOrder.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to confirm the service order
+     * @param id to be passed to find service order object
+     * @return string: name of the page to be rendered
+     */
     public String doConfirmServiceOrderCommit(Long id) {
         serviceOrder = serviceOrderEJB.confirmServiceOrderCommit(id, staffid);
         return "listServiceOrders.xhtml?faces-redirect=true";
     }
 
+    /**
+     *
+     * @return
+     */
     public String doSearch() {
         serviceOrderList = serviceOrderEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
@@ -523,6 +680,12 @@ public class ServiceOrderController {
         return "listServiceOrders.xhtml";
     }
 
+    /**
+     *
+     * @param status
+     * @param searchBy
+     * @return
+     */
     public int doSearchServiceOrderByStatusForDashboard(String status, String searchBy) {
         return serviceOrderEJB.search(status, searchBy).size();
     }

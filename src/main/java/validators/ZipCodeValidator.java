@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package validators;
 
 import java.util.regex.Matcher;
@@ -15,6 +11,10 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ *
+ * A validator class to validate the zipcode provided is of 4 digit number
+ */
 @FacesValidator("validators.ZipCodeValidator")
 public class ZipCodeValidator implements Validator {
 
@@ -23,6 +23,9 @@ public class ZipCodeValidator implements Validator {
     private Pattern pattern;
     private Matcher matcher;
 
+    /**
+     * Default constructor
+     */
     public ZipCodeValidator() {
         pattern = Pattern.compile(ZIP_PATTERN);
     }

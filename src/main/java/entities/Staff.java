@@ -14,7 +14,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
+/**
+ *
+ * An entity class to represent a staff object
+ */
 @Entity
 @NamedQueries({
     //select queries for staffs
@@ -60,58 +63,115 @@ public class Staff extends User implements Serializable {
     private List<ServiceOrderItem> serviceOrderItem;
 
     //constructor
+
+    /**
+     * Default constructor
+     */
     public Staff() {
     }
 
     //getter and setter functions for staff attributes
+
+    /**
+     *
+     * @return serialVersionUID
+     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
+    /**
+     *
+     * @return qualification
+     */
     public String getQualification() {
         return qualification;
     }
 
+    /**
+     *
+     * @param qualification to set the attribute qualification
+     */
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
 
+    /**
+     *
+     * @return jobTitle
+     */
     public String getJobTitle() {
         return jobTitle;
     }
 
+    /**
+     *
+     * @param jobTitle to set the attribute jobTitle
+     */
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
+    /**
+     *
+     * @return fromDate
+     */
     public String getFromDate() {
         return fromDate;
     }
 
+    /**
+     *
+     * @param fromDate to set the attribute fromDate
+     */
     public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }
 
+    /**
+     *
+     * @return toDate
+     */
     public String getToDate() {
         return toDate;
     }
 
+    /**
+     *
+     * @param toDate to set the attribute toDate
+     */
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
 
+    /**
+     *
+     * @return status
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status to set the attribute status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     *
+     * @return serviceOrderItem list
+     */
     public List<ServiceOrderItem> getServiceOrderItem() {
         return serviceOrderItem;
     }
 
+    /**
+     *
+     * @param serviceOrderItem to set the attribute serviceOrderItem
+     */
     public void setServiceOrderItem(List<ServiceOrderItem> serviceOrderItem) {
         this.serviceOrderItem = serviceOrderItem;
     }

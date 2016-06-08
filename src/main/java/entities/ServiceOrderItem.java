@@ -11,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
+/**
+ *
+ * An entity class to represent a service order item object
+ */
 @Entity
 public class ServiceOrderItem implements Serializable {
 
@@ -24,38 +27,80 @@ public class ServiceOrderItem implements Serializable {
     private String serviceStatus;
 
     //constructor
+
+    /**
+     *Default constructor
+     */
     public ServiceOrderItem() {
     }   
     
     //getter and setter fucntions
     //get and set order item id
+
+    /**
+     *
+     * @return orderItemId
+     */
     public Long getOrderItemId() {
         return orderItemId;
     }
+
+    /**
+     *
+     * @param orderItemId to set the attribute orderItemId
+     */
     public void setOrderItemId(Long orderItemId) {
         this.orderItemId = orderItemId;
     }
 
+    /**
+     *
+     * @return orderItemRate
+     */
     public String getOrderItemRate() {
         return orderItemRate;
     }
 
+    /**
+     *
+     * @param orderItemRate to set the attribute orderItemRate
+     */
     public void setOrderItemRate(String orderItemRate) {
         this.orderItemRate = orderItemRate;
     }
     
     //get and set order item name
+
+    /**
+     *
+     * @return to set the attribute orderItemName
+     */
     public String getOrderItemName() {
         return orderItemName;
     }
+
+    /**
+     *
+     * @param orderItemName to set the attribute orderItemName
+     */
     public void setOrderItemName(String orderItemName) {
         this.orderItemName = orderItemName;
     }
 
     //get and set the status of the order item
+
+    /**
+     *
+     * @return serviceStatus
+     */
     public String getServiceStatus() {
         return serviceStatus;
     }
+
+    /**
+     *
+     * @param serviceStatus to set the attribute serviceStatus
+     */
     public void setServiceStatus(String serviceStatus) {
         this.serviceStatus = serviceStatus;
     }

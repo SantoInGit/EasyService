@@ -17,6 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.TypedQuery;
 
+/**
+ *
+ * A stateless enterprise java bean to handle all the business logic related to service order object
+ */
 @Stateless
 public class ServiceOrderEJB {
 
@@ -24,26 +28,50 @@ public class ServiceOrderEJB {
     private EntityManager em;
     private static ServiceOrder serviceOrder;
 
+    /**
+     * Business logic to list all service orders
+     * @return list of all service orders
+     */
     public List<ServiceOrder> listServiceOrders() {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findAllServiceOrders", ServiceOrder.class);
         return query.getResultList();
     }
 
+    /**
+     * Business logic to find the list of service order made by customer with id passed in parameter
+     * @param id to set the parameter id to find the customer
+     * @return
+     */
     public List<ServiceOrder> customerListServiceOrders(Long id) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrdersByCustomer", ServiceOrder.class);
         query.setParameter("CID", id);
         return query.getResultList();
     }
 
+    /**
+     * Business login to persist service order object
+     * @param serviceOrder to be passed to be persisted in the database
+     * @return the currently persisted service order object
+     */
     public ServiceOrder addServiceOrder(ServiceOrder serviceOrder) {
         em.persist(serviceOrder);
         return serviceOrder;
     }
 
+    /**
+     * Business logic to delete an service order object
+     * @param id to be passed to find the service order object to be deleted from the database
+     */
     public void deleteServiceOrder(Long id) {
         em.remove(getServiceOrder(id));
     }
 
+    /**
+     * Business logic to change the status of the service order as per the status parameter passed
+     * @param id to find service order object
+     * @param status to set the status of the service order
+     * @return
+     */
     public int changeStatusServiceOrder(Long id, String status) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("changeServiceOrderStatus", ServiceOrder.class);
         switch (status.toLowerCase()) {
@@ -72,6 +100,11 @@ public class ServiceOrderEJB {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public ServiceOrder createInvoice(Long id) {
 
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrderByOrderId", ServiceOrder.class);
@@ -79,16 +112,30 @@ public class ServiceOrderEJB {
         return query.getSingleResult();
     }
     
-    
-
+    /**
+     *
+     * @param id to be passed to find the service order object in the database
+     * @return the currently found service order object
+     */
     public ServiceOrder getServiceOrder(Long id) {
         return em.find(ServiceOrder.class, id);
     }
 
+    /**
+     *
+     * Function to find the service order of given id
+     * @return service order object of provided id
+     */
     public ServiceOrder rescheduleServiceOrder(Long id) {
         return getServiceOrder(id);
     }
 
+    /**
+     * Business logic to reschedule a service order
+     * @param so to set the service order object
+     * @param id to find the service order object
+     * @return rescheduled service order
+     */
     public ServiceOrder rescheduleServiceOrderCommit(ServiceOrder so, Long id) {
         serviceOrder = getServiceOrder(id);
         //int pkey = updateServiceOrder(so,id);
@@ -100,6 +147,12 @@ public class ServiceOrderEJB {
         return serviceOrder;
     }
 
+    /**
+     * Business logic to update a service order
+     * @param so to set the service order object
+     * @param id to find the service order object
+     * @return integer value to show the number of records updated
+     */
     public int updateServiceOrder(ServiceOrder so, Long id) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("updateServiceOrderReschedule", ServiceOrder.class);
         query.setParameter("serFromDate", so.getFromDate());
@@ -111,10 +164,21 @@ public class ServiceOrderEJB {
         return query.executeUpdate();
     }
 
+    /**
+     * Function to find a service order object to confirm the booking
+     * @param id to be passed to set paramter id
+     * @return service order object
+     */
     public ServiceOrder confirmServiceOrder(Long id) {
         return getServiceOrder(id);
     }
 
+    /**
+     * Business logic to confirm a service order, update staff object as per order and change the status of the service order
+     * @param id to be passed to find service order
+     * @param staffid to be passed to find list of staff to be updated
+     * @return service order object
+     */
     public ServiceOrder confirmServiceOrderCommit(Long id, List<String> staffid) {
         serviceOrder = getServiceOrder(id);
         updateAssignedStaff(staffid);
@@ -122,6 +186,10 @@ public class ServiceOrderEJB {
         return serviceOrder;
     }
 
+    /**
+     * Business logic to update the staff as per the service orders they are assigned to
+     * @param staffid to set the list of staff to be assigned
+     */
     public void updateAssignedStaff(List<String> staffid) {
 
         for (String id : staffid) {
@@ -135,6 +203,12 @@ public class ServiceOrderEJB {
         }
     }
 
+    /**
+     * Business logic to search an service order object
+     * @param search to passed to set the search text
+     * @param searchBy to be passed to select the search method
+     * @return list of service order object which follow the search condition
+     */
     public List<ServiceOrder> search(String search, String searchBy) {
         TypedQuery<ServiceOrder> query = em.createNamedQuery("findServiceOrderBy" + searchBy, ServiceOrder.class);
 
@@ -149,6 +223,17 @@ public class ServiceOrderEJB {
 
     }
 
+    /**
+     *
+     * 
+     * Business login to persist service order object    
+     * @param serOrder to set the service order object
+     * @param service_id to set to find the service in that order
+     * @param service_name to set the name of the service item
+     * @param service_rate to set the rate of the service item
+     * @param customer_id to set to find the customer who made the service order
+     * @return
+     */
     public ServiceOrder addServiceOrder(ServiceOrder serOrder, int service_id, String service_name, String service_rate, String customer_id) {
 
         Long c_id = Long.parseLong(customer_id);

@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+/**
+ *
+ * An entity class to represent a service object
+ */
 @Entity
 @NamedQueries({
     //select queries for service search
@@ -53,54 +57,118 @@ public class Service implements Serializable {
     
 
     //constrcutoer
+
+    /**
+     * Default constructor
+     */
     public Service() {
     }
 
     //getter and setter functions
     //get and set service category
+
+    /**
+     *
+     * @return serviceCategory
+     */
     public ServiceCategory getServiceCategory() {
         return serviceCategory;
     }
+
+    /**
+     *
+     * @param serviceCategory to set the attribute serviceCategory
+     */
     public void setServiceCategory(ServiceCategory serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
     
     //get and set service id
+
+    /**
+     *
+     * @return serviceId
+     */
     public Long getServiceId() {
         return serviceId;
     }
+
+    /**
+     *
+     * @param serviceId to set the attribute serviceId
+     */
     public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
     }
 
     //get and set for service name
+
+    /**
+     *
+     * @return serviceName
+     */
     public String getServiceName() {
         return serviceName;
     }
+
+    /**
+     *
+     * @param serviceName to set the attribute serviceName
+     */
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
 
     //get and set function for rate per hour
+
+    /**
+     *
+     * @return ratePerHour
+     */
     public Float getRatePerHour() {
         return ratePerHour;
     }
+
+    /**
+     *
+     * @param ratePerHour to set the attribute ratePerHour
+     */
     public void setRatePerHour(Float ratePerHour) {
         this.ratePerHour = ratePerHour;
     }
 
     //get and set function for service description
+
+    /**
+     *
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
+
+    /**
+     *
+     * @param description to set the attribute description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
     //get and set function for service status
+
+    /**
+     *
+     * @return status
+     */
     public String getStatus() {
         return status;
     }
+
+    /**
+     *
+     * @param status to set the attribute status
+     */
     public void setStatus(String status) {
         this.status = status;
     }

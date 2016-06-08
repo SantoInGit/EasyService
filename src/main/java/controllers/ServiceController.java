@@ -16,12 +16,20 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * A request scoped controller to handle all the operation related to service entity
+ */
 @Named(value = "serviceController")
 @RequestScoped
 public class ServiceController {
 
+    /**
+     * Default constructor
+     */
     public ServiceController() {
     }
+    //EJB injection
     @EJB
     private ServiceEJB serviceEJB;
     private String serviceCategory;
@@ -34,6 +42,10 @@ public class ServiceController {
     private String search = "";
     private String searchBy = "";
 
+    /**
+     * Function to return list of services  to be displayed in the frontend
+     * @return list of services
+     */
     public List<Service> getFrontendServiceList() {
         if (this.search.isEmpty()) {
             Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -51,19 +63,35 @@ public class ServiceController {
         return frontendServiceList;
     }
 
+    /**
+     *
+     * @param frontendServiceList to set the attribute frontendServiceList
+     */
     public void setFrontendServiceList(List<Service> frontendServiceList) {
         this.frontendServiceList = frontendServiceList;
     }
 
+    /**
+     *
+     * @return list of service with limit of four
+     */
     public List<Service> getServiceListLimitFour() {
         serviceListLimitFour = serviceEJB.listServiceLimitFour();
         return serviceListLimitFour;
     }
 
+    /**
+     *
+     * @param serviceListLimitFour to set the attribute serviceListLimitFour
+     */
     public void setServiceListLimitFour(List<Service> serviceListLimitFour) {
         this.serviceListLimitFour = serviceListLimitFour;
     }
 
+    /**
+     * Function to create service object and persist it in the database
+     * @return string: name of the page to be rendered
+     */
     public String doCreateService() {
         service = serviceEJB.addService(service, serviceCategory);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Service Created Succefully.", "");
@@ -71,11 +99,20 @@ public class ServiceController {
         return "listService.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Functio to delete a service object
+     * @param id to be passed to find a service object
+     * @return string: name of the page to be rendered
+     */
     public String doDeleteService(Long id) {
         serviceEJB.deleteService(id);
         return "listService.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Function to perform search operation on service objects
+     * @return string: name of the page to be rendered
+     */
     public String doSearch() {
         serviceList = serviceEJB.search(search, searchBy);
         FacesMessage infoMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Search result for: " + search, "");
@@ -85,31 +122,59 @@ public class ServiceController {
 
     }
 
+    /**
+     * Function to perform search on services from frontend
+     * @return
+     */
     public String doFrontEndSearch() {
         return "frontendListServices.xhtml?faces-redirect=true&search_by=" + searchBy + "&s=" + search;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSearchBy() {
         return searchBy;
     }
 
+    /**
+     *
+     * @param searchBy
+     */
     public void setSearchBy(String searchBy) {
         this.searchBy = searchBy;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSearch() {
         return search;
     }
 
+    /**
+     *
+     * @param search
+     */
     public void setSearch(String search) {
         this.search = search;
     }
 
+    /**
+     *
+     * @return
+     */
     public Service getServiceByParamId() {
         service = serviceEJB.getServiceByParamId();
         return service;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Service> getServiceList() {
         if (this.search.isEmpty()) {
             serviceList = serviceEJB.listService();
@@ -117,26 +182,50 @@ public class ServiceController {
         return serviceList;
     }
 
+    /**
+     *
+     * @param serviceList
+     */
     public void setServiceList(List<Service> serviceList) {
         this.serviceList = serviceList;
     }
 
+    /**
+     *
+     * @return
+     */
     public Service getService() {
         return service;
     }
 
+    /**
+     *
+     * @param service
+     */
     public void setService(Service service) {
         this.service = service;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getServiceCategory() {
         return serviceCategory;
     }
 
+    /**
+     *
+     * @param serviceCategory
+     */
     public void setServiceCategory(String serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
 
+    /**
+     * functio to create a invoice as per the service order
+     * @throws Exception
+     */
     public void createPdf() throws Exception {
         String machine_name = InetAddress.getLocalHost().getHostName();
         String path_to_desktop = "C:/Documents and Settings/" + machine_name + "/Desktop/";

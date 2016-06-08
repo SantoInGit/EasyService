@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-
+/**
+ *
+ * An entity class to represent an admin object
+ */
 @Entity
 @NamedQueries({
     
@@ -33,30 +36,54 @@ public class Admin extends User implements Serializable{
     private String qualification;
     private String status;
     
-    //constructor
+   
+
+    /**
+     * Default constructor
+     */
     public Admin(){
         
     }
     
     //getter  and setter functions for attributes
+
+    /**
+     *
+     * @return  serialVersionUID
+     */
  
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
+    /**
+     *
+     * @return qualification
+     */
     public String getQualification() {
         return qualification;
     }
 
+    /**
+     *
+     * @param qualification to set the attribute qualification
+     */
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
 
-
+    /**
+     *
+     * @return status
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status to set the attribute status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
